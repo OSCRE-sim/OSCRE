@@ -9,7 +9,7 @@ struct DataPoint {
     double voltage;
 };
 
-std::vector<DataPoint> readData(const std::string& filename) {
+std::vector<DataPoint> readData(const std::string &filename) {
     std::ifstream file(filename);
     std::vector<DataPoint> data;
     std::string line;
@@ -23,12 +23,12 @@ std::vector<DataPoint> readData(const std::string& filename) {
     return data;
 }
 
-double computeAverageVoltage(const std::vector<DataPoint>& data) {
+double computeAverageVoltage(const std::vector<DataPoint> &data) {
     double sum = 0.0;
-    for (const auto& point : data) {
+    for (const auto &point: data) {
         sum += point.voltage;
     }
-    return sum / (double)data.size();
+    return sum / (double) data.size();
 }
 
 int main() {
