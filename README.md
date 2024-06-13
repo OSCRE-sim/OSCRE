@@ -1,11 +1,10 @@
 # RAD-HARD
+
 Open-Source Radiation Hardening circuit-level Simulator in conjunction with SCALE
 
 ## Introduction
 
-
 ## Installation
-
 
 ## Instructions and Run examples
 
@@ -15,8 +14,10 @@ Open-Source Radiation Hardening circuit-level Simulator in conjunction with SCAL
     - Draw your circuit.
     - Save the schematic as `my_circuit.sch`.
 
-2. **Generate Netlist:**
-    - Generate netlist in xschem and save as `my_circuit.spice`.
+2. **Generate the Netlist:**
+    - Ensure your schematic is open.
+    - Go to `Tools` > `Simulation` > `Write SPICE netlist`.
+    - Save the netlist as `my_circuit.spice`.
 
 3. **Simulate with ngspice:**
     - Run the simulation:

@@ -6,4 +6,16 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(./include)
 
 add_executable(RAD_HARD
-        src/compute.cpp)
+        src/compute.cpp
+        src/TransistorModel.h
+        src/TransistorModel.cpp
+        src/main.cpp
+        src/CircuitSimulator.cpp
+        src/CircuitSimulator.h
+        src/ComponentModel.h
+        src/Plotter.cpp
+        src/Plotter.h
+        src/DataPoint.cpp
+        src/DataPoint.h
+        src/ReportGenerator.cpp
+        src/ReportGenerator.h)
