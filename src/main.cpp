@@ -1,21 +1,28 @@
 #include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
-#include <sstream>
 #include "TransistorModel.h"
 #include "CircuitSimulator.h"
 #include "ReportGenerator.h"
 #include "Plotter.h"
 #include "DataPoint.h"
+#include "Circuit.h"
+#include "FaultModel.h"
+#include "InjectionEngine.h"
 
 std::vector<DataPoint> readData(const std::string &basicString);
 
 int main() {
     CircuitSimulator simulator;
+    Circuit circuit;
+    FaultModel faultModel("transistor_fault", {{"sensitivity", 0.1}});
 
-    // Create and add a transistor model
+    // Add components to the circuit
     TransistorModel transistor(0.1);
+    circuit.addComponent("T1", &transistor);
+
+    // Inject fault using InjectionEngine
+    InjectionEngine injector(faultModel);
+    injector.injectFault(circuit, "T1");
+
     simulator.addComponent(&transistor);
 
     // Simulate radiation effects

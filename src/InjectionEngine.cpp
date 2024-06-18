@@ -3,9 +3,10 @@
 InjectionEngine::InjectionEngine(const FaultModel& model) : model(model) {}
 
 void InjectionEngine::injectFault(Circuit& circuit, const std::string& location) {
-    // Inject fault logic here
+    std::map<std::string, double> faultParameters = model.getParameters();
+    circuit.injectFault(location, faultParameters);
 }
 
-void InjectionEngine::logFault(std::string details) {
-    // Log fault details here
+void InjectionEngine::logFault(Circuit& circuit, const std::string& details) {
+    circuit.logFault(details);
 }

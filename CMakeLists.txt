@@ -22,4 +22,6 @@ add_executable(RAD_HARD
         src/FaultModel.cpp
         src/FaultModel.h
         src/InjectionEngine.cpp
-        src/InjectionEngine.h)
+        src/InjectionEngine.h
+        src/Circuit.cpp
+        src/Circuit.h)

@@ -1,11 +1,12 @@
-#include <string>
-#include <map>
-#include <utility>
 #include "FaultModel.h"
 
-FaultModel::FaultModel(std::string type, std::map<std::string, double> parameters)
-        : type(std::move(type)), parameters(std::move(parameters)) {}
+FaultModel::FaultModel(const std::string& type, const std::map<std::string, double>& parameters)
+        : type(type), parameters(parameters) {}
+
+std::map<std::string, double> FaultModel::getParameters() const {
+    return parameters;
+}
 
 void FaultModel::defineFaultModel() {
-    // Define fault model logic here
+    // Define fault model logic
 }
