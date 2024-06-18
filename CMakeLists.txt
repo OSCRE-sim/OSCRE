@@ -18,4 +18,8 @@ add_executable(RAD_HARD
         src/DataPoint.cpp
         src/DataPoint.h
         src/ReportGenerator.cpp
-        src/ReportGenerator.h)
+        src/ReportGenerator.h
+        src/FaultModel.cpp
+        src/FaultModel.h
+        src/InjectionEngine.cpp
+        src/InjectionEngine.h)
