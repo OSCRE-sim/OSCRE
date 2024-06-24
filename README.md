@@ -16,11 +16,12 @@ Open-Source Radiation Hardening circuit-level Simulator in conjunction with SCAL
 
 2. **Generate the Netlist:**
     - Ensure your schematic is open.
-    - Go to `Tools` > `Simulation` > `Write SPICE netlist`.
-    - Save the netlist as `my_circuit.spice`.
+    - Go to `Simulation` > `Set netlist dir`. Set your netlist directory.
+    - Go to `Options` > `Netlist format / Symbol mode`. Ensure your saving your netlist as a spice file
+    - In the top right, press the button that looks like an arrow pointing to a piece of paper to create the netlist
 
 3. **Simulate with ngspice:**
-    - Run the simulation:
+    - In the terminal, run the simulation while in the directory of the spice file:
       ```sh
       ngspice my_circuit.spice
       ```
