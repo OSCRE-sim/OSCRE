@@ -13,7 +13,7 @@
     #nano ~/.bashrc # or
     nano ~/.zshrc
     
-    # For Xschem # NOTE: If you install with the github link, this may be at /Users/$(whoami)/xschem-macos/bin
+    # For Xschem # NOTE: If you install with the xschem github link, this may be at /Users/$(whoami)/xschem-macos/bin
     export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"
     export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib" # May be necessary to fix hanging app
     
