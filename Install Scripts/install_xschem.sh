@@ -11,6 +11,15 @@ BASE_DIR=$(pwd)
 INCLUDE_DIR="${BASE_DIR}/include"
 INSTALL_SCRIPTS_DIR="${BASE_DIR}/Install Scripts"
 
+# Check if the required tar.gz files exist
+if [ ! -f "${INCLUDE_DIR}/tcl8.6.13-src.tar.gz" ]; then
+    error_exit "Tcl source file not found at ${INCLUDE_DIR}/tcl8.6.13-src.tar.gz"
+fi
+
+if [ ! -f "${INCLUDE_DIR}/tk8.6.13-src.tar.gz" ]; then
+    error_exit "Tk source file not found at ${INCLUDE_DIR}/tk8.6.13-src.tar.gz"
+fi
+
 # Install Homebrew if not installed
 if ! command -v brew &> /dev/null; then
     echo "Installing Homebrew..."
@@ -42,22 +51,24 @@ else
 export DYLD_LIBRARY_PATH=\"/usr/local/opt/tcl-tk/lib:/opt/X11/lib\"
 export PATH=\"/Users/$(whoami)/opt/xschem/bin:\$PATH\"
 export DISPLAY=:0"
-    echo "Please add the above line to .bashrc or .zshrc when possible"
+    echo "Please add the above lines to .bashrc or .zshrc when possible"
     export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"
     export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"
     export DISPLAY=:0
 fi
 
-if ! grep -q 'export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"' "$SHELL_CONFIG"; then
-    echo 'export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"' >> "$SHELL_CONFIG"
-fi
+if [ -n "$SHELL_CONFIG" ]; then
+    if ! grep -q 'export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"' "$SHELL_CONFIG"; then
+        echo 'export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"' >> "$SHELL_CONFIG"
+    fi
 
-if ! grep -q 'export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"' "$SHELL_CONFIG"; then
-    echo 'export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"' >> "$SHELL_CONFIG"
-fi
+    if ! grep -q 'export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"' "$SHELL_CONFIG"; then
+        echo 'export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"' >> "$SHELL_CONFIG"
+    fi
 
-if ! grep -q 'export DISPLAY=:0' "$SHELL_CONFIG"; then
-    echo 'export DISPLAY=:0' >> "$SHELL_CONFIG"
+    if ! grep -q 'export DISPLAY=:0' "$SHELL_CONFIG"; then
+        echo 'export DISPLAY=:0' >> "$SHELL_CONFIG"
+    fi
 fi
 
 # Extract and compile Tcl
