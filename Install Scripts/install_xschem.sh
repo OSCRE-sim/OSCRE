@@ -106,7 +106,8 @@ sudo ln -s /usr/local/opt/tcl-tk/lib/libtk8.6.dylib /opt/X11/lib/libtk8.6.dylib 
 # Clone xschem
 echo "Cloning xschem repository..."
 git clone https://github.com/StefanSchippers/xschem.git /tmp/xschem || error_exit "Failed to clone xschem repository."
-cd /tmp/xschem || error_exit "xschem directory not found."
+cd /tmp/xschem || error_exit "Failed to navigate to xschem directory."
+git checkout 973d01f || error_exit "Failed to checkout the specific commit for release 3.4.5."
 
 # Configure xschem
 echo "Configuring xschem..."

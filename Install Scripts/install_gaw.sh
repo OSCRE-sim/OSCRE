@@ -21,8 +21,9 @@ export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr
 
 # Clone the xschem-gaw repository (do not run as root)
 echo "Cloning xschem-gaw repository..."
-git clone https://github.com/StefanSchippers/xschem-gaw.git || error_exit "Failed to clone xschem-gaw repository."
-cd xschem-gaw || error_exit "xschem-gaw directory not found."
+git clone https://github.com/StefanSchippers/xschem-gaw.git /tmp/xschem-gaw || error_exit "Failed to clone xschem-gaw repository."
+cd /tmp/xschem-gaw || error_exit "Failed to navigate to xschem-gaw directory."
+git checkout 640c672e1ad768b92eb6a15943459a1d2214e1dc || error_exit "Failed to checkout the specific commit for xschem-gaw."
 
 # Generate configuration files and build (do not run as root)
 echo "Generating configuration files and building..."
