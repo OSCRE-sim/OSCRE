@@ -7,10 +7,10 @@ function error_exit {
 }
 
 # Check if running as root
-if [ "$EUID" -ne 0 ]; then
-    echo "Please run as root"
-    exit 1
-fi
+# if [ "$EUID" -ne 0 ]; then
+#     echo "Please run as root"
+#     exit 1
+# fi
 
 # Variables for paths
 BASE_DIR=$(pwd)
