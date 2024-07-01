@@ -1,16 +1,23 @@
 #!/bin/bash
 # Function to print an error message and exit
-function error_exit { echo "$1" 1>&2 exit 1 }
+function error_exit {
+    echo "$1" 1>&2
+    exit 1
+}
 
 # Check if running as root
-if [ "$EUID" -ne 0 ]; then echo "Please run as root" exit 1 fi
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run as root"
+    exit 1
+fi
 
 # Variables for paths
 BASE_DIR=$(pwd) INCLUDE_DIR="${BASE_DIR}/include" INSTALL_SCRIPTS_DIR="${BASE_DIR}/Install Scripts"
 
 # Install Homebrew if not installed
-if ! command -v brew &> /dev/null; then echo "Installing Homebrew..." /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || error_exit "Failed to 
-    install Homebrew."
+if ! command -v brew &> /dev/null; then
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || error_exit "Failed to install Homebrew."
 fi
 
 # Install Xquartz
