@@ -6,12 +6,6 @@ function error_exit {
     exit 1
 }
 
-# Check if running as root
-# if [ "$EUID" -ne 0 ]; then
-#     echo "Please run as root"
-#     exit 1
-# fi
-
 # Variables for paths
 BASE_DIR=$(pwd)
 INCLUDE_DIR="${BASE_DIR}/include"
@@ -30,13 +24,41 @@ brew install --cask xquartz || error_exit "Failed to install Xquartz."
 # Install required packages
 echo "Installing required packages..."
 brew install cairo ngspice libxpm macvim dbus jpeg || error_exit "Failed to install required packages."
+brew services start dbus
 
-# Set environment variables
-echo "Setting environment variables..."
-export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"
-echo 'export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"' >> ~/.bashrc
-echo 'export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"' >> ~/.bashrc
-echo 'export DISPLAY=:0' >> ~/.bashrc
+# Set environment variables for JPEG
+export LDFLAGS="-L/usr/local/opt/jpeg/lib"
+export CPPFLAGS="-I/usr/local/opt/jpeg/include"
+
+# Add environment variables to shell configuration (do not run as root)
+echo "Updating shell configuration..."
+SHELL_CONFIG=""
+if [ -f ~/.bashrc ]; then
+    SHELL_CONFIG="$HOME/.bashrc"
+elif [ -f ~/.zshrc ]; then
+    SHELL_CONFIG="$HOME/.zshrc"
+else
+    echo "Neither ~/.bashrc nor ~/.zshrc found. The following are being run manually:
+export DYLD_LIBRARY_PATH=\"/usr/local/opt/tcl-tk/lib:/opt/X11/lib\"
+export PATH=\"/Users/$(whoami)/opt/xschem/bin:\$PATH\"
+export DISPLAY=:0"
+    echo "Please add the above line to .bashrc or .zshrc when possible"
+    export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"
+    export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"
+    export DISPLAY=:0
+fi
+
+if ! grep -q 'export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"' "$SHELL_CONFIG"; then
+    echo 'export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"' >> "$SHELL_CONFIG"
+fi
+
+if ! grep -q 'export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"' "$SHELL_CONFIG"; then
+    echo 'export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"' >> "$SHELL_CONFIG"
+fi
+
+if ! grep -q 'export DISPLAY=:0' "$SHELL_CONFIG"; then
+    echo 'export DISPLAY=:0' >> "$SHELL_CONFIG"
+fi
 
 # Extract and compile Tcl
 echo "Compiling Tcl..."
@@ -69,8 +91,8 @@ echo "Configuring xschem..."
 
 # Modify Makefile.conf
 echo "Modifying Makefile.conf..."
-sed -i.bak 's|CFLAGS=.*|CFLAGS=-std=c99 -I/opt/X11/include -I/opt/X11/include/cairo -I/usr/local/opt/tcl-tk/include -I/usr/local/include -I/opt/homebrew/Cellar/jpeg/9f/include -O2|' Makefile.conf
-sed -i.bak 's|LDFLAGS=.*|LDFLAGS=-L/opt/X11/lib -L/usr/local/opt/tcl-tk/lib -L/usr/local/lib -L/opt/homebrew/Cellar/jpeg/9f/lib -lm -lcairo -ljpeg -lX11 -lXrender -lxcb -lxcb-render -lX11-xcb -lXpm -ltcl8.6 -ltk8.6|' Makefile.conf
+sed -i.bak 's|CFLAGS=.*|CFLAGS=-std=c99 -I/opt/X11/include -I/opt/X11/include/cairo -I/usr/local/opt/tcl-tk/include -I/usr/local/include -I/usr/local/opt/jpeg/include -O2|' Makefile.conf
+sed -i.bak 's|LDFLAGS=.*|LDFLAGS=-L/opt/X11/lib -L/usr/local/opt/tcl-tk/lib -L/usr/local/lib -L/usr/local/opt/jpeg/lib -lm -lcairo -ljpeg -lX11 -lXrender -lxcb -lxcb-render -lX11-xcb -lXpm -ltcl8.6 -ltk8.6|' Makefile.conf
 
 # Build xschem
 echo "Building xschem..."
