@@ -16,6 +16,9 @@ fi
 echo "Installing dependencies..."
 brew install gtk+3 cairo pango autoconf automake libtool pkg-config at-spi2-core || error_exit "Failed to install dependencies."
 
+# Ensure pkg-config paths are set correctly
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/local/opt/gtk+3/lib/pkgconfig:$PKG_CONFIG_PATH"
+
 # Clone the xschem-gaw repository (do not run as root)
 echo "Cloning xschem-gaw repository..."
 git clone https://github.com/StefanSchippers/xschem-gaw.git || error_exit "Failed to clone xschem-gaw repository."
@@ -40,7 +43,16 @@ else
     error_exit "Neither ~/.bashrc nor ~/.zshrc found. Please add 'export NO_AT_BRIDGE=1' manually."
 fi
 
-echo 'export NO_AT_BRIDGE=1' >> "$SHELL_CONFIG"
+# String to be added
+STRING_TO_ADD='export NO_AT_BRIDGE=1'
+
+# Check if the string already exists in the shell configuration file
+if ! grep -qxF "$STRING_TO_ADD" "$SHELL_CONFIG"; then
+  echo "$STRING_TO_ADD" >> "$SHELL_CONFIG"
+  echo "Added '$STRING_TO_ADD' to $SHELL_CONFIG"
+else
+  echo "'$STRING_TO_ADD' already exists in $SHELL_CONFIG"
+fi
 
 # Source the updated shell configuration (do not run as root)
 echo "Sourcing the updated shell configuration..."
