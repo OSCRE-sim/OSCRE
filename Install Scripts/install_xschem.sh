@@ -6,6 +6,14 @@ function error_exit {
     exit 1
 }
 
+# Check if the OS is macOS Big Sur or later
+OS_VERSION=$(sw_vers -productVersion)
+MAJOR_VERSION=$(echo "$OS_VERSION" | cut -d'.' -f1)
+
+if [ "$MAJOR_VERSION" -lt 11 ]; then
+    error_exit "This script requires macOS Big Sur (11) or later. You are running macOS $OS_VERSION."
+fi
+
 # Variables for paths
 BASE_DIR=$(pwd)
 INCLUDE_DIR="${BASE_DIR}/include"
@@ -51,7 +59,7 @@ else
 export DYLD_LIBRARY_PATH=\"/usr/local/opt/tcl-tk/lib:/opt/X11/lib\"
 export PATH=\"/Users/$(whoami)/opt/xschem/bin:\$PATH\"
 export DISPLAY=:0"
-    echo "Please add the above lines to .bashrc or .zshrc when possible"
+    echo "Please add the above line to .bashrc or .zshrc when possible"
     export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"
     export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"
     export DISPLAY=:0
@@ -71,6 +79,10 @@ if [ -n "$SHELL_CONFIG" ]; then
     fi
 fi
 
+# Remove any existing files in /usr/local/opt/tcl-tk
+echo "Cleaning up previous Tcl and Tk installations..."
+rm -rf /usr/local/opt/tcl-tk/*
+
 # Extract and compile Tcl
 echo "Compiling Tcl..."
 mkdir -p /usr/local/opt/tcl-tk
@@ -89,7 +101,7 @@ make || error_exit "Failed to make Tk."
 make install || error_exit "Failed to install Tk."
 
 # Symlink libtk
-sudo ln -s /usr/local/opt/tcl-tk/lib/libtk8.6.dylib /opt/X11/lib/libtk8.6.dylib || error_exit "Failed to symlink libtk."
+sudo ln -s /usr/local/opt/tcl-tk/lib/libtk8.6.dylib /opt/X11/lib/libtk8.6.dylib # || error_exit "Failed to symlink libtk."
 
 # Clone xschem
 echo "Cloning xschem repository..."
