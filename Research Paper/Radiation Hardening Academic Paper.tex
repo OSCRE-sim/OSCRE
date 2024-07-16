@@ -1,0 +1,105 @@
+d\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Open-Source Radiation Hardening Simulator: Design, Implementation, and Applications}
+
+\author{\IEEEauthorblockN{Jacob Anderson}
+\IEEEauthorblockA{\textit{Department of Electrical and Computer Engineering} \\
+\textit{BYU}\\
+Provo, USA \\
+jacobdanderson@gmail.com}
+\and
+\IEEEauthorblockN{David Nichols}
+\IEEEauthorblockA{\textit{Department of Electrical and Computer Engineering} \\
+\textit{BYU}\\
+Provo, USA \\
+davidnichols@email.com}
+\and
+\IEEEauthorblockN{Collin Lambert}
+\IEEEauthorblockA{\textit{Department of Electrical and Computer Engineering} \\
+\textit{BYU}\\
+Provo, USA \\
+collinlambert@email.com}
+\and
+\IEEEauthorblockN{Parker Allred}
+\IEEEauthorblockA{\textit{Department of Electrical and Computer Engineering} \\
+\textit{BYU}\\
+Provo, USA \\
+parkerallred@email.com}
+}
+
+\maketitle
+
+\begin{abstract}
+This paper presents the design, implementation, and applications of an open-source radiation hardening simulator developed using xschem and NGSpice. The simulator aims to address the challenges of simulating radiation effects on electronic circuits by providing a comprehensive library and user-friendly interface. The project integrates core modules for fault injection, radiation effect simulation, and results analysis, along with thorough documentation and examples to support users in their research and development efforts.
+\end{abstract}
+
+\begin{IEEEkeywords}
+radiation hardening, simulator, xschem, NGSpice, fault injection, electronic circuits
+\end{IEEEkeywords}
+
+\section{Introduction}
+The accurate simulation of radiation effects on electronic circuits is crucial for the development of robust systems in space, nuclear, and other radiation-prone environments. This paper introduces an open-source radiation hardening simulator that leverages xschem and NGSpice to provide an accessible and effective tool for researchers and engineers.
+
+\section{Background and Related Work}
+Advancements in radiation hardening simulation have led to various methodologies aimed at increasing precision and reducing error. However, many existing techniques struggle with issues such as non-linearity, sensitivity to environmental conditions, and complex calibration processes. This section reviews the relevant literature and existing tools in the field.
+
+\subsection{Comparison with Existing Methods}
+This subsection provides a detailed comparison of our method with existing techniques, highlighting the unique features and improvements introduced by our approach.
+
+\section{Project Scope and Objectives}
+This section outlines the specific goals and scope of the radiation hardening simulator project. It describes the challenges the simulator aims to address and the expected outcomes.
+
+\section{Methodology}
+The methodology section details the methods and tools used in the project, including the integration of xschem, NGSpice, and custom-developed modules. It also covers the systematic approach taken to ensure accurate simulation and analysis.
+
+\section{Library Structure and Core Features}
+This section provides an overview of the library structure and the core features of the simulator, including the Fault Injection Module, Radiation Effect Simulation Module, and Results Analysis Module.
+
+\subsection{Fault Injection Module}
+The Fault Injection Module simulates faults in circuit elements to study radiation effects. It includes key functions such as \texttt{DefineFaultModel()}, \texttt{InjectFault()}, and \texttt{LogFault()}.
+
+\subsection{Radiation Effect Simulation Module}
+The Radiation Effect Simulation Module simulates the effects of radiation on electronic circuits. It includes functions such as \texttt{SimulateSET()}, \texttt{SimulateSEU()}, and \texttt{AnalyzeImpact()}.
+
+\subsection{Results Analysis Module}
+The Results Analysis Module analyzes and presents simulation results. It includes functions such as \texttt{GenerateReport()}, \texttt{PlotResults()}, and \texttt{ComputeSER()}.
+
+\section{Implementation}
+This section explains the implementation process, including the development of C++ classes, integration with xschem and NGSpice, and the creation of test cases.
+
+\section{Testing and Results}
+Presents the results of preliminary tests, highlighting the system's ability to simulate radiation effects with improved accuracy. Discusses the observed challenges and their impact on measurement accuracy.
+
+\section{Documentation and User Guide}
+This section provides a comprehensive user guide for the simulator, including installation instructions, example circuits, and tutorials.
+
+\section{Discussion}
+\subsection{Analysis of Non-linearities and Repeatability}
+This subsection investigates the sources of non-linearities in the simulation process and evaluates the system's repeatability across different test scenarios.
+
+\subsection{Generalization and Application}
+Explores the potential for generalizing the simulation method to other types of circuits and its applicability in various fields requiring precise radiation effect simulation.
+
+\section{Future Work}
+Outlines the next steps in research, including further optimization of the simulator, exploration of additional features, and potential collaborations with other projects.
+
+\section{Conclusion}
+Summarizes the contributions of this work to the field of radiation hardening simulation, emphasizing the innovations introduced and the potential impact on future research.
+
+\section*{Acknowledgment}
+The authors would like to thank Dr. Shiuh-hua Wood Chiang for his guidance and support throughout this project. This work was supported by [Funding Source].
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

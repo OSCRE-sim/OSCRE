@@ -113,4 +113,4 @@ To allow users to specify radiation effect blocks and parameters within xschem, 
 1. **Run Simulation in xschem:**
     - Use xschem's built-in capabilities to run NGSpice simulations and visualize results.
     - Ensure all parameters and models are correctly interpreted and simulated.
-sd
+

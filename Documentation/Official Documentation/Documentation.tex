@@ -1,0 +1,178 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\geometry{margin=1in}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Comprehensive Project Documentation}
+\fancyhead[R]{\thepage}
+
+\title{Comprehensive Project Documentation: Open-Source Radiation Hardening Simulator}
+\author{Jacob Anderson, David Nichols, Collin Lambert, Parker Allred}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Project Overview}
+This project aims to develop an open-source radiation hardening simulator using xschem and NGSpice. The simulator provides a comprehensive library for simulating the effects of radiation on electronic circuits, including modules for fault injection, radiation effect simulation, and results analysis. The project is designed to be user-friendly and accessible to researchers and engineers working in the field of radiation hardening.
+
+\section{Library Structure and Core Features}
+\subsection{Fault Injection Module}
+The Fault Injection Module simulates faults in circuit elements to study radiation effects.
+
+\textbf{Key Functions:}
+\begin{itemize}
+    \item \texttt{DefineFaultModel(type, parameters)}: Defines the fault model.
+    \item \texttt{InjectFault(circuit)}: Injects faults into the circuit.
+    \item \texttt{LogFault(details)}: Logs the fault details.
+\end{itemize}
+
+\subsection{Radiation Effect Simulation Module}
+The Radiation Effect Simulation Module simulates the effects of radiation on electronic circuits.
+
+\textbf{Key Functions:}
+\begin{itemize}
+    \item \texttt{SimulateSET(circuit)}: Simulates Single Event Transients.
+    \item \texttt{SimulateSEU(circuit)}: Simulates Single Event Upsets.
+    \item \texttt{AnalyzeImpact(data)}: Analyzes the impact of radiation on the circuit.
+\end{itemize}
+
+\subsection{Results Analysis Module}
+The Results Analysis Module analyzes and presents simulation results.
+
+\textbf{Key Functions:}
+\begin{itemize}
+    \item \texttt{GenerateReport(results)}: Generates a report of the simulation results.
+    \item \texttt{PlotResults(data)}: Plots the results for visualization.
+    \item \texttt{ComputeSER(data)}: Computes the Soft Error Rate.
+\end{itemize}
+
+\section{Installation Instructions}
+\subsection{Prerequisites}
+Before installing the simulator, ensure you have the following software installed:
+\begin{itemize}
+    \item Homebrew (for macOS users)
+    \item Git
+    \item xschem
+    \item NGSpice
+    \item GTK+3
+\end{itemize}
+
+\subsection{Step-by-Step Installation}
+\begin{enumerate}
+    \item Install Homebrew (macOS):
+    \begin{lstlisting}[language=bash, breaklines=true]
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    \end{lstlisting}
+    
+    \item Install Dependencies:
+    \begin{lstlisting}[language=bash, breaklines=true]
+    brew install gtk+3 cairo pango autoconf automake libtool pkg-config at-spi2-core
+    \end{lstlisting}
+
+    \item Clone the xschem-gaw Repository:
+    \begin{lstlisting}[language=bash, breaklines=true]
+    git clone https://github.com/StefanSchippers/xschem-gaw.git
+    cd xschem-gaw
+    \end{lstlisting}
+
+    \item Generate Configuration Files and Build:
+    \begin{lstlisting}[language=bash, breaklines=true]
+    autoreconf --install
+    automake --add-missing
+    ./configure
+    make
+    sudo make install
+    \end{lstlisting}
+
+    \item Add the following to your \texttt{.bashrc} or \texttt{.zshrc} file:
+    \begin{lstlisting}
+    export NO_AT_BRIDGE=1
+    \end{lstlisting}
+
+    \item Source the \texttt{.bashrc} or \texttt{.zshrc} file or open a new terminal window:
+    \begin{lstlisting}[language=bash]
+    source ~/.bashrc  # or
+    source ~/.zshrc
+    \end{lstlisting}
+
+    \item Run the GTK Analog Wave Viewer:
+    \begin{lstlisting}[language=bash]
+    gaw
+    \end{lstlisting}
+\end{enumerate}
+
+\section{Usage Examples}
+\subsection{Example Circuit: Memory Cell}
+\begin{figure}[htbp]
+%\centering
+%\includegraphics[width=0.8\linewidth]{example_circuit_memory.png}
+%\caption{Example Memory Cell Circuit}
+%\label{fig:memory_cell}
+\end{figure}
+
+\textbf{Steps to Simulate:}
+\begin{enumerate}
+    \item Create the schematic in xschem.
+    \item Export the netlist as \texttt{memory\_cell.spice}.
+    \item Run the simulation with NGSpice:
+    \begin{lstlisting}[language=bash, breaklines=true]
+    ngspice -b memory_cell.spice -o ngspice_output.txt
+    \end{lstlisting}
+    \item Analyze the results using the Results Analysis Module.
+\end{enumerate}
+
+\subsection{Example Circuit: Operational Amplifier}
+\begin{figure}[htbp]
+%\centering
+%\includegraphics[width=0.8\linewidth]{example_circuit_opamp.png}
+%\caption{Example Operational Amplifier Circuit}
+%\label{fig:opamp}
+\end{figure}
+
+\textbf{Steps to Simulate:}
+\begin{enumerate}
+    \item Create the schematic in xschem.
+    \item Export the netlist as \texttt{opamp.spice}.
+    \item Run the simulation with NGSpice:
+    \begin{lstlisting}[language=bash, breaklines=true]
+    ngspice -b opamp.spice -o ngspice_output.txt
+    \end{lstlisting}
+    \item Analyze the results using the Results Analysis Module.
+\end{enumerate}
+
+\section{Additional Resources}
+\subsection{Documentation and Tutorials}
+\begin{itemize}
+    \item User Guide: Detailed user guide with step-by-step instructions.
+    \item API Documentation: Comprehensive API documentation for all modules and functions.
+    \item Tutorials: Various tutorials to help users get started with the simulator.
+\end{itemize}
+
+\subsection{GitHub Repository}
+The source code and additional resources for the project can be found on GitHub:
+\begin{itemize}
+    \item \href{https://github.com/Jacoba1100254352/RAD-HARD}{GitHub Repository: RAD-HARD}
+\end{itemize}
+
+\section{Conclusion}
+This document provides comprehensive documentation for the open-source radiation hardening simulator project. By following the instructions and utilizing the provided resources, users can effectively simulate and analyze the effects of radiation on electronic circuits.
+
+\section*{Acknowledgment}
+We would like to thank Dr. Shiuh-hua Wood Chiang for his guidance and support throughout this project. This work was supported by [Funding Source].
+
+\end{document}
