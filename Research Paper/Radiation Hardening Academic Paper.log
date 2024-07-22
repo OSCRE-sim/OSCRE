@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.7.16)  16 JUL 2024 13:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.7.16)  22 JUL 2024 11:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -264,7 +264,7 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count291
 \l__pdf_internal_box=\box56
 )
-No file "Radiation Hardening Academic Paper".aux.
+(./Radiation Hardening Academic Paper.aux)
 \openout1 = `"Radiation Hardening Academic Paper.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
@@ -281,6 +281,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
+
 -- Lines per column: 56 (exact).
 (/usr/local/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -316,19 +317,19 @@ LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 6
 (/usr/local/texlive/2024/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 3088) in paragraph at lines 75--76
-[]\OT1/ptm/m/n/10 The Re-sults Anal-y-sis Mod-ule an-a-lyzes and presents
+Underfull \hbox (badness 7685) in paragraph at lines 72--73
+ \OT1/ptm/m/it/10 2) Ra-di-a-tion Ef-fect Sim-u-la-tion Mod-ule: [][] \OT1/ptm/
+m/n/10 The Ra-di-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--76
-\OT1/ptm/m/n/10 sim-u-la-tion re-sults. It in-cludes func-tions such as
+Underfull \hbox (badness 6078) in paragraph at lines 72--73
+\OT1/ptm/m/n/10 a-tion Ef-fect Sim-u-la-tion Mod-ule sim-u-lates the ef-fects
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--76
-\OT1/pcr/m/n/10 GenerateReport()\OT1/ptm/m/n/10 , \OT1/pcr/m/n/10 PlotResults()
-\OT1/ptm/m/n/10 , and
+Underfull \hbox (badness 6252) in paragraph at lines 72--73
+\OT1/ptm/m/n/10 of ra-di-a-tion on elec-tronic cir-cuits. It in-cludes func-
  []
 
 
@@ -338,11 +339,6 @@ ocal/texlive/2024/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
 
 ]
-Underfull \hbox (badness 1596) in paragraph at lines 91--92
-[]\OT1/ptm/m/n/10 Explores the po-ten-tial for gen-er-al-iz-ing the sim-u-la-ti
-on
- []
-
 No file "Radiation Hardening Academic Paper".bbl.
 
 ** Conference Paper **
@@ -368,19 +364,19 @@ L3 programming layer <2024-05-27>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4139 strings out of 473584
- 64919 string characters out of 5728328
- 1939905 words of memory out of 5000000
- 27017 multiletter control sequences out of 15000+600000
+ 4142 strings out of 473584
+ 65048 string characters out of 5728328
+ 1940905 words of memory out of 5000000
+ 27018 multiletter control sequences out of 15000+600000
  587951 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,8n,65p,572b,266s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,8n,65p,580b,266s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/
 local/texlive/2024/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texl
 ive/2024/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2024/
 texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2024/texmf-dist
 /fonts/type1/urw/times/utmri8a.pfb>
-Output written on "Radiation Hardening Academic Paper.pdf" (2 pages, 70286 byte
+Output written on "Radiation Hardening Academic Paper.pdf" (2 pages, 71019 byte
 s).
 PDF statistics:
  37 PDF objects out of 1000 (max. 8388607)
