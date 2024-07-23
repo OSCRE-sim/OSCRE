@@ -44,11 +44,15 @@ This paper presents the design, implementation, and applications of an open-sour
 \end{abstract}
 
 \begin{IEEEkeywords}
-radiation hardening, simulator, xschem, NGSpice, fault injection, electronic circuits
+radiation hardening, electronic circuits, fault injection, simulation, xschem, NGSpice
 \end{IEEEkeywords}
 
 \section{Introduction}
-The accurate simulation of radiation effects on electronic circuits is crucial for the development of robust systems in space, nuclear, and other radiation-prone environments. This paper introduces an open-source radiation hardening simulator that leverages xschem and NGSpice to provide an accessible and effective tool for researchers and engineers.
+The accurate simulation of radiation effects on electronic circuits is crucial for the development of robust systems in space, nuclear, and other radiation-prone environments. Radiation can induce a variety of faults and errors in electronic components, leading to system failures. Thus, understanding and mitigating these effects is essential for ensuring the reliability of electronic systems.
+
+In this paper, we introduce an open-source radiation hardening simulator that leverages xschem and NGSpice. This simulator is designed to provide researchers and engineers with a tool to simulate and analyze the effects of radiation on electronic circuits. By offering a comprehensive library and a user-friendly interface, the simulator aims to facilitate the development and testing of radiation-hardened designs.
+
+The paper is structured as follows: Section II provides an overview of the project, including its background, objectives, and scope. Section III details the methodology and implementation, describing the integration of xschem, NGSpice, and custom-developed modules. Section IV presents the testing, results, and discussion, highlighting the system's performance and the challenges encountered. Finally, Section V concludes the paper and outlines future work.
 
 \section{Project Overview}
 This section provides an overview of the project, including background, objectives, and scope.
@@ -58,6 +62,13 @@ Advancements in radiation hardening simulation have led to various methodologies
 
 \subsection{Project Scope and Objectives}
 This subsection outlines the specific goals and scope of the radiation hardening simulator project. It describes the challenges the simulator aims to address and the expected outcomes.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\linewidth]{project_flow_diagram_placeholder.png}
+\caption{High-level project workflow illustrating the interaction between the main modules of the simulator.}
+\label{fig:project_flow}
+\end{figure}
 
 \section{Methodology and Implementation}
 The methodology and implementation section details the methods and tools used in the project, including the integration of xschem, NGSpice, and custom-developed modules.
@@ -74,20 +85,36 @@ The Radiation Effect Simulation Module simulates the effects of radiation on ele
 \subsubsection{Results Analysis Module}
 The Results Analysis Module analyzes and presents simulation results. It includes functions such as \texttt{GenerateReport()}, \texttt{PlotResults()}, and \texttt{ComputeSER()}.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\linewidth]{example_circuit_placeholder.png}
+\caption{Schematic of an example circuit used in the simulations.}
+\label{fig:example_circuit}
+\end{figure}
+
 \section{Testing, Results, and Discussion}
 This section presents the results of preliminary tests, highlighting the system's ability to simulate radiation effects with improved accuracy. It also discusses the observed challenges and their impact on measurement accuracy.
 
 \subsection{Analysis of Non-linearities and Repeatability}
 This subsection investigates the sources of non-linearities in the simulation process and evaluates the system's repeatability across different test scenarios.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\linewidth]{simulation_results_placeholder.png}
+\caption{Simulation results showing the transient response of a circuit under radiation exposure.}
+\label{fig:simulation_results}
+\end{figure}
+
 \subsection{Generalization and Application}
 This subsection explores the potential for generalizing the simulation method to other types of circuits and its applicability in various fields requiring precise radiation effect simulation.
 
 \section{Conclusion and Future Work}
-This section summarizes the contributions of this work to the field of radiation hardening simulation, emphasizing the innovations introduced and the potential impact on future research. It also outlines the next steps in research, including further optimization of the simulator, exploration of additional features, and potential collaborations with other projects.
+This paper presented an open-source radiation hardening simulator designed to simulate and analyze the effects of radiation on electronic circuits. The simulator integrates xschem and NGSpice with custom-developed modules for fault injection, radiation effect simulation, and results analysis. The preliminary tests demonstrated the system's improved accuracy in simulating radiation effects.
+
+In future work, we plan to further optimize the simulator and explore additional features. We aim to enhance the simulator's capability to handle more complex scenarios and to improve its user interface for better usability. Additionally, we will investigate potential collaborations with other research projects to expand the simulator's applications and impact.
 
 \section*{Acknowledgment}
-The authors would like to thank Dr. Shiuh-hua Wood Chiang for his guidance and support throughout this project. This work was supported by [Funding Source].
+The authors would like to thank Dr. Shiuh-hua Wood Chiang for his guidance and support throughout this project. We also acknowledge the contributions of our colleagues and the funding support from [Funding Source]. Their assistance has been invaluable in the development and success of this project.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
