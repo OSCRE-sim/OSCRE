@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{float}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -21,14 +22,14 @@ jacobdanderson@gmail.com}
 \IEEEauthorblockN{David Nichols}
 \IEEEauthorblockA{\textit{Department of Electrical and Computer Engineering} \\
 \textit{BYU}\\
-Provo, USA \\
-davidnichols@email.com}
+Provo, UT, USA \\
+dav1111@byu.edu}
 \and
 \IEEEauthorblockN{Collin Lambert}
 \IEEEauthorblockA{\textit{Department of Electrical and Computer Engineering} \\
 \textit{BYU}\\
 Provo, USA \\
-collinlambert@email.com}
+collinml@byu.edu}
 \and
 \IEEEauthorblockN{Parker Allred}
 \IEEEauthorblockA{\textit{Department of Electrical and Computer Engineering} \\
@@ -60,10 +61,10 @@ The paper is structured as follows: Section II provides an overview of the proje
 This section provides an overview of the project, including background, objectives, and scope.
 
 \subsection{Background and Related Work}
-Advancements in radiation hardening simulation have led to various methodologies aimed at increasing precision and reducing error. However, many existing techniques struggle with issues such as non-linearity, sensitivity to environmental conditions, and complex calibration processes. This subsection reviews the relevant literature and existing tools in the field, providing a detailed comparison of our method with existing techniques and highlighting the unique features and improvements introduced by our approach \cite{Wrobel2011, Florian1986, Pepper1990}.
+Advancements in radiation hardening simulation have resulted in the development of numerous methodologies designed to enhance precision and minimize error. Despite these advancements, many existing techniques encounter challenges, including non-linearity, sensitivity to environmental conditions, and intricate calibration processes. Numerous efforts to improve these models have been undertaken, yielding significant success. Our open-source models are based on several of these advancements, most notably the adaptive double exponential model, which has proven effective in accurately modeling certain Single-Event Effects (SEEs) \cite{}.
 
 \subsection{Project Scope and Objectives}
-This subsection outlines the specific goals and scope of the radiation hardening simulator project. It describes the challenges the simulator aims to address and the expected outcomes \cite{Wrobel2011, Florian1986}.
+There are multiple existing Radiation-Hardened SPICE simulations; however, these simulators are not open-sourced, limiting their accessibility to users who can afford to purchase these software environments. The primary objective of this project was to develop an open-source, radiation-effects SPICE simulator that is both user-friendly and accurate in its modeling capabilities. This was accomplished by researching various contemporary methods and modules for modeling radiation effects in circuits and integrating them into existing open-source SPICE programs, specifically XSchem for the front-end and NGSpice for the back-end. Additionally, we ensured that the interface for applying these methods was intuitive, facilitating their integration into users' projects.
 
 \begin{figure}[htbp]
 \centering
@@ -73,26 +74,154 @@ This subsection outlines the specific goals and scope of the radiation hardening
 \end{figure}
 
 \section{Methodology and Implementation}
-The methodology and implementation section details the methods and tools used in the project, including the integration of Xschem, NGSpice, and custom-developed modules.
+[TODO]
 
 \subsection{Library Structure and Core Features}
-This subsection provides an overview of the library structure and the core features of the simulator, including the Fault Injection Module, Radiation Effect Simulation Module, and Results Analysis Module.
+[TODO]
 
-\subsubsection{Fault Injection Module}
-The Fault Injection Module simulates faults in circuit elements to study radiation effects. It includes key functions such as \texttt{DefineFaultModel()}, \texttt{InjectFault()}, and \texttt{LogFault()} \cite{Pepper1990}.
-
-\subsubsection{Radiation Effect Simulation Module}
-The Radiation Effect Simulation Module simulates the effects of radiation on electronic circuits. It includes functions such as \texttt{SimulateSET()}, \texttt{SimulateSEU()}, and \texttt{AnalyzeImpact()} \cite{Pepper1990}.
-
-\subsubsection{Results Analysis Module}
-The Results Analysis Module analyzes and presents simulation results. It includes functions such as \texttt{GenerateReport()}, \texttt{PlotResults()}, and \texttt{ComputeSER()} \cite{Pepper1990}.
+\vspace{1em}
+\subsubsection{Double Exponential Current Source}
+A simple way to model the photocurrent generated in a reverse biased pn junction due to a radiation strike, is with a double exponential current source. [NEED TO ADD MORE]
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\linewidth]{example_circuit_placeholder.png}
-\caption{Schematic of an example circuit used in the simulations.}
-\label{fig:example_circuit}
+\includegraphics[width=0.9\linewidth]{double_exponential.png}
+\caption{Double exponential waveform.}
+\label{fig:double_exp}
 \end{figure}
+
+\cite{Pepper1990}.
+
+\subsubsection{Dual Double Exponential Current Source}
+A problem that arises with the simple double exponential current source is that it can be inaccurate in some scenarios. It has been found that a more realistic photocurrent waveform consists of an initial peak followed by a plateau region caused by limitations of PMOS drive current, and a final drop off. This waveform can be represented by adding two double exponential current sources together resulting in a dual double exponential current source. [NEED TO ADD MORE]
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{dual_double_exponential.png}
+\caption{Dual double exponential waveform}
+\label{fig:dual_double_exp}
+\end{figure}
+
+\cite{Pepper1990}.
+
+\subsubsection{Adaptive Double Exponential Current Source}
+A problem that arises when using either the double or dual double exponential current models is that these models can produce unrealistic node voltages. If, for example, a double or dual double exponential current source is placed from the drain to the body node of a reverse biased NMOS transistor, when the current source is activated, the drain node voltage can be pulled below the ground node voltage. This means that the NMOS transistor is no longer held in reverse bias and no current should be flowing.
+
+The adaptive double exponential current source solves this problem by adjusting the drive current proportional to the voltage accross the reverse bias PN junction of the transistor for which a radiation strike is being simulated for. This adjustment allows the node voltage to drop to near zero and remain at this level until the radiation induced current spike is complete. The resulting current waveform closely resembles that of a dual double exponential current source.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\linewidth]{Adaptive_Model_Cropped.png}
+\caption{Overview of adaptive double exponential current source model.}
+\label{fig:adaptive_model_overview}
+\end{figure}
+
+The following equations define the behavior of the adaptive model:
+{\large
+\[B_{SEE}=Q(C1)*(V(IN)-V(OUT))*k\]
+}
+\(B_{SEE}\) (The obsereved current due to single event effects) is a function of the total charge stored in the capacitor, the voltage across the adaptive current source, and an adjustmentc constant \(k\).
+{\large
+\[B_{REC}=recomb\_adj*Q(C1)*k\]
+}
+\(B_{REC}\) (The current due to electron-hole pair recombination effects) is a function of an adjustment parameter \(recomb\_adj\), the total charge on the capcitor, and a second adjustment constant \(k\). Note, this \(k\) is the same \(k\) as presented in the equation for \(B_{SEE}\).
+{\large
+\[B_{REC}=I(B_{REC})\]
+}
+\(B_{SEE}'\) is a current mirror of \(B_{SEE}'\). This allows for the calculation portion of the circuit to be separated from outside influence.
+
+Lastly, \(I_{SRC}\) Is the standard double exponential current source built into most versions of SPICE.
+
+A detailed description of each parameter in the adpative current source is as follows:
+
+\begin{itemize}
+
+\item[] \(t_r\) - The simulation time at which charge injection begins
+
+\item[] \(t_f\) - The simulation time at which charge injection halts
+
+\item[] \(\tau_r\) - The rise time constant of \(I_{SRC}\)
+
+\item[] \(\tau_f\) - The fall time constant of \(I_{SRC}\)
+
+\item[] \(q_{tot}\) - The total charge to be injected into the node
+
+\item[] \(k\) - A constant for proportionally adjusting the drive strength of \(B_{SEE}\) and \(B_{REC}\)
+
+\item[] \(recomb\_adj\) - A constant for proportionally adjusting the drive strength of \(B_{REC}\)
+
+\end{itemize}
+
+An example usage case for this adaptive double exponential current model is given as follows. The following image depicts using the adaptive model to simulate a radiation strike on a reverse biased NMOS transistor in a CMOS inverter. Note: the arrow indicated the direction of current flow. Thus, the input is connected to the drain node of the NMOS transistor and the output is connected to the body node of the NMOS transistor.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\linewidth]{Adaptive_Current_Example_Circuit.png}
+\caption{Usage of adaptive double exponential current source model to simulate radiation effects in a CMOS inverter.}
+\label{fig:adaptive_model_example}
+\end{figure}
+
+\cite{Kauppila2009}.
+ 
+\vspace{1em}
+\subsubsection{TID Modules}
+TID, or total ionizing dose, is a radiation affect in which charge can build up in the insulating regions of a MOSFET. This buildup of charge can cause a number of undesireable affects. Some of the major affects that occur are a change in the threhold voltage of the MOSFET, and an increase in leakage current. We've chosen only to model the change in threshold voltage for the purposes of this paper.
+
+TID effects on an NMOS transistor cause the threshold voltage of said transistor to decrease. This means that less voltage differential needs to exist between the gate and the source of the transistor to cause the transistor to transistion out of the cutoff region. This decrease in voltage threhold raises the noise floor of the transistor[NEED TO VERIFY THIS CLAIM].
+
+TID effect on a PMOS transistor are much the same as those of the NMOS. The threshold voltage, however, increases rather than decreases. This does still mean, however, that the less voltage differential need to exist between the gate and the source of the transistor to cause the transistor to transition out of the cutoff region.
+
+We've chosen to model these effects as an inline voltage source that introduces a voltage bias into the signal driving the gate of the transistors. This bias can be used to effectively raise or lower the threhold voltage of each type of transistor respectively.
+\cite{Pepper1990}.
+
+\vspace{1em}
+\subsubsection{Rail Span Collapse Voltage Source}
+A radiation induced phenomenon called rail span collapse is often observed in complex circuits. Rail span collapse is characterized by the voltage between the positive and negative voltage rail collapsing due to excess current draw. This voltage collapse can result in severe problems, especially in circuity with sequential logic.
+
+One example where rail span collapse can cause issues is in an SRAM circuit. When an SRAM is irradiated, each time a reverse biased mosfet is struck a photocurrent is generated in the junction. These photocurrents can be compounded together which can result in more current being drawn than the voltage rails can supply. This reduction in voltage difference between the positive and negative power rails can then cause the SRAM to become more susceptible to upsets, or lose its saved state all together. 
+
+We've chosen to model voltage drop due to excessive current draw as a logistic function. This logistic function outputs a voltage drop for a given current draw as input. The image below shows an example plot of the model. Note that the x axis represents current draw and the y axis represents voltage drop.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{rail_collapse_function.png}
+\caption{Rail span collapse function. [TEMPORARY IMAGE, I JUST NEEDED A GRAPHIC]}
+\label{fig:rail_collapse_function}
+\end{figure}
+
+In the above image the function is tuned such that significant voltage drop begins to occur once a current of 3mA is exceeded. When more than about 5mA is drawn the voltage source can no longer sustain the load and the voltage drop is near 1.8 volts. Given that the voltage source in this example has a nominal voltage of 1.8 volts, this means that there is near zero voltage between the positive an negative rails after 5mA.
+
+The following equations define the behavior of the rail span collapse model:
+{\Large
+\[V(I)=V_{nominal}-\frac{V_{nominal}}{1+e^{-k(I-I_0)}}\]
+}
+Where \(I_0\), the inflection point of the logistic function, is defined as:
+{\Large
+\[I_0=I_{limit}-\frac{ln(\frac{V_{limit}}{V_{initial}-V_{limit}})}{k}\]
+}
+
+A detailed description of each parameter in the rail span collapse voltage source is as follows:
+
+\begin{itemize}
+
+\item[] \(V_{nominal}\) - The nominal voltage of the voltage source under normal conditions
+
+\item[] \(V_{limit}\) - The voltage drop when a current of exactly \(I_{limit}\) is being drawn. Must be greater than zero
+
+\item[] \(k\) - A constant for adjusting the slope of the logistic function
+
+\end{itemize}
+
+The below image presents an example of the response of the voltage source to a given current draw. The blue line represents current draw with the y axis representing current draw in mA. The red line represents the voltage output of the voltage source with the y axis representing voltage. The x axis for both lines represents time.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{Voltage_Collapse_Response.png}
+\caption{Voltage output in response to excess current draw. [TEMPORARY IMAGE, I JUST NEEDED A GRAPHIC]}
+\label{fig:rail_collapse_response}
+\end{figure}
+
+\cite{Massengill1984}.
 
 \section{Testing, Results, and Discussion}
 This section presents the results of preliminary tests, highlighting the system's ability to simulate radiation effects with improved accuracy. It also discusses the observed challenges and their impact on measurement accuracy \cite{Pepper1990}.
