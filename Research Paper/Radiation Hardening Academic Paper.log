@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.15)  25 JUL 2024 12:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.15)  26 JUL 2024 09:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -113,7 +113,7 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
 \c@IEEEbiography=\count199
 \@IEEEtranrubishbin=\box51
 )
-** ATTENTION: Overriding command lockouts (line 2).
+** ATTENTION: Overriding command lockouts (line 5).
 (/usr/share/texlive/texmf-dist/tex/latex/cite/cite.sty
 LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 332.
@@ -261,20 +261,20 @@ File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 (./Radiation Hardening Academic Paper.aux)
 \openout1 = `"Radiation Hardening Academic Paper.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
 
 -- Lines per column: 56 (exact).
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -299,27 +299,13 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-
-LaTeX Warning: Citation `Wrobel2011' on page 1 undefined on input line 52.
-
-
-LaTeX Warning: Citation `Florian1986' on page 1 undefined on input line 52.
-
-
-LaTeX Warning: Citation `Wrobel2011' on page 1 undefined on input line 54.
-
-
-LaTeX Warning: Citation `Florian1986' on page 1 undefined on input line 54.
-
-
-LaTeX Warning: Citation `Pepper1990' on page 1 undefined on input line 56.
-
 <project_flow_diagram_placeholder.png, id=1, 100.375pt x 100.375pt>
 File: project_flow_diagram_placeholder.png Graphic file (type png)
 <use project_flow_diagram_placeholder.png>
 Package pdftex.def Info: project_flow_diagram_placeholder.png  used on input li
-ne 71.
+ne 75.
 (pdftex.def)             Requested size: 201.60077pt x 201.63014pt.
+
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
@@ -327,31 +313,25 @@ ne 71.
 <double_exponential.png, id=11, 1204.5pt x 803.0pt>
 File: double_exponential.png Graphic file (type png)
 <use double_exponential.png>
-Package pdftex.def Info: double_exponential.png  used on input line 88.
+Package pdftex.def Info: double_exponential.png  used on input line 92.
 (pdftex.def)             Requested size: 226.79846pt x 151.19926pt.
-
-
-LaTeX Warning: Citation `Pepper1990' on page 2 undefined on input line 93.
-
 <dual_double_exponential.png, id=13, 1204.5pt x 803.0pt>
 File: dual_double_exponential.png Graphic file (type png)
 <use dual_double_exponential.png>
-Package pdftex.def Info: dual_double_exponential.png  used on input line 100.
+Package pdftex.def Info: dual_double_exponential.png  used on input line 104.
 (pdftex.def)             Requested size: 226.79846pt x 151.19926pt.
-
-LaTeX Warning: Citation `Pepper1990' on page 2 undefined on input line 105.
-
 <Adaptive_Model_Cropped.png, id=14, 811.03pt x 252.945pt>
 File: Adaptive_Model_Cropped.png Graphic file (type png)
 <use Adaptive_Model_Cropped.png>
-Package pdftex.def Info: Adaptive_Model_Cropped.png  used on input line 114.
+Package pdftex.def Info: Adaptive_Model_Cropped.png  used on input line 118.
 (pdftex.def)             Requested size: 252.0pt x 78.59354pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 121
+LaTeX Font Info:    Trying to load font information for U+msa on input line 125
 .
+
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 121
+LaTeX Font Info:    Trying to load font information for U+msb on input line 125
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -362,60 +342,33 @@ l_double_exponential.png> <./Adaptive_Model_Cropped.png>]
 File: Adaptive_Current_Example_Circuit.png Graphic file (type png)
 <use Adaptive_Current_Example_Circuit.png>
 Package pdftex.def Info: Adaptive_Current_Example_Circuit.png  used on input li
-ne 159.
+ne 163.
 (pdftex.def)             Requested size: 226.79846pt x 133.18947pt.
-
-
-LaTeX Warning: Citation `Kauppila2009' on page 3 undefined on input line 164.
-
-
-LaTeX Warning: Citation `Pepper1990' on page 3 undefined on input line 175.
-
 <rail_collapse_function.png, id=27, 1204.5pt x 803.0pt>
 File: rail_collapse_function.png Graphic file (type png)
 <use rail_collapse_function.png>
-Package pdftex.def Info: rail_collapse_function.png  used on input line 187.
+Package pdftex.def Info: rail_collapse_function.png  used on input line 191.
 (pdftex.def)             Requested size: 226.79846pt x 151.19926pt.
+LaTeX Font Info:    Calculating math sizes for size <14> on input line 200.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 8019) has occurred while \output is active []
 
  [3 <./Adaptive_Current_Example_Circuit.png>]
-LaTeX Font Info:    Calculating math sizes for size <14> on input line 196.
 <Voltage_Collapse_Response.png, id=33, 1204.5pt x 803.0pt>
 File: Voltage_Collapse_Response.png Graphic file (type png)
 <use Voltage_Collapse_Response.png>
-Package pdftex.def Info: Voltage_Collapse_Response.png  used on input line 219.
+Package pdftex.def Info: Voltage_Collapse_Response.png  used on input line 223.
 
 (pdftex.def)             Requested size: 226.79846pt x 151.19926pt.
-
-Underfull \vbox (badness 1648) has occurred while \output is active []
-
-
-
-LaTeX Warning: Citation `Massengill1984' on page 4 undefined on input line 224.
-
-
-
-LaTeX Warning: Citation `Pepper1990' on page 4 undefined on input line 227.
-
-
-LaTeX Warning: Citation `Pepper1990' on page 4 undefined on input line 230.
-
 <simulation_results_placeholder.png, id=34, 100.375pt x 100.375pt>
 File: simulation_results_placeholder.png Graphic file (type png)
 <use simulation_results_placeholder.png>
 Package pdftex.def Info: simulation_results_placeholder.png  used on input line
- 234.
+ 238.
 (pdftex.def)             Requested size: 201.60077pt x 201.63014pt.
-
-LaTeX Warning: Citation `Pepper1990' on page 4 undefined on input line 240.
-
-[4 <./Rail_Collapse_Function.png> <./Voltage_Collapse_Response.png> <./simulati
-on_results_placeholder.png>]
-
-LaTeX Warning: Citation `Pepper1990' on page 5 undefined on input line 245.
-
-No file "Radiation Hardening Academic Paper".bbl.
+ [4 <./Rail_Collapse_Function.png> <./Voltage_Collapse_Response.png> <./simulat
+ion_results_placeholder.png>]
+(./Radiation Hardening Academic Paper.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -429,33 +382,29 @@ Before submitting the final camera ready copy, remember to:
 
 [5
 
-] (./Radiation Hardening Academic Paper.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+] (./Radiation Hardening Academic Paper.aux) ) 
 Here is how much of TeX's memory you used:
- 4300 strings out of 478287
- 68141 string characters out of 5849289
- 371956 words of memory out of 5000000
- 22453 multiletter control sequences out of 15000+600000
- 509268 words of font info for 114 fonts, out of 8000000 for 9000
+ 4310 strings out of 478287
+ 68390 string characters out of 5849289
+ 372971 words of memory out of 5000000
+ 22461 multiletter control sequences out of 15000+600000
+ 509297 words of font info for 114 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,8n,62p,833b,266s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
-10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
-rw/times/utmri8a.pfb>
-Output written on "Radiation Hardening Academic Paper.pdf" (5 pages, 321368 byt
+{/usr/share/texlive/texmf-dist/fo
+nts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/font
+s/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/tim
+es/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on "Radiation Hardening Academic Paper.pdf" (5 pages, 323004 byt
 es).
 PDF statistics:
  100 PDF objects out of 1000 (max. 8388607)

@@ -1,0 +1,58 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: Radiation Hardening Academic Paper.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: references.bib
+Warning--I didn't find a database entry for ""
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+
+Done.
+You've used 5 entries,
+            4087 wiz_defined-function locations,
+            859 strings with 8290 characters,
+and the built_in function-call counts, 3155 in all, are:
+= -- 280
+> -- 73
+< -- 9
++ -- 34
+- -- 17
+* -- 154
+:= -- 515
+add.period$ -- 10
+call.type$ -- 5
+change.case$ -- 5
+chr.to.int$ -- 0
+cite$ -- 5
+duplicate$ -- 266
+empty$ -- 234
+format.name$ -- 22
+if$ -- 717
+int.to.chr$ -- 0
+int.to.str$ -- 5
+missing$ -- 46
+newline$ -- 38
+num.names$ -- 5
+pop$ -- 98
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 263
+stack$ -- 0
+substring$ -- 45
+swap$ -- 203
+text.length$ -- 9
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 5
+warning$ -- 0
+while$ -- 7
+width$ -- 6
+write$ -- 71
+(There was 1 warning)
