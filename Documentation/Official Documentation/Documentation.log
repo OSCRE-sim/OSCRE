@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.7.24)  29 JUL 2024 11:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.7.24)  29 JUL 2024 19:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -463,6 +463,12 @@ File: lstlang1.sty 2024/05/25 1.10b listings language file
 (/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/05/25 1.10b listings language file
 )
+Overfull \hbox (9.7164pt too wide) in paragraph at lines 86--87
+[]\OT1/cmr/m/n/12 The script will au-to-mat-i-cally in-stall all nec-es-sary de
+-pen-den-cies, in-clud-ing xschem, NGSpice,
+ []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -473,12 +479,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [3]
-<example_circuit_memory.png, id=123, 100.375pt x 100.375pt>
-File: example_circuit_memory.png Graphic file (type png)
-<use example_circuit_memory.png>
-Package pdftex.def Info: example_circuit_memory.png  used on input line 123.
-(pdftex.def)             Requested size: 375.80544pt x 375.92128pt.
-
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -488,58 +488,38 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[4 <./example_circuit_memory.png>]
-<example_circuit_opamp.png, id=138, 100.375pt x 100.375pt>
-File: example_circuit_opamp.png Graphic file (type png)
-<use example_circuit_opamp.png>
-Package pdftex.def Info: example_circuit_opamp.png  used on input line 142.
-(pdftex.def)             Requested size: 375.80544pt x 375.92128pt.
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[5 <./example_circuit_opamp.png>]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[6] (./Documentation.aux)
+[4] (./Documentation.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-05-27>
  ***********
-Package rerunfilecheck Info: File `Documentation.out' has not changed.
-(rerunfilecheck)             Checksum: 1F4566B7D1239D2F143136DE03139456;2587.
+
+
+Package rerunfilecheck Warning: File `Documentation.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Documentation.out':
+(rerunfilecheck)             Before: 504C19A2E80A73A91A68031D94269E84;2552
+(rerunfilecheck)             After:  809DB3FB0BE37449B61A3EC132404A8D;2623.
  ) 
 Here is how much of TeX's memory you used:
- 12295 strings out of 473584
- 183453 string characters out of 5728328
- 1987905 words of memory out of 5000000
- 34981 multiletter control sequences out of 15000+600000
- 567685 words of font info for 73 fonts, out of 8000000 for 9000
+ 12226 strings out of 473584
+ 182407 string characters out of 5728328
+ 1962905 words of memory out of 5000000
+ 34939 multiletter control sequences out of 15000+600000
+ 567338 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,472b,1264s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,472b,1169s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><
 /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></u
-sr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></us
-r/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr
-/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Documentation.pdf (6 pages, 90813 bytes).
+sr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></us
+r/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on Documentation.pdf (4 pages, 78129 bytes).
 PDF statistics:
- 200 PDF objects out of 1000 (max. 8388607)
- 176 compressed objects within 2 object streams
- 65 named destinations out of 1000 (max. 500000)
- 131 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 157 PDF objects out of 1000 (max. 8388607)
+ 139 compressed objects within 2 object streams
+ 39 named destinations out of 1000 (max. 500000)
+ 121 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -28,7 +28,7 @@
 \newpage
 
 \section{Project Overview}
-This project aims to develop an open-source radiation hardening simulator using xschem and NGSpice. The simulator provides a comprehensive library for simulating the effects of radiation on electronic circuits, including modules for fault injection, radiation effect simulation, and results analysis. The project is designed to be user-friendly and accessible to researchers and engineers working in the field of radiation hardening.
+This project aims to develop an open-source radiation hardening simulator using Xschem and NGSpice. The simulator provides a comprehensive library for simulating the effects of radiation on electronic circuits, including modules for fault injection, radiation effect simulation, and results analysis. The project is designed to be user-friendly and accessible to researchers and engineers working in the field of radiation hardening.
 
 \section{Library Structure and Core Features}
 \subsection{Fault Injection Module}
@@ -62,67 +62,36 @@ The Results Analysis Module analyzes and presents simulation results.
 \end{itemize}
 
 \section{Installation Instructions}
+To install the simulator, follow these steps:
+
 \subsection{Prerequisites}
 Before installing the simulator, ensure you have the following software installed:
 \begin{itemize}
     \item Homebrew (for macOS users)
     \item Git
-    \item xschem
-    \item NGSpice
-    \item GTK+3
 \end{itemize}
 
-\subsection{Step-by-Step Installation}
-\begin{enumerate}
-    \item Install Homebrew (macOS):
+\subsection{Running the Installation Script}
+1. Clone the project repository from GitHub:
     \begin{lstlisting}[language=bash, breaklines=true]
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    git clone https://github.com/Jacoba1100254352/RAD-HARD.git
+    cd RAD-HARD
     \end{lstlisting}
-    
-    \item Install Dependencies:
+
+2. Run the installation script:
     \begin{lstlisting}[language=bash, breaklines=true]
-    brew install gtk+3 cairo pango autoconf automake libtool pkg-config at-spi2-core
+    ./install_script.sh
     \end{lstlisting}
 
-    \item Clone the xschem-gaw Repository:
-    \begin{lstlisting}[language=bash, breaklines=true]
-    git clone https://github.com/StefanSchippers/xschem-gaw.git
-    cd xschem-gaw
-    \end{lstlisting}
-
-    \item Generate Configuration Files and Build:
-    \begin{lstlisting}[language=bash, breaklines=true]
-    autoreconf --install
-    automake --add-missing
-    ./configure
-    make
-    sudo make install
-    \end{lstlisting}
-
-    \item Add the following to your \texttt{.bashrc} or \texttt{.zshrc} file:
-    \begin{lstlisting}
-    export NO_AT_BRIDGE=1
-    \end{lstlisting}
-
-    \item Source the \texttt{.bashrc} or \texttt{.zshrc} file or open a new terminal window:
-    \begin{lstlisting}[language=bash]
-    source ~/.bashrc  # or
-    source ~/.zshrc
-    \end{lstlisting}
-
-    \item Run the GTK Analog Wave Viewer:
-    \begin{lstlisting}[language=bash]
-    gaw
-    \end{lstlisting}
-\end{enumerate}
+The script will automatically install all necessary dependencies, including xschem, NGSpice, Tcl, Tk, and BeSpiceWave.app, and set up the environment for you.
 
 \section{Usage Examples}
 \subsection{Example Circuit: Memory Cell}
 \begin{figure}[htbp]
-\centering
-\includegraphics[width=0.8\linewidth]{example_circuit_memory.png}
-\caption{Example Memory Cell Circuit}
-\label{fig:memory_cell}
+%\centering
+%\includegraphics[width=0.8\linewidth]{example_circuit_memory.png}
+%\caption{Example Memory Cell Circuit}
+%\label{fig:memory_cell}
 \end{figure}
 
 \textbf{Steps to Simulate:}
@@ -138,10 +107,10 @@ Before installing the simulator, ensure you have the following software installe
 
 \subsection{Example Circuit: Operational Amplifier}
 \begin{figure}[htbp]
-\centering
-\includegraphics[width=0.8\linewidth]{example_circuit_opamp.png}
-\caption{Example Operational Amplifier Circuit}
-\label{fig:opamp}
+%\centering
+%\includegraphics[width=0.8\linewidth]{example_circuit_opamp.png}
+%\caption{Example Operational Amplifier Circuit}
+%\label{fig:opamp}
 \end{figure}
 
 \textbf{Steps to Simulate:}
