@@ -48,7 +48,7 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
     \begin{abstract}
         This paper presents the design, implementation, and applications of an open-source radiation hardening simulator developed using Xschem and NGSpice.
         The simulator aims to address the challenges of simulating radiation effects on electronic circuits by providing a comprehensive library and user-friendly interface.
-        The project integrates core modules for fault injection, radiation effect simulation, including Single Event Effects (SEE) and Total Ionizing Dose (TID), and results analysis, along with thorough documentation and examples to support users in their research and development efforts.
+        The project integrates core modules for fault injection, radiation effect simulation, including Single Event Effects (SEE) and Total Ionizing Dose (TID), along with thorough documentation and examples to support users in their research and development efforts.
         Preliminary tests demonstrate the simulator's improved accuracy in modeling radiation effects, offering significant potential for future research and development.
     \end{abstract}
 
@@ -85,52 +85,41 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
     Our open-source models are based on several of these advancements, most notably the adaptive double exponential model, which has proven effective in accurately modeling certain Single-Event Effects (SEEs)~\cite{}.
 
     \subsection{Project Scope and Objectives}\label{subsec:project-scope-and-objectives}
-    There are multiple existing Radiation-Hardened SPICE simulations; however, these simulators are not open-sourced, limiting their accessibility to users who can afford to purchase these software environments.
+    There are multiple existing Radiation-Hardened SPICE simulatiors; however, these simulators are not open-sourced, limiting their accessibility to users who can afford to purchase these software environments.
     The primary objective of this project was to develop an open-source, radiation-effects SPICE simulator that is both user-friendly and accurate in its modeling capabilities.
-    This was accomplished by researching various contemporary methods and modules for modeling radiation effects in circuits and integrating them into existing open-source SPICE programs, specifically XSchem for the front-end and NGSpice for the back-end.
+    This was accomplished by researching various contemporary methods and modules for modeling radiation effects in circuits and integrating them into existing open-source SPICE programs, specifically Xschem for the front-end and NGSpice for the back-end.
     Additionally, we ensured that the interface for applying these methods was intuitive, facilitating their integration into users' projects.
-
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.8\linewidth]{project_flow_diagram_placeholder}
-        \caption{High-level project workflow illustrating the interaction between the main modules of the simulator.}
-        \label{fig:project_flow}
-    \end{figure}
 
 
     \section{Methodology and Implementation}\label{sec:methodology-and-implementation}
-    [TODO]
-
-    \subsection{Library Structure and Core Features}\label{subsec:library-structure-and-core-features}
-    [TODO]
+	A goal of this project is to present a user friendly and intutive experience to the user. To effectuate this, we've chosen to implement each radiation effect as a block that can be placed and connected to other compoenents in Xschem. A description of each block is as follows:
 
     \vspace{1em}
 
     \subsection{Single Event Effect [SEE] Simulation}\label{subsec:single-event-effect-[see]-simulation}
 
     \subsubsection{Double Exponential Current Source}
-    A simple way to model the photo-current generated in a reverse biased pn junction due to a radiation strike, is with a double exponential current source.
-    [NEED TO ADD MORE]
+    A simple way to model the photo-current generated in a reverse biased pn junction due to a radiation strike, is with a double exponential current source. This method has existed for decades and has been widely used. Figure \ref{fig:double_exp} depicts a double exponential waveform.
 
     \begin{figure}[htbp]
         \centering
         \includegraphics[width=0.95\linewidth]{EX_Double_Exponential}
         \caption{Double exponential waveform}
         \label{fig:double_exp}
-    \end{figure}~\cite{Pepper1990}.
+    \end{figure}
 
     \subsubsection{Dual Double Exponential Current Source}
-    A problem that arises with the simple double exponential current source is that it can be inaccurate in some scenarios.
-    It has been found that a more realistic photo-current waveform consists of an initial peak followed by a plateau region caused by limitations of PMOS drive current, and a final drop off.
-    This waveform can be represented by adding two double exponential current sources together resulting in a dual double exponential current source.
-    [NEED TO ADD MORE]
+    A limitation of the simple double exponential current source is that it can be inaccurate in some scenarios.
+    It has been found that a more realistic photo-current waveform consists of an initial peak followed by a plateau region caused by limitations of PMOS drive current in CMOS circuitry, and a final drop off.
+    This waveform can be represented by adding two double exponential current sources together resulting in a dual double exponential current source. Figure \ref{fig:dual_double_exp} depicts a dual double exponential waveform. \cite{Black2015}
+    \vspace{1em}
 
     \begin{figure}[htbp]
         \centering
         \includegraphics[width=0.95\linewidth]{EX_Dual_Double_Exponential}
         \caption{Dual double exponential waveform}
         \label{fig:dual_double_exp}
-    \end{figure}~\cite{Pepper1990}.
+    \end{figure}
 
     \subsubsection{Adaptive Double Exponential Current Source}
     A problem that arises when using either the double or dual double exponential current models is that these models can produce unrealistic node voltages.
@@ -139,7 +128,7 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
 
     The adaptive double exponential current source solves this problem by adjusting the drive current proportional to the voltage across the reverse bias PN junction of the transistor for which a radiation strike is being simulated for.
     This adjustment allows the node voltage to drop to near zero and remain at this level until the radiation induced current spike is complete.
-    The resulting current waveform closely resembles that of a dual double exponential current source.
+    The resulting current waveform, as seen in figure \ref{fig:inverter_response}, closely resembles that of a dual double exponential current source.
 
     \begin{figure}[htbp]
         \centering
@@ -159,14 +148,14 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
     \(B_{REC}\) (The current due to electron-hole pair recombination effects) is a function of an adjustment parameter \(recomb\_adj\), the total charge on the capacitor, and a second adjustment constant \(k\).
     Note, this \(k\) is the same \(k\) as presented in the equation for \(B_{SEE}\).
             {\large
-    \[B_{REC}=I(B_{REC})\]
+    \[B_{SEE}'=I(B_{SEE})\]
     }
-    \(B_{SEE}'\) is a current mirror of \(B_{SEE}'\).
+    \(B_{SEE}'\) is a current mirror of \(B_{SEE}\).
     This allows for the calculation portion of the circuit to be separated from outside influence.
 
     Lastly, \(I_{SRC}\) Is the standard double exponential current source built into most versions of SPICE\@.
 
-    A detailed description of each parameter in the adaptive current source is as follows:
+    A description of each parameter in the adaptive current source is as follows:
 
     \begin{itemize}
 
@@ -187,32 +176,11 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
     \end{itemize}
     \vspace{1em}
 
-    Figure~\ref{fig:adaptive_model_example} depicts using the adaptive model to simulate a radiation strike on a reverse biased NMOS transistor in a CMOS inverter.
-    Note: the arrow indicates the direction of current flow.
-    Thus, the input is connected to the drain node of the NMOS transistor and the output is connected to the body node of the NMOS transistor.
-
-    Figure~\ref{fig:inverter_response} details the voltage of the node Out in response to the current draw generated by the adaptive double exponential current source.
-
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.9\linewidth]{Adaptive_Current_Example_Circuit}
-        \caption{Usage of adaptive double exponential current source model to simulate radiation effects in a CMOS inverter.}
-        \label{fig:adaptive_model_example}
-    \end{figure}
-
-
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.95\linewidth]{Inverter_Response}
-        \caption{Voltage response of CMOS inverter due to simulated radiation strike on NMOS transistor}
-        \label{fig:inverter_response}
-    \end{figure}~\cite{Kauppila2009}.
-
     \subsubsection{Usage}
-    To simulate a single event effect on a PMOS transistor, one of the three single event effect simulation blocks must be placed with the input of the block originating at the body node of the PMOS transistor and the output ending at the drain node of the PMOS transistor.
+    To simulate a single event effect on a PMOS transistor, a single event effect simulation block must be placed with the input of the block connected to the body node of the PMOS transistor and the output of the block connected to the drain node of the PMOS transistor.
 
-    To simulate a single event effect on an NMOS transistor, one of the three single event effect simulation blocks must be placed with the input of the block originating at the drain node of the NMOS transistor and the output ending at the body node of the NMOS transistor.
-    Both of these configurations are demonstrated in figure~\ref{fig:SEE_Usage}.
+    To simulate a single event effect on an NMOS transistor, a single event effect simulation block must be placed with the input of the block connected to the drain node of the NMOS transistor and the output of the block connected to the body node of the NMOS transistor. 
+    Both of these configurations are demonstrated in figure~\ref{fig:SEE_Usage}. The reason behind these configuration restraints is beyong the scope of this paper.
 
     \begin{figure}[htbp]
         \centering
@@ -221,31 +189,25 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
         \label{fig:SEE_Usage}
     \end{figure}
 
-    \vspace{1em}
 
     \subsection{Other Radiation Effect Simulation}
     \label{subsec:other-radiation-effect-simulation}
 
     \subsubsection{TID Modules}
-    TID, or total ionizing dose, is a radiation effect in which charge can build up in the insulating regions of a MOSFET. This buildup of charge can cause a number of undesirable affects.
+    TID, or total ionizing dose, is a radiation effect in which charge accumulates in the insulating regions of a MOSFET. This accumulation of charge can cause a number of undesirable affects.
     Some of the major affects that occur are a change in the threshold voltage of the MOSFET, and an increase in leakage current.
     We've chosen only to model the change in threshold voltage for the purposes of this paper.
 
-    TID effects on an NMOS transistor cause the threshold voltage of said transistor to decrease.
-    This means that less voltage differential needs to exist between the gate and the source of the transistor to cause the transistor to transition out of the cutoff region.
-    This decrease in voltage threshold raises the noise floor of the transistor[NEED TO VERIFY THIS CLAIM].
-
-    TID effect on a PMOS transistor are much the same as those of the NMOS. The threshold voltage, however, increases rather than decreases.
-    This does still mean, however, that the less voltage differential need to exist between the gate and the source of the transistor to cause the transistor to transition out of the cutoff region.
+    TID effects on MOSFET transistors cause the absolute value of the threshold voltage to decrease. This means that less voltage differential needs to exist between the gate and the source of the transistor to cause the transistor to transistion out of the cutoff region.
 
     We've chosen to model these effects as an inline voltage source that introduces a voltage bias into the signal driving the gate of the transistors.
-    This bias can be used to effectively raise or lower the threshold voltage of each type of transistor respectively.
-    \cite{Pepper1990}.
+    This, in effect, changes the threshold voltage for the MOSFET.
+    [ADD CITATION]
 
     \vspace{1em}
 
     \subsubsection{Rail Span Collapse Voltage Source}
-    A radiation induced phenomenon called rail span collapse is often observed in complex circuits.
+    A radiation induced phenomenon known as rail span collapse is often observed in complex circuits.
     Rail span collapse is characterized by the voltage between the positive and negative voltage rail collapsing due to excess current draw.
     This voltage collapse can result in severe problems, especially in circuity with sequential logic.
 
@@ -256,17 +218,16 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
 
     We've chosen to model voltage drop due to excessive current draw as a logistic function.
     This logistic function outputs a voltage drop for a given current draw as input.
-    The image below shows an example plot of the model.
-    Note that the x-axis represents current draw and the y-axis represents voltage drop.
+    Figure \ref{fig:rail_collapse_function} shows an example plot of this model.
 
     \begin{figure}[htbp]
         \centering
         \includegraphics[width=0.95\linewidth]{rail_collapse_function}
-        \caption{Rail span collapse function. [TEMPORARY IMAGE, I JUST NEEDED A GRAPHIC]}
+        \caption{Rail span collapse function.}
         \label{fig:rail_collapse_function}
     \end{figure}
 
-    In the above image the function is tuned such that significant voltage drop begins to occur once a current of 3mA is exceeded.
+    In image \ref{fig:rail_collapse_function} the function is tuned such that significant voltage drop begins to occur once a current of 3mA is exceeded.
     When more than about 5mA is drawn the voltage source can no longer sustain the load and the voltage drop is near 1.8 volts.
     Given that the voltage source in this example has a nominal voltage of 1.8 volts, this means that there is near zero voltage between the positive and negative rails after 5mA\@.
 
@@ -293,42 +254,40 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
         \item[] \(k\) - A constant for adjusting the slope of the logistic function
 
     \end{itemize}
-    \vspace{1em}
 
-    The below image presents an example of the response of the voltage source to a given current draw.
-    The blue line represents current draw with the y-axis representing current draw in mA. The red line represents the voltage output of the voltage source with the y-axis representing voltage.
-    The x-axis for both lines represents time.
+
+
+
+    \section{Testing, Results, and Discussion}\label{sec:testing-results-and-discussion}
+    This section presents the results of preliminary tests, highlighting the system's ability to simulate radiation effects with accuracy.
+    
+    Figure \ref{fig:inverter_response} depicts the voltage response of a CMOS inverter to a simulated radiation strike generated by the adaptive double exponential current source on the reverse biased NMOS transistor. The waveform generated closely resembles results found from TCAD simulations. \cite{Kauppila2009}
+    
+        \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.95\linewidth]{Inverter_Response}
+        \caption{Voltage response of CMOS inverter due to simulated radiation strike on NMOS transistor}
+        \label{fig:inverter_response}
+    \end{figure}
+    
+Figure \ref{fig:rail_collapse_response} depicts the voltage response of the rail span collapse voltage source to an arbitrary current draw. In this example, the threshold current before rail collapse begins is set at 8.7 mA.
 
     \begin{figure}[htbp]
         \centering
         \includegraphics[width=0.95\linewidth]{Rail_Collapse_Response}
-        \caption{Voltage output in response to excess current draw. [TEMPORARY IMAGE, I JUST NEEDED A GRAPHIC]}
+        \caption{Voltage output in response to excess current draw.}
         \label{fig:rail_collapse_response}
     \end{figure}~\cite{Massengill1984}.
 
 
-    \section{Testing, Results, and Discussion}\label{sec:testing-results-and-discussion}
-    This section presents the results of preliminary tests, highlighting the system's ability to simulate radiation effects with improved accuracy.
-    It also discusses the observed challenges and their impact on measurement accuracy~\cite{Pepper1990}.
-
-    \subsection{Analysis of Non-linearities and Repeatability}\label{subsec:analysis-of-non-linearities-and-repeatability}
-    This subsection investigates the sources of non-linearities in the simulation process and evaluates the system's repeatability across different test scenarios~\cite{Pepper1990}.
-
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.8\linewidth]{simulation_results_placeholder}
-        \caption{Simulation results showing the transient response of a circuit under radiation exposure.}
-        \label{fig:simulation_results}
-    \end{figure}
-
-    \subsection{Generalization and Application}\label{subsec:generalization-and-application}
-    This subsection explores the potential for generalizing the simulation method to other types of circuits and its applicability in various fields requiring precise radiation effect simulation~\cite{Pepper1990}.
+    %\subsection{Generalization and Application}\label{subsec:generalization-and-application}
+    %This subsection explores the potential for generalizing the simulation method to other types of circuits and its applicability in various fields requiring precise radiation effect simulation~\cite{Pepper1990}.
 
 
     \section{Conclusion and Future Work}\label{sec:conclusion-and-future-work}
     This paper presented an open-source radiation hardening simulator designed to simulate and analyze the effects of radiation on electronic circuits.
-    The simulator integrates Xschem and NGSpice with custom-developed modules for fault injection, radiation effect simulation, and results analysis.
-    The incorporation of advanced models for Single Event Effects (SEE) and Total Ionizing Dose (TID) has shown improved accuracy in preliminary tests, demonstrating the system's potential for reliable simulations.
+    The simulator integrates Xschem and NGSpice with custom-developed modules for fault injection, and radiation effect simulation.
+    The incorporation of advanced models for Single Event Effects (SEE) and Total Ionizing Dose (TID) has shown accuracy in preliminary tests, demonstrating the system's potential for reliable simulations.
 
     In future work, we plan to further optimize the simulator and explore additional features.
     We aim to enhance the simulator's capability to handle more complex scenarios and to improve its user interface for better usability.

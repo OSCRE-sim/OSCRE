@@ -35,6 +35,12 @@ G.~Pepper and R.~Stone, ``An evaluation of the hspice/radspice circuit
   simulation code system,'' \emph{Defence Research Establishment Ottawa
   Technical Note}, vol. 90-33, November 1990.
 
+\bibitem{Black2015}
+D.~Black, W.~Robinson, I.~Wilcox, D.~Limbrick, and J.~Black, ``Modeling of
+  single event transients with dual double-exponential current sources:
+  Implications for logic cell characterization,'' \emph{IEEE Transactions on
+  Nuclear Science}, vol.~62, August 2015.
+
 \bibitem{Kauppila2009}
 J.~Kauppila, A.~Sternberg, M.~Alles, A.~Francis, J.~Holmes, O.~Amusan, and
   L.~Massengill, ``A bias-dependent single-event compact model implemented into
