@@ -1,0 +1,28 @@
+v {xschem version=3.4.5 file_version=1.2
+}
+G {}
+K {type=subcircuit
+format="@name @pinlist @symname Vnom=@Vnom Ilim=@Ilim Vlim=@Vlim k=@k I0=@Ilim-(ln(@Vlim/(@Vnom-@Vlim))/@k)"
+template="name=x1 Vnom=1.8 Ilim=1 Vlim=0.001 k=1"}
+V {}
+S {}
+E {}
+L 4 90 -30 110 -30 {}
+L 4 20 -30 40 -30 {}
+L 4 40 -50 90 -50 {}
+L 4 40 -10 90 -10 {}
+L 4 40 -50 40 -10 {}
+L 4 90 -50 90 -10 {}
+L 4 80 -35 80 -25 {}
+L 4 75 -30 85 -30 {}
+L 4 45 -30 55 -30 {}
+L 4 55 -37.5 65 -22.5 {}
+L 4 65 -22.5 75 -37.5 {}
+B 5 107.5 -32.5 112.5 -27.5 {name=POSITIVE dir=out}
+B 5 17.5 -32.5 22.5 -27.5 {name=NEGATIVE dir=in}
+T {@symname} 95 -75 0 0 0.2 0.2 {}
+T {@name} 95 -85 0 0 0.2 0.2 {}
+T {Vnom = @Vnom} 95 -60 0 0 0.1 0.1 {}
+T {Ilim = @Ilim} 95 -55 0 0 0.1 0.1 {}
+T {Vlim = @Vlim} 95 -50 0 0 0.1 0.1 {}
+T {k = @k} 95 -45 0 0 0.1 0.1 {}
