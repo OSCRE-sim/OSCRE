@@ -6,166 +6,293 @@ function error_exit {
     exit 1
 }
 
-# Check if the OS is macOS Big Sur or later
-OS_VERSION=$(sw_vers -productVersion)
-MAJOR_VERSION=$(echo "$OS_VERSION" | cut -d'.' -f1)
+# Detect the operating system
+OS_TYPE=$(uname)
 
-if [ "$MAJOR_VERSION" -lt 11 ]; then
-    error_exit "This script requires macOS Big Sur (11) or later. You are running macOS $OS_VERSION."
-fi
+if [ "$OS_TYPE" == "Darwin" ]; then
+    # macOS Installation Script
+    echo "Detected macOS. Running macOS installation script..."
 
-# Variables for paths
-BASE_DIR=$(pwd)
-INCLUDE_DIR="${BASE_DIR}/include"
-INSTALL_SCRIPTS_DIR="${BASE_DIR}/Install Scripts"
+    # Check if the OS is macOS Big Sur or later
+    OS_VERSION=$(sw_vers -productVersion)
+    MAJOR_VERSION=$(echo "$OS_VERSION" | cut -d'.' -f1)
 
-# Check if the required tar.gz files exist
-if [ ! -f "${INCLUDE_DIR}/tcl8.6.13-src.tar.gz" ]; then
-    error_exit "Tcl source file not found at ${INCLUDE_DIR}/tcl8.6.13-src.tar.gz"
-fi
+    if [ "$MAJOR_VERSION" -lt 11 ]; then
+        error_exit "This script requires macOS Big Sur (11) or later. You are running macOS $OS_VERSION."
+    fi
 
-if [ ! -f "${INCLUDE_DIR}/tk8.6.13-src.tar.gz" ]; then
-    error_exit "Tk source file not found at ${INCLUDE_DIR}/tk8.6.13-src.tar.gz"
-fi
+    # Variables for paths
+    BASE_DIR=$(pwd)
+    INCLUDE_DIR="${BASE_DIR}/include"
+    INSTALL_SCRIPTS_DIR="${BASE_DIR}/Install Scripts"
 
-# Install Homebrew if not installed
-if ! command -v brew &> /dev/null; then
-    echo "Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || error_exit "Failed to install Homebrew."
-fi
+    # Check if the required tar.gz files exist
+    if [ ! -f "${INCLUDE_DIR}/tcl8.6.13-src.tar.gz" ]; then
+        error_exit "Tcl source file not found at ${INCLUDE_DIR}/tcl8.6.13-src.tar.gz"
+    fi
 
-# Install Xquartz
-echo "Installing Xquartz..."
-brew install --cask xquartz || error_exit "Failed to install Xquartz."
+    if [ ! -f "${INCLUDE_DIR}/tk8.6.13-src.tar.gz" ]; then
+        error_exit "Tk source file not found at ${INCLUDE_DIR}/tk8.6.13-src.tar.gz"
+    fi
 
-# Install required packages
-echo "Installing required packages..."
-brew install cairo ngspice libxpm macvim dbus jpeg || error_exit "Failed to install required packages."
-brew services start dbus
+    # Install Homebrew if not installed
+    if ! command -v brew &> /dev/null; then
+        echo "Installing Homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || error_exit "Failed to install Homebrew."
+    fi
 
-# Set environment variables for JPEG
-export LDFLAGS="-L/usr/local/opt/jpeg/lib"
-export CPPFLAGS="-I/usr/local/opt/jpeg/include"
+    # Install Xquartz
+    echo "Installing Xquartz..."
+    brew install --cask xquartz || error_exit "Failed to install Xquartz."
 
-# Add environment variables to shell configuration (do not run as root)
-echo "Updating shell configuration..."
-SHELL_CONFIG=""
-if [ -f ~/.bashrc ]; then
-    SHELL_CONFIG="$HOME/.bashrc"
-elif [ -f ~/.zshrc ]; then
-    SHELL_CONFIG="$HOME/.zshrc"
+    # Install required packages
+    echo "Installing required packages..."
+    brew install cairo ngspice libxpm macvim dbus jpeg || error_exit "Failed to install required packages."
+    brew services start dbus
+
+    # Set environment variables for JPEG
+    export LDFLAGS="-L/usr/local/opt/jpeg/lib"
+    export CPPFLAGS="-I/usr/local/opt/jpeg/include"
+
+    # Add environment variables to shell configuration (do not run as root)
+    echo "Updating shell configuration..."
+    SHELL_CONFIG=""
+    if [ -f ~/.bashrc ]; then
+        SHELL_CONFIG="$HOME/.bashrc"
+    elif [ -f ~/.zshrc ]; then
+        SHELL_CONFIG="$HOME/.zshrc"
+    else
+        echo "Neither ~/.bashrc nor ~/.zshrc found. The following are being run manually:
+        export DYLD_LIBRARY_PATH=\"/usr/local/opt/tcl-tk/lib:/opt/X11/lib\"
+        export PATH=\"/Users/$(whoami)/opt/xschem/bin:\$PATH\"
+        export DISPLAY=:0"
+        echo "Please add the above line to .bashrc or .zshrc when possible"
+        export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"
+        export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"
+        export DISPLAY=:0
+    fi
+
+    if [ -n "$SHELL_CONFIG" ]; then
+        if ! grep -q 'export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"' "$SHELL_CONFIG"; then
+            echo 'export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"' >> "$SHELL_CONFIG"
+        fi
+
+        if ! grep -q 'export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"' "$SHELL_CONFIG"; then
+            echo 'export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"' >> "$SHELL_CONFIG"
+        fi
+
+        if ! grep -q 'export DISPLAY=:0' "$SHELL_CONFIG"; then
+            echo 'export DISPLAY=:0' >> "$SHELL_CONFIG"
+        fi
+
+        if ! grep -q 'export DYLD_LIBRARY_PATH=/opt/local/lib/postgresql94:/usr/lib' "$SHELL_CONFIG"; then
+            echo 'export DYLD_LIBRARY_PATH=/opt/local/lib/postgresql94:/usr/lib' >> "$SHELL_CONFIG"
+        fi
+    fi
+
+    # Remove any existing files in /usr/local/opt/tcl-tk
+    echo "Cleaning up previous Tcl and Tk installations..."
+    rm -rf /usr/local/opt/tcl-tk/*
+
+    # Extract and compile Tcl
+    echo "Compiling Tcl..."
+    mkdir -p /usr/local/opt/tcl-tk
+    tar -xzf "${INCLUDE_DIR}/tcl8.6.13-src.tar.gz" -C /tmp || error_exit "Failed to extract Tcl."
+    cd /tmp/tcl8.6.13/unix || error_exit "Tcl source directory not found."
+    ./configure --prefix=/usr/local/opt/tcl-tk || error_exit "Failed to configure Tcl."
+    make || error_exit "Failed to make Tcl."
+    make install || error_exit "Failed to install Tcl."
+
+    # Extract and compile Tk
+    echo "Compiling Tk..."
+    tar -xzf "${INCLUDE_DIR}/tk8.6.13-src.tar.gz" -C /tmp || error_exit "Failed to extract Tk."
+    cd /tmp/tk8.6.13/unix || error_exit "Tk source directory not found."
+    ./configure --prefix=/usr/local/opt/tcl-tk --with-tcl=/usr/local/opt/tcl-tk/lib --with-x --x-includes=/opt/X11/include --x-libraries=/opt/X11/lib || error_exit "Failed to configure Tk."
+    make || error_exit "Failed to make Tk."
+    make install || error_exit "Failed to install Tk."
+
+    # Symlink libtk
+    sudo ln -s /usr/local/opt/tcl-tk/lib/libtk8.6.dylib /opt/X11/lib/libtk8.6.dylib || error_exit "Failed to symlink libtk."
+
+    # Clone xschem
+    echo "Cloning xschem repository..."
+    git clone https://github.com/StefanSchippers/xschem.git /tmp/xschem || error_exit "Failed to clone xschem repository."
+    cd /tmp/xschem || error_exit "Failed to navigate to xschem directory."
+    git checkout 973d01f || error_exit "Failed to checkout the specific commit for release 3.4.5."
+
+    # Configure xschem
+    echo "Configuring xschem..."
+    ./configure --prefix="/Users/$(whoami)/opt/xschem" || error_exit "Failed to configure xschem."
+
+    # Modify Makefile.conf
+    echo "Modifying Makefile.conf..."
+    sed -i.bak 's|CFLAGS=.*|CFLAGS=-std=c99 -I/opt/X11/include -I/opt/X11/include/cairo -I/usr/local/opt/tcl-tk/include -I/usr/local/include -I/usr/local/opt/jpeg/include -O2|' Makefile.conf
+    sed -i.bak 's|LDFLAGS=.*|LDFLAGS=-L/opt/X11/lib -L/usr/local/opt/tcl-tk/lib -L/usr/local/lib -L/usr/local/opt/jpeg/lib -lm -lcairo -ljpeg -lX11 -lXrender -lxcb -lxcb-render -lX11-xcb -lXpm -ltcl8.6 -ltk8.6|' Makefile.conf
+
+    # Build xschem
+    echo "Building xschem..."
+    make clean || error_exit "Failed to clean xschem build."
+    make || error_exit "Failed to build xschem."
+
+    # Install xschem
+    echo "Installing xschem..."
+    make install || error_exit "Failed to install xschem."
+
+    echo "xschem installation completed successfully."
+
+    # Define the DMG file path
+    DMG_FILE="include/analog_flavor_eval_osx_2024_06_24.dmg"
+
+    # Attach the DMG file and get the mount point
+    MOUNT_POINT=$(hdiutil attach "$DMG_FILE" | grep "/Volumes/" | awk '{for (i=3; i<=NF; i++) printf "%s ", $i; print ""}' | sed 's/ *$//')
+
+    # Check if the DMG file was mounted successfully
+    if [ -z "$MOUNT_POINT" ]; then
+        error_exit "Failed to mount DMG file."
+    fi
+
+    echo "DMG mounted at: $MOUNT_POINT"
+
+    # List contents of the mounted volume to identify the correct application path
+    echo "Contents of $MOUNT_POINT:"
+    ls "$MOUNT_POINT"
+
+    # Define the expected paths for the application
+    APP_PATH="$MOUNT_POINT/BeSpiceWave.app"
+
+    # Copy the application or files to the Applications folder (or any other desired location)
+    if [ -d "$APP_PATH" ]; then
+        cp -R "$APP_PATH" /Applications/ || error_exit "Failed to copy BeSpiceWave.app to /Applications"
+    else
+        error_exit "BeSpiceWave.app not found in mounted volume."
+    fi
+
+    # Unmount the DMG file
+    hdiutil detach "$MOUNT_POINT"
+
+    # Check if the unmount was successful
+    if [ $? -ne 0 ]; then
+        error_exit "Failed to unmount DMG file."
+    fi
+
+    echo "BeSpice Wave installation completed successfully."
+
+elif [ "$OS_TYPE" == "Linux" ]; then
+    # Linux Installation Script
+    echo "Detected Linux. Running Linux installation script..."
+
+    set -eu -o pipefail # fail on error and report it, debug all lines
+
+    sudo -n true    # Run as a superuser and do not ask for a password. Exit status as successful.
+    test $? -eq 0 || error_exit "you should have sudo privilege to run this script"
+
+    echo "installing the must-have pre-requisites"
+    while read -r p ; do sudo apt-get install -y $p ; done < <(cat << "EOF"
+        nautilus
+        gedit
+        x11-apps
+        build-essential
+        flex
+        bison
+        m4
+        tcsh
+        csh
+        libx11-dev
+        tcl-dev
+        tk-dev
+        libcairo2
+        libcairo2-dev
+        libx11-6
+        libxcb1 libx11-xcb-dev libxrender1 libxrender-dev libxpm4 libxpm-dev libncurses-dev
+        blt freeglut3 mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev tcl-tclreadline libgtk-3-dev
+        tcl8.6 tcl8.6-dev tk8.6 tk8.6-dev
+        gawk
+        graphicsmagick
+        vim-gtk3
+        libxaw7
+        libxaw7-dev fontconfig libxft-dev libxft2
+        libxmu6 libxext-dev libxext6 libxrender1
+        libxrender-dev libtool readline-common libreadline-dev gawk autoconf libtool automake adms gettext ruby-dev
+        python3-dev
+        qtmultimedia5-dev
+        libqt5multimediawidgets5 libqt5multimedia5-plugins libqt5multimedia5 libqt5xmlpatterns5-dev
+        python3-pyqt5 qtcreator pyqt5-dev-tools
+        libqt5svg5-dev gcc g++ gfortran
+        make cmake bison flex
+        libfl-dev libfftw3-dev libsuitesparse-dev libblas-dev liblapack-dev libtool autoconf automake libopenmpi-dev
+        openmpi-bin
+        python3-pip
+        python3-venv python3-virtualenv python3-numpy
+        rustc libprotobuf-dev
+        protobuf-compiler
+        libopenmpi-dev
+        gnat
+        gperf
+        liblzma-dev
+        libgtk2.0-dev
+        swig
+        libboost-all-dev
+        wget
+        libwww-curl-perl
+EOF
+    )
+
+    echo "installing the nice-to-have pre-requisites"
+    echo "you have 5 seconds to proceed ..."
+    echo "or"
+    echo "hit Ctrl+C to quit"
+    echo -e "\n"
+    sleep 6
+
+    sudo apt-get install -y tig
+
+    echo "Installing xschem and dependencies..."
+
+    git clone https://github.com/StefanSchippers/xschem.git xschem-src
+    cd xschem-src
+
+    ./configure
+    sudo make
+    sudo make install
+    cd ..
+
+#     # MAGIC
+#     echo "Installing MAGIC..."
+#     git clone https://github.com/RTimothyEdwards/magic
+#     cd magic
+#
+#     ./configure
+#     sudo make
+#     sudo make install
+#     cd ..
+
+    # OPEN PDK
+    echo "Installing OPEN PDK..."
+    git clone https://github.com/RTimothyEdwards/open_pdks
+    cd open_pdks
+
+    ./configure
+    sudo make
+    sudo make install
+
+    ./configure --enable-sky130-pdk
+    sudo make -j2
+    sudo make install
+
+    # NGspice
+    echo "Installing NGspice..."
+    git clone https://git.code.sf.net/p/ngspice/ngspice ngspice-ngspice
+    cd ngspice-ngspice
+
+    ./autogen.sh --adms # create configure and enable verilog-A compiler
+    mkdir release
+    cd release
+    #--with-x --enable-openmp --enable-adms
+    ../configure  --with-x --with-xspice --enable-openmp --enable-adms --with-readline=yes --disable-debug
+    sudo make -j4
+    sudo make install
+
+    echo "Installation completed successfully."
 else
-    echo "Neither ~/.bashrc nor ~/.zshrc found. The following are being run manually:
-export DYLD_LIBRARY_PATH=\"/usr/local/opt/tcl-tk/lib:/opt/X11/lib\"
-export PATH=\"/Users/$(whoami)/opt/xschem/bin:\$PATH\"
-export DISPLAY=:0"
-    echo "Please add the above line to .bashrc or .zshrc when possible"
-    export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"
-    export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"
-    export DISPLAY=:0
+    error_exit "Unsupported operating system. This script supports macOS and Linux only."
 fi
-
-if [ -n "$SHELL_CONFIG" ]; then
-    if ! grep -q 'export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"' "$SHELL_CONFIG"; then
-        echo 'export DYLD_LIBRARY_PATH="/usr/local/opt/tcl-tk/lib:/opt/X11/lib"' >> "$SHELL_CONFIG"
-    fi
-
-    if ! grep -q 'export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"' "$SHELL_CONFIG"; then
-        echo 'export PATH="/Users/$(whoami)/opt/xschem/bin:$PATH"' >> "$SHELL_CONFIG"
-    fi
-
-    if ! grep -q 'export DISPLAY=:0' "$SHELL_CONFIG"; then
-        echo 'export DISPLAY=:0' >> "$SHELL_CONFIG"
-    fi
-
-    if ! grep -q 'export DYLD_LIBRARY_PATH=/opt/local/lib/postgresql94:/usr/lib' "$SHELL_CONFIG"; then
-        echo 'export DYLD_LIBRARY_PATH=/opt/local/lib/postgresql94:/usr/lib' >> "$SHELL_CONFIG"
-    fi
-fi
-
-# Remove any existing files in /usr/local/opt/tcl-tk
-echo "Cleaning up previous Tcl and Tk installations..."
-rm -rf /usr/local/opt/tcl-tk/*
-
-# Extract and compile Tcl
-echo "Compiling Tcl..."
-mkdir -p /usr/local/opt/tcl-tk
-tar -xzf "${INCLUDE_DIR}/tcl8.6.13-src.tar.gz" -C /tmp || error_exit "Failed to extract Tcl."
-cd /tmp/tcl8.6.13/unix || error_exit "Tcl source directory not found."
-./configure --prefix=/usr/local/opt/tcl-tk || error_exit "Failed to configure Tcl."
-make || error_exit "Failed to make Tcl."
-make install || error_exit "Failed to install Tcl."
-
-# Extract and compile Tk
-echo "Compiling Tk..."
-tar -xzf "${INCLUDE_DIR}/tk8.6.13-src.tar.gz" -C /tmp || error_exit "Failed to extract Tk."
-cd /tmp/tk8.6.13/unix || error_exit "Tk source directory not found."
-./configure --prefix=/usr/local/opt/tcl-tk --with-tcl=/usr/local/opt/tcl-tk/lib --with-x --x-includes=/opt/X11/include --x-libraries=/opt/X11/lib || error_exit "Failed to configure Tk."
-make || error_exit "Failed to make Tk."
-make install || error_exit "Failed to install Tk."
-
-# Symlink libtk
-sudo ln -s /usr/local/opt/tcl-tk/lib/libtk8.6.dylib /opt/X11/lib/libtk8.6.dylib # || error_exit "Failed to symlink libtk."
-
-# Clone xschem
-echo "Cloning xschem repository..."
-git clone https://github.com/StefanSchippers/xschem.git /tmp/xschem || error_exit "Failed to clone xschem repository."
-cd /tmp/xschem || error_exit "Failed to navigate to xschem directory."
-git checkout 973d01f || error_exit "Failed to checkout the specific commit for release 3.4.5."
-
-# Configure xschem
-echo "Configuring xschem..."
-./configure --prefix="/Users/$(whoami)/opt/xschem" || error_exit "Failed to configure xschem."
-
-# Modify Makefile.conf
-echo "Modifying Makefile.conf..."
-sed -i.bak 's|CFLAGS=.*|CFLAGS=-std=c99 -I/opt/X11/include -I/opt/X11/include/cairo -I/usr/local/opt/tcl-tk/include -I/usr/local/include -I/usr/local/opt/jpeg/include -O2|' Makefile.conf
-sed -i.bak 's|LDFLAGS=.*|LDFLAGS=-L/opt/X11/lib -L/usr/local/opt/tcl-tk/lib -L/usr/local/lib -L/usr/local/opt/jpeg/lib -lm -lcairo -ljpeg -lX11 -lXrender -lxcb -lxcb-render -lX11-xcb -lXpm -ltcl8.6 -ltk8.6|' Makefile.conf
-
-# Build xschem
-echo "Building xschem..."
-make clean || error_exit "Failed to clean xschem build."
-make || error_exit "Failed to build xschem."
-
-# Install xschem
-echo "Installing xschem..."
-make install || error_exit "Failed to install xschem."
-
-echo "xschem installation completed successfully."
-
-# Define the DMG file path
-DMG_FILE="include/analog_flavor_eval_osx_2024_06_24.dmg"
-
-# Attach the DMG file and get the mount point
-MOUNT_POINT=$(hdiutil attach "$DMG_FILE" | grep "/Volumes/" | awk '{for (i=3; i<=NF; i++) printf "%s ", $i; print ""}' | sed 's/ *$//')
-
-# Check if the DMG file was mounted successfully
-if [ -z "$MOUNT_POINT" ]; then
-    error_exit "Failed to mount DMG file."
-fi
-
-echo "DMG mounted at: $MOUNT_POINT"
-
-# List contents of the mounted volume to identify the correct application path
-echo "Contents of $MOUNT_POINT:"
-ls "$MOUNT_POINT"
-
-# Define the expected paths for the application
-APP_PATH="$MOUNT_POINT/BeSpiceWave.app"
-
-# Copy the application or files to the Applications folder (or any other desired location)
-if [ -d "$APP_PATH" ]; then
-    cp -R "$APP_PATH" /Applications/ || error_exit "Failed to copy BeSpiceWave.app to /Applications"
-else
-    error_exit "BeSpiceWave.app not found in mounted volume."
-fi
-
-# Unmount the DMG file
-hdiutil detach "$MOUNT_POINT"
-
-# Check if the unmount was successful
-if [ $? -ne 0 ]; then
-    error_exit "Failed to unmount DMG file."
-fi
-
-echo "BeSpice Wave installation completed successfully."
