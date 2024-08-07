@@ -94,7 +94,7 @@ elif [ "$OS_TYPE" == "Linux" ]; then
 
     echo "installing the must-have pre-requisites"
     while read -r p ; do sudo apt-get install -y $p ; done < <(cat << "EOF"
-        build-essential flex bison m4 tcsh csh
+        git build-essential flex bison m4 tcsh csh
         libx11-dev tcl-dev tk-dev libcairo2 libcairo2-dev
         libxcb1 libx11-xcb-dev libxrender1 libxrender-dev libxpm4 libxpm-dev libncurses-dev
         gawk libtool readline-common libreadline-dev autoconf automake

@@ -207,7 +207,7 @@ elif [ "$OS_TYPE" == "Linux" ]; then
 
     echo "installing the must-have pre-requisites"
     while read -r p ; do sudo apt-get install -y $p ; done < <(cat << "EOF"
-        build-essential libx11-dev libxpm-dev libxaw7-dev
+        git build-essential libx11-dev libxpm-dev libxaw7-dev
         libcairo2-dev tcl-dev tk-dev libxrender-dev libgtk-2.0-dev gcc g++ gfortran
         make cmake bison flex m4 tcsh csh autoconf automake libtool libreadline-dev
         gawk wget libncurses-dev tig
