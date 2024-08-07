@@ -1,12 +1,12 @@
 #!/bin/bash
 
-CURRENT_DIR = "$PWD"
-
 # Function to print an error message and exit
 function error_exit {
     echo "$1" 1>&2
     exit 1
 }
+
+CURRENT_DIR="$PWD"
 
 
 # Detect the operating system
@@ -144,6 +144,83 @@ if [ "$OS_TYPE" == "Darwin" ]; then
     
     
     echo "Uninstallation process completed successfully."
+elif [ "$OS_TYPE" == "Linux" ]; then
+    # Linux Installation Script
+    echo "Detected Linux. Running Linux uninstall script..."
+
+    set -eu -o pipefail # fail on error and report it, debug all lines
+
+    sudo -n true    # Run as a superuser and do not ask for a password. Exit status as successful.
+    test $? -eq 0 || error_exit "you should have sudo privilege to run this script"
+
+    echo "Removing xschem and dependencies..."
+    sudo rm -rf xschem-src
+
+    # MAGIC
+    echo "Removing MAGIC..."
+    sudo rm -rf magic
+
+    # OPEN PDK
+    echo "Removing OPEN PDK..."
+    sudo rm -rf open_pdks
+
+    # NGspice
+    echo "Removing NGspice..."
+    sudo rm -rf ngspice-ngspice
+
+    echo "installing the must-have pre-requisites"
+    while read -r p ; do sudo apt-get remove -y $p ; done < <(cat << "EOF"
+        nautilus
+        gedit
+        x11-apps
+        build-essential
+        flex
+        bison
+        m4
+        tcsh
+        csh
+        libx11-dev
+        tcl-dev
+        tk-dev
+        libcairo2
+        libcairo2-dev
+        libx11-6
+        libxcb1 libx11-xcb-dev libxrender1 libxrender-dev libxpm4 libxpm-dev libncurses-dev
+        blt freeglut3 mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev tcl-tclreadline libgtk-3-dev
+        tcl8.6 tcl8.6-dev tk8.6 tk8.6-dev
+        gawk
+        graphicsmagick
+        vim-gtk3
+        libxaw7
+        libxaw7-dev fontconfig libxft-dev libxft2
+        libxmu6 libxext-dev libxext6 libxrender1
+        libxrender-dev libtool readline-common libreadline-dev gawk autoconf libtool automake adms gettext ruby-dev
+        python3-dev
+        qtmultimedia5-dev
+        libqt5multimediawidgets5 libqt5multimedia5-plugins libqt5multimedia5 libqt5xmlpatterns5-dev
+        python3-pyqt5 qtcreator pyqt5-dev-tools
+        libqt5svg5-dev gcc g++ gfortran
+        make cmake bison flex
+        libfl-dev libfftw3-dev libsuitesparse-dev libblas-dev liblapack-dev libtool autoconf automake libopenmpi-dev
+        openmpi-bin
+        python3-pip
+        python3-venv python3-virtualenv python3-numpy
+        rustc libprotobuf-dev
+        protobuf-compiler
+        libopenmpi-dev
+        gnat
+        gperf
+        liblzma-dev
+        libgtk2.0-dev
+        swig
+        libboost-all-dev
+        wget
+        libwww-curl-perl
+        tig
+EOF
+    )
+
+    echo "Uninstall completed successfully."
 else
-    error_exit "Unsupported operating system. This script supports macOS only."
+    error_exit "Unsupported operating system. This script supports macOS and Linux only."
 fi
