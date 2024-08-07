@@ -1,4 +1,5 @@
-v {xschem version=2.9.8 file_version=1.2}
+v {xschem version=3.4.5 file_version=1.2
+}
 G {}
 K {}
 V {}
@@ -105,7 +106,7 @@ N 320 -830 420 -830 { lab=IBIAS1}
 N 420 -830 420 -770 { lab=IBIAS1}
 N 420 -770 420 -760 { lab=IBIAS1}
 N 420 -760 600 -760 { lab=IBIAS1}
-C {code_shown.sym} 690 -180 0 0 {name=SPICE only_toplevel=false value=".lib /usr/local/share/sky130_fd_pr/models/sky130.lib.spice tt
+C {code_shown.sym} 690 -180 0 0 {name=SPICE only_toplevel=false value=".lib /usr/local/share/sky130_fd_pr/combined_models/sky130.lib.spice tt
 .options filetype=ascii
 .ac dec 100 10 100Meg
 .save all"
