@@ -161,7 +161,7 @@ if [ "$OS_TYPE" == "Darwin" ]; then
 
     # Check if the DMG file was mounted successfully
     if [ -z "$MOUNT_POINT" ]; then
-        error_exit "Failed to mount DMG file."
+        error_exit "Failed to mount DMG file at: $MOUNT_POINT"
     fi
 
     echo "DMG mounted at: $MOUNT_POINT"
@@ -189,61 +189,6 @@ if [ "$OS_TYPE" == "Darwin" ]; then
     fi
 
     echo "BeSpice Wave installation completed successfully."
-    
-    
-    # PYENV (create and activate)
-    python3.12 -m venv ~/my_venv_pdk_rad_hard
-    source ~/my_venv_pdk_rad_hard/bin/activate
-    pip install --upgrade pip
-    pip install setuptools
-
-
-    # MAGIC
-    echo "Installing Magic (a prerequisit for the PDKs)"
-    git clone https://github.com/RTimothyEdwards/magic
-    cd magic
-    brew install cairo tcl-tk python3
-    brew install --cask xquartz
-    ./scripts/configure_mac
-    make database/database.h
-    make -j$(sysctl -n hw.ncpu)
-    sudo make install # may need sudo depending on your setup
-    cd ..
-
-
-    # OPEN PDK
-    echo "Installing OPEN PDK..."
-    git clone https://github.com/RTimothyEdwards/open_pdks
-    cd open_pdks
-
-    ./configure --enable-sky130-pdk --enable-sram-sky130
-    make
-    sudo make install
-    make veryclean
-    
-    
-    # Creating simlinks for PDKs
-    # Directory containing the source files and directories
-    SOURCE_DIR="./open_pdks/sources"
-    
-    # Target directory for the symbolic links
-    TARGET_DIR="/usr/local/share"
-    
-    # Symlink each directory in the source directory to the target directory
-    for dir in $SOURCE_DIR/*; do
-        # Extract just the directory name
-        dir_name=$(basename "$dir")
-        
-        # Create symlink in target directory pointing to the source directory
-        ln -s "$PWD/$dir" "$TARGET_DIR/$dir_name"
-    done
-    
-    echo "Symbolic links created successfully."
-    
-    
-    # PYENV (deactivate)
-    deactivate
-    rm -rf ~/my_venv_pdk_rad_hard
 
 elif [[ "$KERNEL_INFO" == *microsoft* ]]; then
     sudo apt update
@@ -262,63 +207,12 @@ elif [ "$OS_TYPE" == "Linux" ]; then
 
     echo "installing the must-have pre-requisites"
     while read -r p ; do sudo apt-get install -y $p ; done < <(cat << "EOF"
-        nautilus
-        gedit
-        x11-apps
-        build-essential
-        flex
-        bison
-        m4
-        tcsh
-        csh
-        libx11-dev
-        tcl-dev
-        tk-dev
-        libcairo2
-        libcairo2-dev
-        libx11-6
-        libxcb1 libx11-xcb-dev libxrender1 libxrender-dev libxpm4 libxpm-dev libncurses-dev
-        blt freeglut3 mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev tcl-tclreadline libgtk-3-dev
-        tcl8.6 tcl8.6-dev tk8.6 tk8.6-dev
-        gawk
-        graphicsmagick
-        vim-gtk3
-        libxaw7
-        libxaw7-dev fontconfig libxft-dev libxft2
-        libxmu6 libxext-dev libxext6 libxrender1
-        libxrender-dev libtool readline-common libreadline-dev gawk autoconf libtool automake adms gettext ruby-dev
-        python3-dev
-        qtmultimedia5-dev
-        libqt5multimediawidgets5 libqt5multimedia5-plugins libqt5multimedia5 libqt5xmlpatterns5-dev
-        python3-pyqt5 qtcreator pyqt5-dev-tools
-        libqt5svg5-dev gcc g++ gfortran
-        make cmake bison flex
-        libfl-dev libfftw3-dev libsuitesparse-dev libblas-dev liblapack-dev libtool autoconf automake libopenmpi-dev
-        openmpi-bin
-        python3-pip
-        python3-venv python3-virtualenv python3-numpy
-        rustc libprotobuf-dev
-        protobuf-compiler
-        libopenmpi-dev
-        gnat
-        gperf
-        liblzma-dev
-        libgtk2.0-dev
-        swig
-        libboost-all-dev
-        wget
-        libwww-curl-perl
+        build-essential libx11-dev libxpm-dev libxaw7-dev
+        libcairo2-dev tcl-dev tk-dev libxrender-dev libgtk-2.0-dev gcc g++ gfortran
+        make cmake bison flex m4 tcsh csh autoconf automake libtool libreadline-dev
+        gawk wget libncurses-dev tig
 EOF
     )
-
-    echo "installing the nice-to-have pre-requisites"
-    echo "you have 5 seconds to proceed ..."
-    echo "or"
-    echo "hit Ctrl+C to quit"
-    echo -e "\n"
-    sleep 6
-
-    sudo apt-get install -y tig
 
     echo "Installing xschem and dependencies..."
 
@@ -329,34 +223,6 @@ EOF
     sudo make
     sudo make install
     cd ..
-
-    # MAGIC
-    echo "Installing MAGIC..."
-    git clone https://github.com/RTimothyEdwards/magic
-    cd magic
-
-    ./configure
-    sudo make
-    sudo make install
-    cd ..
-
-    # OPEN PDK
-    echo "Installing OPEN PDK..."
-    git clone https://github.com/RTimothyEdwards/open_pdks
-    cd open_pdks
-
-    ./configure
-    sudo make
-    sudo make install
-
-    ./configure --enable-sky130-pdk --enable-sram-sky130
-    sudo make -j2
-    sudo make install
-
-#    ./configure --enable-sky130-pdk --enable-sram-sky130
-#    make
-#    sudo make install
-#    make veryclean
 
     # NGspice
     echo "Installing NGspice..."
@@ -375,3 +241,50 @@ EOF
 else
     error_exit "Unsupported operating system. This script supports macOS and Linux only."
 fi
+
+#        nautilus
+#        gedit
+#        x11-apps
+#        build-essential
+#        flex
+#        bison
+#        m4
+#        tcsh
+#        csh
+#        libx11-dev
+#        tcl-dev
+#        tk-dev
+#        libcairo2
+#        libcairo2-dev
+#        libx11-6
+#        libxcb1 libx11-xcb-dev libxrender1 libxrender-dev libxpm4 libxpm-dev libncurses-dev
+#        blt freeglut3 mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev tcl-tclreadline libgtk-3-dev
+#        tcl8.6 tcl8.6-dev tk8.6 tk8.6-dev
+#        gawk
+#        graphicsmagick
+#        vim-gtk3
+#        libxaw7
+#        libxaw7-dev fontconfig libxft-dev libxft2
+#        libxmu6 libxext-dev libxext6 libxrender1
+#        libxrender-dev libtool readline-common libreadline-dev gawk autoconf libtool automake adms gettext ruby-dev
+#        python3-dev
+#        qtmultimedia5-dev
+#        libqt5multimediawidgets5 libqt5multimedia5-plugins libqt5multimedia5 libqt5xmlpatterns5-dev
+#        python3-pyqt5 qtcreator pyqt5-dev-tools
+#        libqt5svg5-dev gcc g++ gfortran
+#        make cmake bison flex
+#        libfl-dev libfftw3-dev libsuitesparse-dev libblas-dev liblapack-dev libtool autoconf automake libopenmpi-dev
+#        openmpi-bin
+#        python3-pip
+#        python3-venv python3-virtualenv python3-numpy
+#        rustc libprotobuf-dev
+#        protobuf-compiler
+#        libopenmpi-dev
+#        gnat
+#        gperf
+#        liblzma-dev
+#        libgtk2.0-dev
+#        swig
+#        libboost-all-dev
+#        wget
+#        libwww-curl-perl

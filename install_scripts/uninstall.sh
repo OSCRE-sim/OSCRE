@@ -99,50 +99,6 @@ if [ "$OS_TYPE" == "Darwin" ]; then
     fi
     
     
-    # REMOVE MAGIC and OPEN_PDKs
-    echo "Uninstalling Magic and open_pdks directories"
-    if [ -d "$CURRENT_DIR/magic" ]; then
-        sudo rm -rf "$CURRENT_DIR/magic" || error_exit "Failed to remove magic directory."
-    fi
-    if [ -d "$CURRENT_DIR/open_pdks" ]; then
-        sudo rm -rf "$CURRENT_DIR/open_pdks" || error_exit "Failed to remove open_pdks directory."
-    fi
-    if [ -d "/usr/local/share/pdk" ]; then
-        sudo rm -rf "/usr/local/share/pdk" || error_exit "Failed to remove shared pdk directory."
-    fi
-    
-    
-    # REMOVE PDKs LINK
-    # Directory containing the source files and directories
-    SOURCE_DIR="./open_pdks/sources"
-    
-    # Target directory for the symbolic links
-    TARGET_DIR="/usr/local/share"
-    
-    
-    # Remove the symlinks in the target directory that point to the source directory
-    for dir in $SOURCE_DIR/*; do
-        # Extract just the directory name
-        dir_name=$(basename "$dir")
-        # Path to the potential symlink in the target directory
-        symlink_path="$TARGET_DIR/$dir_name"
-        # Check if the symlink exists and is indeed a symlink
-        if [ -L "$symlink_path" ]; then
-            # Remove the symlink
-            echo "Removing symlink: $symlink_path"
-            rm "$symlink_path"
-        else
-            echo "No symlink found for $symlink_path, skipping..."
-        fi
-    done
-    
-    
-    # REMOVE VENV
-    if [ -d "~/my_venv_pdk_rad_hard" ]; then
-        sudo rm -rf "~/my_venv_pdk_rad_hard" || error_exit "Failed to remove venv my_venv_pdk_rad_hard."
-    fi
-    
-    
     echo "Uninstallation process completed successfully."
 elif [ "$OS_TYPE" == "Linux" ]; then
     # Linux Installation Script
@@ -168,55 +124,12 @@ elif [ "$OS_TYPE" == "Linux" ]; then
     echo "Removing NGspice..."
     sudo rm -rf ngspice-ngspice
 
-    echo "installing the must-have pre-requisites"
+    echo "Removing the must-have pre-requisites"
     while read -r p ; do sudo apt-get remove -y $p ; done < <(cat << "EOF"
-        nautilus
-        gedit
-        x11-apps
-        build-essential
-        flex
-        bison
-        m4
-        tcsh
-        csh
-        libx11-dev
-        tcl-dev
-        tk-dev
-        libcairo2
-        libcairo2-dev
-        libx11-6
-        libxcb1 libx11-xcb-dev libxrender1 libxrender-dev libxpm4 libxpm-dev libncurses-dev
-        blt freeglut3 mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev tcl-tclreadline libgtk-3-dev
-        tcl8.6 tcl8.6-dev tk8.6 tk8.6-dev
-        gawk
-        graphicsmagick
-        vim-gtk3
-        libxaw7
-        libxaw7-dev fontconfig libxft-dev libxft2
-        libxmu6 libxext-dev libxext6 libxrender1
-        libxrender-dev libtool readline-common libreadline-dev gawk autoconf libtool automake adms gettext ruby-dev
-        python3-dev
-        qtmultimedia5-dev
-        libqt5multimediawidgets5 libqt5multimedia5-plugins libqt5multimedia5 libqt5xmlpatterns5-dev
-        python3-pyqt5 qtcreator pyqt5-dev-tools
-        libqt5svg5-dev gcc g++ gfortran
-        make cmake bison flex
-        libfl-dev libfftw3-dev libsuitesparse-dev libblas-dev liblapack-dev libtool autoconf automake libopenmpi-dev
-        openmpi-bin
-        python3-pip
-        python3-venv python3-virtualenv python3-numpy
-        rustc libprotobuf-dev
-        protobuf-compiler
-        libopenmpi-dev
-        gnat
-        gperf
-        liblzma-dev
-        libgtk2.0-dev
-        swig
-        libboost-all-dev
-        wget
-        libwww-curl-perl
-        tig
+        build-essential libx11-dev libxpm-dev libxaw7-dev
+        libcairo2-dev tcl-dev tk-dev libxrender-dev libgtk-2.0-dev gcc g++ gfortran
+        make cmake bison flex m4 tcsh csh autoconf automake libtool libreadline-dev
+        gawk wget libncurses-dev
 EOF
     )
 
@@ -224,3 +137,51 @@ EOF
 else
     error_exit "Unsupported operating system. This script supports macOS and Linux only."
 fi
+
+#        nautilus
+#        gedit
+#        x11-apps
+#        build-essential
+#        flex
+#        bison
+#        m4
+#        tcsh
+#        csh
+#        libx11-dev
+#        tcl-dev
+#        tk-dev
+#        libcairo2
+#        libcairo2-dev
+#        libx11-6
+#        libxcb1 libx11-xcb-dev libxrender1 libxrender-dev libxpm4 libxpm-dev libncurses-dev
+#        blt freeglut3 mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev tcl-tclreadline libgtk-3-dev
+#        tcl8.6 tcl8.6-dev tk8.6 tk8.6-dev
+#        gawk
+#        graphicsmagick
+#        vim-gtk3
+#        libxaw7
+#        libxaw7-dev fontconfig libxft-dev libxft2
+#        libxmu6 libxext-dev libxext6 libxrender1
+#        libxrender-dev libtool readline-common libreadline-dev gawk autoconf libtool automake adms gettext ruby-dev
+#        python3-dev
+#        qtmultimedia5-dev
+#        libqt5multimediawidgets5 libqt5multimedia5-plugins libqt5multimedia5 libqt5xmlpatterns5-dev
+#        python3-pyqt5 qtcreator pyqt5-dev-tools
+#        libqt5svg5-dev gcc g++ gfortran
+#        make cmake bison flex
+#        libfl-dev libfftw3-dev libsuitesparse-dev libblas-dev liblapack-dev libtool autoconf automake libopenmpi-dev
+#        openmpi-bin
+#        python3-pip
+#        python3-venv python3-virtualenv python3-numpy
+#        rustc libprotobuf-dev
+#        protobuf-compiler
+#        libopenmpi-dev
+#        gnat
+#        gperf
+#        liblzma-dev
+#        libgtk2.0-dev
+#        swig
+#        libboost-all-dev
+#        wget
+#        libwww-curl-perl
+#        tig
