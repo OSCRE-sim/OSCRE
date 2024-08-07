@@ -197,6 +197,8 @@ elif [[ "$KERNEL_INFO" == *microsoft* ]]; then
     
     
 elif [ "$OS_TYPE" == "Linux" ]; then
+    # https://github.com/RobertoDiLorenzo/Skywater_tools.git
+
     # Linux Installation Script
     echo "Detected Linux. Running Linux installation script..."
 

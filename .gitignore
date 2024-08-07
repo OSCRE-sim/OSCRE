@@ -1,5 +1,5 @@
 .cache
-cmake-build-debug
+**/cmake-build-debug
 **/.DS_Store
 ./install_scripts/magic
 ./install_scripts/open_pdks
