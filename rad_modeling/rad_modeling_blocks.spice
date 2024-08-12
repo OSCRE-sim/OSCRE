@@ -1,0 +1,42 @@
+.subckt double_exp in out  t_r=0 t_f=0 tau_r=0 tau_f=0 q_tot=0
+*.opin OUT
+*.ipin IN
+I1 IN OUT EXP(0 {q_tot / (t_f-t_r+tau_f-tau_r)} {t_r} {tau_r} {t_f} {tau_f})
+.ends
+
+.subckt dual_double_exp in out  t_r_main tau_r_main t_f_main tau_f_main q_tot_main t_r_secondary tau_r_secondary t_f_secondary tau_f_secondary q_tot_secondary
+*.ipin in
+*.opin out
+I2 in out EXP(0 {q_tot_main / (t_f_main-t_r_main+tau_f_main-tau_r_main)} {t_r_main} {tau_r_main} {t_f_main} {tau_f_main})
+I3 in out EXP(0 {q_tot_secondary / (t_f_secondary-t_r_secondary+tau_f_secondary-tau_r_secondary)} {t_r_secondary} {tau_r_secondary}
++ {t_f_secondary} {tau_f_secondary})
+.ends
+
+.subckt pmos_tid in gate  v_bias=0
+*.ipin in
+*.opin gate
+V2 in gate {v_bias}
+.ends
+
+.subckt nmos_tid in gate  v_bias=0
+*.opin gate
+*.ipin in
+V2 gate in {v_bias}
+.ends
+
+.subckt rail_span_collapse_voltage_source POSITIVE NEGATIVE  Vnom=1.8 Ilim=1 Vlim=0.001 k=1
+*.ipin NEGATIVE
+*.opin POSITIVE
+E1 POSITIVE NEGATIVE VOL=' Vnom-(Vnom/(1+exp(-k*(abs(I(E1))-(Ilim-(ln(Vlim/(Vnom-Vlim))/k)))))) '
+.ends
+
+.subckt adaptive_double_exp in out  t_r=0 t_f=0 tau_r=0 tau_f=0 q_tot=0 k=1e11 recomb_param=1 capacitance=1p
+*.ipin in
+*.opin out
+B2 out in I = -I(B1)
+B1 GND CAP_V I = {capacitance*(-V(CAP_V))*(V(in)-V(out))*k}
+B3 GND CAP_V I = {recomb_param*(-V(CAP_V)*capacitance)*k}
+C1 CAP_V GND {capacitance} m=1
+I1 CAP_V GND EXP(0 {q_tot / (t_f-t_r+tau_f-tau_r)} {t_r} {tau_r} {t_f} {tau_f})
+
+.ends adaptive_double_exp
