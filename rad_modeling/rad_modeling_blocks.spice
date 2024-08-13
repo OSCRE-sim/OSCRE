@@ -4,7 +4,7 @@
 I1 IN OUT EXP(0 {q_tot / (t_f-t_r+tau_f-tau_r)} {t_r} {tau_r} {t_f} {tau_f})
 .ends
 
-.subckt dual_double_exp in out  t_r_main tau_r_main t_f_main tau_f_main q_tot_main t_r_secondary tau_r_secondary t_f_secondary tau_f_secondary q_tot_secondary
+.subckt dual_double_exp in out  t_r_main=0 tau_r_main=0 t_f_main=0 tau_f_main=0 q_tot_main=0 t_r_secondary=0 tau_r_secondary=0 t_f_secondary=0 tau_f_secondary=0 q_tot_secondary=0
 *.ipin in
 *.opin out
 I2 in out EXP(0 {q_tot_main / (t_f_main-t_r_main+tau_f_main-tau_r_main)} {t_r_main} {tau_r_main} {t_f_main} {tau_f_main})
