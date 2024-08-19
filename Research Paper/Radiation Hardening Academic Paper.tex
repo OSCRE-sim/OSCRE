@@ -10,6 +10,9 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{float}
+\usepackage{hyperref} % Adding hyperref for references
+\usepackage{url}
+
 \newcommand{\BibTeX}{\textrm{B \kern -.05em \textsc{i \kern -.025em b} \kern -.08em
 T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
 \begin{document}
@@ -107,7 +110,7 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
     \subsection{Single Event Effect [SEE] Simulation}\label{subsec:single-event-effect-[see]-simulation}
 
     \subsubsection{Double Exponential Current Source}
-    A simple way to model the photo-current generated in a reverse biased pn junction due to a radiation strike, is with a double exponential current source.
+    A simple way to model the photo-current generated in a reverse biased pn junction due to a radiation strike is with a double exponential current source.
     This method has existed for decades and is widely used.
     Fig.~\ref{fig:double_exp} depicts a double exponential waveform.
 
@@ -122,8 +125,7 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
     A limitation of the simple double exponential current source is that it can be inaccurate in some scenarios.
     It has been found that a more realistic photo-current waveform consists of an initial peak followed by a plateau region caused by limitations of PMOS drive current in CMOS circuitry, and a final drop off.
     This waveform can be represented by adding two double exponential current sources together resulting in a dual double exponential current source.
-    Fig.~\ref{fig:dual_double_exp} depicts a dual double exponential waveform. \cite{Black2015}
-    \vspace{1em}
+    Fig.~\ref{fig:dual_double_exp} depicts a dual double exponential waveform~\cite{Black2015}.
 
     \begin{figure}[htbp]
         \centering
@@ -223,7 +225,7 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
     \label{subsec:other-radiation-effect-simulations}
 
     \subsubsection{TID Modules}
-    Total ionizing dose, is a radiation effect in which charge accumulates in the insulating regions of a MOSFET. This accumulation of charge can cause a number of undesirable effects.
+    Total ionizing dose is a radiation effect in which charge accumulates in the insulating regions of a MOSFET. This accumulation of charge can cause a number of undesirable effects.
     Some of the major effects that occur are a change in the threshold voltage of the MOSFET, and an increase in leakage current.
     We've chosen only to model the change in threshold voltage for the purposes of this paper and will add other effects in the future.
 
@@ -238,7 +240,7 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
     \subsubsection{Rail Span Collapse Voltage Source}
     A radiation induced phenomenon known as rail span collapse is often observed in complex circuits.
     Rail span collapse is characterized by the voltage between the positive and negative voltage rail collapsing due to excess current draw.
-    This voltage collapse can result in severe problems, especially in circuity with sequential logic.
+    This voltage collapse can result in severe problems, especially in circuitry with sequential logic.
 
     One example where rail span collapse can cause issues is in an SRAM circuit.
     When an SRAM is irradiated, each time a reverse biased MOSFET is struck a photo-current is generated in the junction.
@@ -321,7 +323,7 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
 
     \section{Conclusion and Future Work}\label{sec:conclusion-and-future-work}
     This paper presented an open-source radiation hardening simulator designed to simulate and analyze the effects of radiation on electronic circuits.
-    The simulator integrates XSchem and NGSpice with custom-developed modules for fault injection, and radiation effect simulation.
+    The simulator integrates XSchem and NGSpice with custom-developed modules for fault injection and radiation effect simulation.
     The incorporation of advanced models for Single Event Effects and Total Ionizing Dose has shown accuracy in preliminary tests, demonstrating the system's potential for reliable simulations.
 
     In future work, we plan to further optimize the simulator and explore additional features.
