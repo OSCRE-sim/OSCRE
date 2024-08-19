@@ -2,10 +2,8 @@ v {xschem version=3.4.5 file_version=1.2
 }
 G {}
 K {type=primitive
-format="@name @pinlist @symname t_r_main=@t_r_main tau_r_main=@tau_r_main t_f_main=@t_f_main tau_f_main=@tau_f_main q_tot_main=@q_tot_main
-t_r_secondary=@t_r_secondary tau_r_secondary=@tau_r_secondary t_f_secondary=@t_f_secondary tau_f_secondary=@tau_f_secondary q_tot_secondary=@q_tot_secondary"
-template="name=x1 t_r_main = 0 tau_r_main = 0 t_f_main = 0 tau_f_main = 0 q_tot_main = 0
-t_r_secondary = 0 tau_r_secondary = 0 t_f_secondary = 0 tau_f_secondary = 0 q_tot_secondary = 0"
+format="@name @pinlist @symname t_r_main=@t_r_main tau_r_main=@tau_r_main t_f_main=@t_f_main tau_f_main=@tau_f_main q_tot_main=@q_tot_main t_r_secondary=@t_r_secondary tau_r_secondary=@tau_r_secondary t_f_secondary=@t_f_secondary tau_f_secondary=@tau_f_secondary q_tot_secondary=@q_tot_secondary"
+template="name=x1 t_r_main=0 tau_r_main=0 t_f_main=0 tau_f_main=0 q_tot_main=0 t_r_secondary=0 tau_r_secondary=0 t_f_secondary=0 tau_f_secondary=0 q_tot_secondary=0"
 }
 V {}
 S {}

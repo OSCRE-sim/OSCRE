@@ -239,6 +239,14 @@ EOF
     sudo make -j4
     sudo make install
 
+    # Copy radiation simulation blocks from repository to universal location
+    sudo cp -r ../rad_modeling_blocks /usr/local/share
+
+    # Add rad_modeling_blocks to the xschem library path
+    echo "append XSCHEM_LIBRARY_PATH :/usr/local/share/rad_modeling_blocks" >> ~/.xschem/xschemrc
+    echo "append XSCHEM_LIBRARY_PATH :$HOME" >> ~/.xschem/xschemrc
+    echo "set XSCHEM_START_WINDOW {/usr/local/share/rad_modeling_blocks/top.sch}" >> ~/.xschem/xschemrc
+
     echo "Installation completed successfully."
 else
     error_exit "Unsupported operating system. This script supports macOS and Linux only."
