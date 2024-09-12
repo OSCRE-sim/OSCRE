@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.9.4)  9 SEP 2024 10:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.9.4)  12 SEP 2024 12:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -503,68 +503,75 @@ Overfull \hbox (19.235pt too wide) in paragraph at lines 34--34
  [] 
  []
 
-<Inverter_Image_cropped.png, id=70, 566.3559pt x 335.8146pt>
-File: Inverter_Image_cropped.png Graphic file (type png)
-<use Inverter_Image_cropped.png>
-Package pdftex.def Info: Inverter_Image_cropped.png  used on input line 76.
-(pdftex.def)             Requested size: 252.0pt x 149.41908pt.
+<Block_Diagram_B_W_cropped.png, id=72, 639.1077pt x 299.6796pt>
+File: Block_Diagram_B_W_cropped.png Graphic file (type png)
+<use Block_Diagram_B_W_cropped.png>
+Package pdftex.def Info: Block_Diagram_B_W_cropped.png  used on input line 70.
+(pdftex.def)             Requested size: 239.39923pt x 112.2561pt.
 [1{C:/Users/collinml/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users
 /collinml/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
 
 
- <./Inverter_Image_cropped.png>]
-<EX_Double_Exponential.png, id=89, 758.835pt x 433.62pt>
+ <./Block_Diagram_B_W_cropped.png>]
+<Inverter_Image_B_W_cropped.png, id=90, 534.3162pt x 311.7246pt>
+File: Inverter_Image_B_W_cropped.png Graphic file (type png)
+<use Inverter_Image_B_W_cropped.png>
+Package pdftex.def Info: Inverter_Image_B_W_cropped.png  used on input line 89.
+
+(pdftex.def)             Requested size: 252.0pt x 147.01952pt.
+<EX_Double_Exponential.png, id=92, 758.835pt x 433.62pt>
 File: EX_Double_Exponential.png Graphic file (type png)
 <use EX_Double_Exponential.png>
-Package pdftex.def Info: EX_Double_Exponential.png  used on input line 105.
+Package pdftex.def Info: EX_Double_Exponential.png  used on input line 118.
 (pdftex.def)             Requested size: 239.39923pt x 136.79613pt.
-<EX_Dual_Double_Exponential.png, id=92, 758.835pt x 433.62pt>
+<EX_Dual_Double_Exponential.png, id=95, 758.835pt x 433.62pt>
 File: EX_Dual_Double_Exponential.png Graphic file (type png)
 <use EX_Dual_Double_Exponential.png>
-Package pdftex.def Info: EX_Dual_Double_Exponential.png  used on input line 118
+Package pdftex.def Info: EX_Dual_Double_Exponential.png  used on input line 131
 .
 (pdftex.def)             Requested size: 239.39923pt x 136.79613pt.
-<Adaptive_Model_Cropped.png, id=94, 828.9369pt x 265.9536pt>
+<Adaptive_Model_Cropped.png, id=97, 828.9369pt x 265.9536pt>
 File: Adaptive_Model_Cropped.png Graphic file (type png)
 <use Adaptive_Model_Cropped.png>
-Package pdftex.def Info: Adaptive_Model_Cropped.png  used on input line 134.
+Package pdftex.def Info: Adaptive_Model_Cropped.png  used on input line 147.
 (pdftex.def)             Requested size: 239.39923pt x 76.80803pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 141
+LaTeX Font Info:    Trying to load font information for U+msa on input line 154
 .
 
 (C:\Users\collinml\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 141
+LaTeX Font Info:    Trying to load font information for U+msb on input line 154
 .
 
 (C:\Users\collinml\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-[2 <./EX_Double_Exponential.png> <./EX_Dual_Double_Exponential.png> <./Adaptive
-_Model_Cropped.png>]
-<PMOS_NMOS_Usage.png, id=121, 1204.5pt x 913.4125pt>
+[2 <./Inverter_Image_B_W_cropped.png> <./EX_Double_Exponential.png> <./EX_Dual_
+Double_Exponential.png>]
+<PMOS_NMOS_Usage.png, id=114, 1204.5pt x 913.4125pt>
 File: PMOS_NMOS_Usage.png Graphic file (type png)
 <use PMOS_NMOS_Usage.png>
-Package pdftex.def Info: PMOS_NMOS_Usage.png  used on input line 205.
+Package pdftex.def Info: PMOS_NMOS_Usage.png  used on input line 218.
 (pdftex.def)             Requested size: 226.79846pt x 171.98917pt.
-<rail_collapse_function.png, id=123, 758.835pt x 433.62pt>
+ [3 <./Adaptive_Model_Cropped.png> <./PMOS_NMOS_Usage.png>]
+<rail_collapse_function.png, id=140, 758.835pt x 433.62pt>
 File: rail_collapse_function.png Graphic file (type png)
 <use rail_collapse_function.png>
-Package pdftex.def Info: rail_collapse_function.png  used on input line 232.
+Package pdftex.def Info: rail_collapse_function.png  used on input line 245.
 (pdftex.def)             Requested size: 239.39923pt x 136.79613pt.
- [3 <./PMOS_NMOS_Usage.png> <./rail_collapse_function.png>]
-<Inverter_Response.png, id=142, 758.835pt x 433.62pt>
+<Inverter_Response.png, id=143, 758.835pt x 433.62pt>
 File: Inverter_Response.png Graphic file (type png)
 <use Inverter_Response.png>
-Package pdftex.def Info: Inverter_Response.png  used on input line 275.
+Package pdftex.def Info: Inverter_Response.png  used on input line 288.
 (pdftex.def)             Requested size: 239.39923pt x 136.79613pt.
-<Rail_Collapse_Response.png, id=145, 758.835pt x 433.62pt>
+<Rail_Collapse_Response.png, id=146, 758.835pt x 433.62pt>
 File: Rail_Collapse_Response.png Graphic file (type png)
 <use Rail_Collapse_Response.png>
-Package pdftex.def Info: Rail_Collapse_Response.png  used on input line 287.
+Package pdftex.def Info: Rail_Collapse_Response.png  used on input line 300.
 (pdftex.def)             Requested size: 239.39923pt x 136.79613pt.
-(Radiation Hardening Academic Paper.bbl)
+ (Radiation Hardening Academic Paper.bbl [4 <./rail_collapse_function.png> <./I
+nverter_Response.png> <./Rail_Collapse_Response.png>])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -576,24 +583,25 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[4 <./Inverter_Response.png> <./Rail_Collapse_Response.png>]
-(Radiation Hardening Academic Paper.aux)
+[5
+
+] (Radiation Hardening Academic Paper.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `"Radiation Hardening Academic Paper".out' ha
 s not changed.
-(rerunfilecheck)             Checksum: 351C9457639FF5554BEFC55EED326189;2949.
+(rerunfilecheck)             Checksum: 23C967D73D88454D84C321202CBBCCA8;2963.
  ) 
 Here is how much of TeX's memory you used:
- 11439 strings out of 474486
- 182302 string characters out of 5742340
+ 11452 strings out of 474486
+ 182733 string characters out of 5742340
  1945542 words of memory out of 5000000
- 33532 multiletter control sequences out of 15000+600000
+ 33544 multiletter control sequences out of 15000+600000
  595585 words of font info for 107 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,10n,79p,376b,518s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,10n,79p,962b,594s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/collinml/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
 cm/cmex10.pfb><C:/Users/collinml/AppData/Local/Programs/MiKTeX/fonts/type1/publ
 ic/amsfonts/cm/cmmi10.pfb><C:/Users/collinml/AppData/Local/Programs/MiKTeX/font
@@ -610,10 +618,10 @@ TeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/collinml/AppData/Local/Programs/
 MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/collinml/AppData/Local/Progr
 ams/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/collinml/AppData/Local/Pr
 ograms/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "Radiation Hardening Academic Paper.pdf" (4 pages, 588670 byt
+Output written on "Radiation Hardening Academic Paper.pdf" (5 pages, 756977 byt
 es).
 PDF statistics:
- 233 PDF objects out of 1000 (max. 8388607)
- 45 named destinations out of 1000 (max. 500000)
- 161 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 240 PDF objects out of 1000 (max. 8388607)
+ 46 named destinations out of 1000 (max. 500000)
+ 174 words of extra memory for PDF output out of 10000 (max. 10000000)
 

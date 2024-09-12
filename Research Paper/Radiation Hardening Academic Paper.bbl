@@ -35,23 +35,6 @@ G.~Pepper and R.~Stone, ``An evaluation of the hspice/radspice circuit
   simulation code system,'' \emph{Defence Research Establishment Ottawa
   Technical Note}, vol. 90-33, November 1990.
 
-\bibitem{electronics13061073}
-\BIBentryALTinterwordspacing
-Y.~Chi, C.~Cai, and L.~Cai, ``Radiation effects of advanced electronic devices
-  and circuits,'' \emph{Electronics}, vol.~13, no.~6, 2024. [Online].
-  Available: \url{https://www.mdpi.com/2079-9292/13/6/1073}
-\BIBentrySTDinterwordspacing
-
-\bibitem{Pellish2016}
-\BIBentryALTinterwordspacing
-J.~A. Pellish, ``Recent advances and future challenges in risk-based radiation
-  engineering,'' Presentation at NASA Space Exploration \& Space Weather
-  Workshop, Greenbelt, MD, United States, September 27-28 2016, document ID:
-  20160013227, Acquisition Source: Goddard Space Flight Center, Report/Patent
-  Number: GSFC-E-DAA-TN36092. [Online]. Available:
-  \url{https://ntrs.nasa.gov/citations/20160013227}
-\BIBentrySTDinterwordspacing
-
 \bibitem{Black2015}
 D.~Black, W.~Robinson, I.~Wilcox, D.~Limbrick, and J.~Black, ``Modeling of
   single event transients with dual double-exponential current sources:

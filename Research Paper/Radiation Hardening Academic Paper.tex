@@ -33,10 +33,10 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
     \maketitle
 
     \begin{abstract}
-        This paper presents the design, implementation, and applications of an open-source radiation hardening simulator developed using XSchem and NGSpice.
+        This paper presents the design, implementation, and applications of an open-source radiation hardening simulator developed using XSchem and Ngspice.
         The simulator aims to address the challenges of simulating radiation effects on electronic circuits by providing a comprehensive library and user-friendly interface.
-        The project integrates core modules for fault injection, radiation effect simulation, including Single Event Effects (SEE) and Total Ionizing Dose (TID), along with thorough documentation and examples to support users in their research and development efforts.
-        Preliminary tests demonstrate the simulator's improved accuracy in modeling radiation effects, offering significant potential for future research and development.
+        The project integrates core modules for radiation effect simulation, including Single Event Effects (SEE), along with thorough documentation and examples to support users in their research and development efforts.
+        Preliminary tests demonstrate the simulator's accuracy in modeling radiation effects, offering significant potential for future research and development.
     \end{abstract}
 
     \begin{IEEEkeywords}
@@ -54,7 +54,7 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
 
     In this paper, we introduce an open-source radiation hardening simulator that leverages XSchem and NGSpice.
     This tool is designed to simulate and analyze the effects of radiation on electronic circuits, and aims to facilitate the development and testing of radiation-hardened designs.
-    Our approach includes simulating Single Event Effects (SEE) using advanced models such as adaptive double exponential current sources and Total Ionizing Dose (TID) effects to improve the accuracy of simulations~\cite{Pepper1990}.
+    Our approach includes simulating Single Event Effects (SEE) using advanced models such as adaptive double exponential current sources to improve the accuracy of simulations~\cite{Pepper1990}.
 
     The paper is structured as follows: Section II provides an overview of the project, including its background, objectives, and scope.
     Section III details the methodology and implementation, describing the integration of XSchem, NGSpice, and custom-developed modules.
@@ -63,25 +63,38 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
 
 
     \section{Project Overview}\label{sec:project-overview}
-    This section provides an overview of the project, including background, objectives, and scope.
-
-    \subsection{Background and Related Work}\label{subsec:background-and-related-work}
-    Advancements in radiation hardening simulation have resulted in the development of numerous methodologies designed to enhance precision and minimize error.
-    Despite these advancements, many existing techniques encounter challenges, including non-linearity, sensitivity to environmental conditions, and intricate calibration processes.
-    Numerous efforts to improve these models have been undertaken, yielding significant success.
-    Our open-source models are based on several of these advancements, most notably the adaptive double exponential model, which has proven effective in accurately modeling certain Single-Event Effects (SEEs)~\cite{electronics13061073, Pellish2016}.
+    This section provides an overview of the project, including structure, background, objectives, and scope.
     
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=1\linewidth]{Inverter_Image_cropped}
-        \caption{CMOS Inverter}
+        \includegraphics[width=0.95\linewidth]{Block_Diagram_B_W_cropped}
+        \caption{Interaction Diagram. This figure shows how different components of the project interact with each other.}
+        \label{fig:interaction_diagram}
+    \end{figure}
+    
+    \subsection{Structure}\label{subsec:project-structure}
+    To facilitate easy schematic creation and simulation, we've chosen to use an open source program called Xschem. Xschem provides a GUI interface for drawing circuits, generating netlists, running simulations, and viewing waveforms. We've created a set of radiation simulation blocks that can be imported into Xschem as components. These components can then be included in schematics and simulated. Once a schematic is created, Xschem generates a netlist, sends the netlist to ngspice to simulate, receives the results from ngspice, and finally send the results to an external waveform viewer (in this case we are using BeSpice Wave). This structure is detailed in Fig.~\ref{fig:interaction_diagram}
+    
+
+    \subsection{Backgroundk}\label{subsec:background}
+    %Advancements in radiation hardening simulation have resulted in the development of numerous methodologies designed to enhance precision and minimize error.
+    %Despite these advancements, many existing techniques encounter challenges, including non-linearity, sensitivity to environmental conditions, and intricate calibration processes.
+    %Numerous efforts to improve these models have been undertaken, yielding significant success.
+    %Our open-source models are based on several of these advancements, most notably the adaptive double exponential model, which has proven effective in accurately modeling certain Single-Event Effects (SEEs)~\cite{electronics13061073, Pellish2016}.
+    
+   	Single-Event Effects (SEEs) are some of the most commonly simulated radiation effects. One single-event effect of interest is transient generation. When a radiation particle passes through silicon, it generates electron hole pairs along the length of the radiation track. In most cases, there is no strong electric field to separate these charges and the electron hole pairs recombine randomly. If, however, the electron hole pairs are generated in the proximity of a strong electric field, such as a reverse biased PN junction, the electrons and holes can be separated before recombination can occur. These charges are swept out of the junction which creates a photocurrent in the circuit. This photocurrent then generates transients in the circuit. These transients are one of many single-event effects. Fig.~\ref{fig:cmos_inverter} depicts a radiation event taking place in a CMOS inverter.
+    
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=1\linewidth]{Inverter_Image_B_W_cropped}
+        \caption{Radiation event in a CMOS Inverter. In the above configuration, the drain of the NMOS transistor is held in a reverse bias condition. When radiation stikes the aforementioned drain region, electron-hole pairs are generated along the radiation track. A photocurrent is then generated due to the reverse bias condition, thus creating voltage transients.}
         \label{fig:cmos_inverter}
     \end{figure}
     
 
     \subsection{Project Scope and Objectives}\label{subsec:project-scope-and-objectives}
     There are multiple existing Radiation-Hardened SPICE simulators; however, these simulators are not open-sourced, limiting their accessibility to users who can afford to purchase these software environments.
-    The primary objective of this project was to develop an open-source, radiation-effects SPICE simulator that is both user-friendly and accurate in its modeling capabilities.
+    The primary objective of this project is to develop an open-source, radiation-effects SPICE simulator that is both user-friendly and accurate in its modeling capabilities.
     This was accomplished by researching various contemporary methods and modules for modeling radiation effects in circuits and integrating them into existing open-source SPICE programs, specifically XSchem for the front-end and NGSpice for the back-end.
     Additionally, we ensured that the interface for applying these methods was intuitive, facilitating their integration into users' design flows.
 
