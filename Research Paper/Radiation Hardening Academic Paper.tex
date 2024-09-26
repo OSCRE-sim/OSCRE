@@ -76,13 +76,13 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
     To facilitate easy schematic creation and simulation, we've chosen to use an open source program called Xschem. Xschem provides a GUI interface for drawing circuits, generating netlists, running simulations, and viewing waveforms. We've created a set of radiation simulation blocks that can be imported into Xschem as components. These components can then be included in schematics and simulated. Once a schematic is created, Xschem generates a netlist, sends the netlist to ngspice to simulate, receives the results from ngspice, and finally send the results to an external waveform viewer (in this case we are using BeSpice Wave). This structure is detailed in Fig.~\ref{fig:interaction_diagram}
     
 
-    \subsection{Backgroundk}\label{subsec:background}
+    \subsection{Background}\label{subsec:background}
     %Advancements in radiation hardening simulation have resulted in the development of numerous methodologies designed to enhance precision and minimize error.
     %Despite these advancements, many existing techniques encounter challenges, including non-linearity, sensitivity to environmental conditions, and intricate calibration processes.
     %Numerous efforts to improve these models have been undertaken, yielding significant success.
     %Our open-source models are based on several of these advancements, most notably the adaptive double exponential model, which has proven effective in accurately modeling certain Single-Event Effects (SEEs)~\cite{electronics13061073, Pellish2016}.
     
-   	Single-Event Effects (SEEs) are some of the most commonly simulated radiation effects. One single-event effect of interest is transient generation. When a radiation particle passes through silicon, it generates electron hole pairs along the length of the radiation track. In most cases, there is no strong electric field to separate these charges and the electron hole pairs recombine randomly. If, however, the electron hole pairs are generated in the proximity of a strong electric field, such as a reverse biased PN junction, the electrons and holes can be separated before recombination can occur. These charges are swept out of the junction which creates a photocurrent in the circuit. This photocurrent then generates transients in the circuit. These transients are one of many single-event effects. Fig.~\ref{fig:cmos_inverter} depicts a radiation event taking place in a CMOS inverter.
+   	Single-Event Effects (SEEs) are some of the most commonly simulated radiation effects. One single-event effect of interest are transients resulting from photocurrent generation. When a radiation particle passes through silicon, it generates electron hole pairs along the length of the radiation track. In most cases, there is no strong electric field to separate these charges and the electron hole pairs recombine randomly. If, however, the electron hole pairs are generated in the proximity of a strong electric field, such as a reverse biased PN junction, the electrons and holes can be separated before recombination can occur. These charges are swept out of the junction which creates a photocurrent in the circuit. This photocurrent then generates transients in the circuit. These transients are one of many single-event effects. Fig.~\ref{fig:cmos_inverter} depicts a radiation event taking place in a CMOS inverter.
     
     \begin{figure}[htbp]
         \centering
@@ -104,7 +104,7 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
     To effectuate this, we implement each radiation effect as a block that can be placed and connected to other components in XSchem.
     A description of each block is as follows:
 
-    \vspace{1em}
+    
 
     \subsection{Single Event Effect [SEE] Simulation}\label{subsec:single-event-effect-[see]-simulation}
 
@@ -119,6 +119,36 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
         \caption{Double exponential waveform}
         \label{fig:double_exp}
     \end{figure}
+    
+    The equations that govern the behavior of such a double exponential current source are given in equations (\ref{eq:Ipeak}) and (\ref{eq:ISRC})
+    
+        \begin{equation}
+        I_{\text{peak}} = \frac{Q_{\text{tot}}}{[(t_f - t_r) - \tau_r + \tau_f]}\label{eq:Ipeak}
+    \end{equation}
+
+    \begin{equation}
+        I = \begin{cases}
+                      0, & t < t_r \\
+                      I_{\text{peak}}\left(1 - e^{\frac{-(t - t_r)}{\tau_r}}\right), & t_r \leq t < t_f \\
+                      I_{\text{peak}}\left(e^{\frac{-(t - t_f)}{\tau_f}} - e^{\frac{-(t - t_r)}{\tau_r}}\right), & t_f > t
+        \end{cases}\label{eq:ISRC}
+    \end{equation}
+    
+	\vspace{1em}
+    
+    \begin{itemize}
+        \item[] \(t_r\) - The simulation time at which charge injection begins
+
+        \item[] \(t_f\) - The simulation time at which charge injection halts
+
+        \item[] \(\tau_r\) - The rise time constant of \(I_{SRC}\)
+
+        \item[] \(\tau_f\) - The fall time constant of \(I_{SRC}\)
+
+        \item[] \(Q_{tot}\) - The total charge to be injected into the node
+    \end{itemize}
+    
+    \vspace{1em}
 
     \subsubsection{Dual Double Exponential Current Source}
     A limitation of the simple double exponential current source is that it can be inaccurate in some scenarios.
@@ -140,7 +170,7 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
 
     The adaptive double exponential current source solves this problem by adjusting the drive current proportional to the voltage across the reverse bias PN junction of the transistor for which a radiation strike is being simulated for.
     This adjustment allows the node voltage to drop to near zero and remain at this level until the radiation induced current spike is complete.
-    The resulting current waveform, as seen in Fig.~\ref{fig:inverter_response}, closely resembles that of a dual double exponential current source.
+    The resulting current waveform closely resembles that of a dual double exponential current source. Fig. ~\ref{fig:adaptive_model_overview} shows how the adaptive double exponential current source is constructed.
 
     \begin{figure}[htbp]
         \centering
@@ -171,34 +201,11 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
     \(I_{SEE}'\) is a current mirror of \(I_{SEE}\).
     This allows for the calculation portion of the circuit to be separated from outside influence.
 
-    \begin{equation}
-        I_{\text{peak}} = \frac{Q_{\text{tot}}}{[(t_f - t_r) - \tau_r + \tau_f]}\label{eq:Ipeak}
-    \end{equation}
+    Lastly, \(I_{SRC}\) is the standard double exponential current source given by equations (\ref{eq:Ipeak}) and (\ref{eq:ISRC}).
 
-    \begin{equation}
-        I_{SRC} = \begin{cases}
-                      0, & t < t_r \\
-                      I_{\text{peak}}\left(1 - e^{\frac{-(t - t_r)}{\tau_r}}\right), & t_r \leq t < t_f \\
-                      I_{\text{peak}}\left(e^{\frac{-(t - t_f)}{\tau_f}} - e^{\frac{-(t - t_r)}{\tau_r}}\right), & t_f > t
-        \end{cases}\label{eq:ISRC}
-    \end{equation}
-
-    Lastly, \(I_{SRC}\) is the standard double exponential current source built into most versions of SPICE\@.
-
-    A description of each parameter in the adaptive current source is as follows:
+    A description the additional parameters in the adaptive current source is as follows:
 
     \begin{itemize}
-
-        \item[] \(t_r\) - The simulation time at which charge injection begins
-
-        \item[] \(t_f\) - The simulation time at which charge injection halts
-
-        \item[] \(\tau_r\) - The rise time constant of \(I_{SRC}\)
-
-        \item[] \(\tau_f\) - The fall time constant of \(I_{SRC}\)
-
-        \item[] \(Q_{tot}\) - The total charge to be injected into the node
-
         \item[] \(k\) - A constant for proportionally adjusting the drive strength of \(B_{SEE}\) and \(B_{REC}\)
 
         \item[] \(recomb\_adj\) - A constant for proportionally adjusting the drive strength of \(B_{REC}\)
@@ -213,12 +220,12 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
     Both of these configurations are demonstrated in Fig. \ref{fig:SEE_Usage}.
     The reason behind these configuration restraints is beyond the scope of this paper.
 
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.9\linewidth]{PMOS_NMOS_Usage}
-        \caption{Usage of SEE simulation modules on PMOS and NMOS transistors}
-        \label{fig:SEE_Usage}
-    \end{figure}
+%    \begin{figure}[htbp]
+%        \centering
+%        \includegraphics[width=0.9\linewidth]{PMOS_NMOS_Usage}
+%        \caption{Usage of SEE simulation modules on PMOS and NMOS transistors}
+%        \label{fig:SEE_Usage}
+%    \end{figure}
 
     \subsection{Other Radiation Effect Simulations}
     \label{subsec:other-radiation-effect-simulations}
@@ -276,36 +283,55 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
 
     \end{itemize}
 
+%
+%    \section{Testing, Results, and Discussion}\label{sec:testing-results-and-discussion}
+%    This section presents the results of preliminary tests, highlighting the system's ability to simulate radiation effects with accuracy.
 
-    \section{Testing, Results, and Discussion}\label{sec:testing-results-and-discussion}
-    This section presents the results of preliminary tests, highlighting the system's ability to simulate radiation effects with accuracy.
+%    Fig.~\ref{fig:inverter_response} depicts the voltage response of a CMOS inverter to a simulated radiation strike generated by the adaptive double exponential current source on the reverse biased NMOS transistor.
+%    The waveform generated closely resembles results found from TCAD simulations~\cite{Kauppila2009}.
 
-    Fig.~\ref{fig:inverter_response} depicts the voltage response of a CMOS inverter to a simulated radiation strike generated by the adaptive double exponential current source on the reverse biased NMOS transistor.
-    The waveform generated closely resembles results found from TCAD simulations~\cite{Kauppila2009}.
-
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.95\linewidth]{Inverter_Response}
-        \caption{Voltage response of CMOS inverter due to simulated radiation strike on NMOS transistor}
-        \label{fig:inverter_response}
-    \end{figure}
+%    \begin{figure}[htbp]
+%        \centering
+%        \includegraphics[width=0.95\linewidth]{Inverter_Response}
+%        \caption{Voltage response of CMOS inverter due to simulated radiation strike on NMOS transistor}
+%        \label{fig:inverter_response}
+%    \end{figure}
 
     % POSSIBLE TODO: Maybe find a TCAD waveform to compare to our plot.
 
-    Fig.~\ref{fig:rail_collapse_response} depicts the voltage response of the rail span collapse voltage source to an arbitrary current draw.
-    In this example, the threshold current before rail collapse begins is set at 8.7 mA~\cite{Massengill1984}.
+%    Fig.~\ref{fig:rail_collapse_response} depicts the voltage response of the rail span collapse voltage source to an arbitrary current draw.
+%    In this example, the threshold current before rail collapse begins is set at 8.7 mA~\cite{Massengill1984}.
 
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.95\linewidth]{Rail_Collapse_Response}
-        \caption{Voltage output in response to excess current draw.}
-        \label{fig:rail_collapse_response}
-    \end{figure}
+%    \begin{figure}[htbp]
+%        \centering
+%        \includegraphics[width=0.95\linewidth]{Rail_Collapse_Response}
+%        \caption{Voltage output in response to excess current draw.}
+%        \label{fig:rail_collapse_response}
+%    \end{figure}
 
 
     %\subsection{Generalization and Application}\label{subsec:generalization-and-application}
     %This subsection explores the potential for generalizing the simulation method to other types of circuits and its applicability in various fields requiring precise radiation effect simulation~\cite{Pepper1990}.
 
+	\section{Example Usage}\label{sec:example-usage}
+	\begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.95\linewidth]{sram_circuit}
+        \caption{Motivating Example}
+        \label{fig:motivating_example}
+    \end{figure}    
+    
+    \subsection{Motivating Example}\label{subsec:motivating-example}
+    In this section we will demonstrate how our simulator can be used to simulate radiation effects on a standard SRAM cell. SRAMs are susceptible to radiation induced upsets where the state of the cell can be flipped from zero to one or vice versa. To simulate a radiation strike, a schematic can be set up as seen in Fig. \ref{fig:motivating_example}. In this schematic, a radiation simulation block is placed to simulate a particle striking the drain region of the NMOS transistor on the Q side of the SRAM. The parameters of the simulation block are set according to process parameters, as well as experimental data. When the simulation is run, the radiation simulation block will inject current at a presribed time. The results of such a simulation are presented in Fig.\ref{fig:motivating_example_result}
+    
+    
+    
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.95\linewidth]{SRAM_Response_Multi}
+        \caption{motivating example result}
+        \label{fig:motivating_example_result}
+    \end{figure}
 
     \section{Conclusion and Future Work}\label{sec:conclusion-and-future-work}
     This paper presented an open-source radiation hardening simulator designed to simulate and analyze the effects of radiation on electronic circuits.
