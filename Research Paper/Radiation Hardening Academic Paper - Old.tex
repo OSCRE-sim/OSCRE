@@ -26,11 +26,7 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
         David Nichols,
         Collin Lambert,
         Parker Allred,
-        Shiuh-hua Wood Chiang, \textit{Senior Member, IEEE},
-        }
-        \IEEEauthorblockN{
-        Jeffrey Goeders, \textit{Senior Member, IEEE},
-        and Mike Wirthlin, \textit{Senior Member, IEEE}
+        and Shiuh-hua Wood Chiang, \textit{Senior Member, IEEE}
         }
     }
 
@@ -79,14 +75,12 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
     \subsection{Structure}\label{subsec:project-structure}
     To facilitate easy schematic creation and simulation, we've chosen to use an open source program called Xschem. Xschem provides a GUI interface for drawing circuits, generating netlists, running simulations, and viewing waveforms. We've created a set of radiation simulation blocks that can be imported into Xschem as components. These components can then be included in schematics and simulated. Once a schematic is created, Xschem generates a netlist, sends the netlist to ngspice to simulate, receives the results from ngspice, and finally send the results to an external waveform viewer (in this case we are using BeSpice Wave). This structure is detailed in Fig.~\ref{fig:interaction_diagram}
     
-        \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.95\linewidth]{xschem_light}
-        \caption{Xschem}
-        \label{fig:interaction_diagram}
-    \end{figure}
 
     \subsection{Background}\label{subsec:background}
+    %Advancements in radiation hardening simulation have resulted in the development of numerous methodologies designed to enhance precision and minimize error.
+    %Despite these advancements, many existing techniques encounter challenges, including non-linearity, sensitivity to environmental conditions, and intricate calibration processes.
+    %Numerous efforts to improve these models have been undertaken, yielding significant success.
+    %Our open-source models are based on several of these advancements, most notably the adaptive double exponential model, which has proven effective in accurately modeling certain Single-Event Effects (SEEs)~\cite{electronics13061073, Pellish2016}.
     
    	Single-Event Effects (SEEs) are some of the most commonly simulated radiation effects. One single-event effect of interest are transients resulting from photocurrent generation. When a radiation particle passes through silicon, it generates electron hole pairs along the length of the radiation track. In most cases, there is no strong electric field to separate these charges and the electron hole pairs recombine randomly. If, however, the electron hole pairs are generated in the proximity of a strong electric field, such as a reverse biased PN junction, the electrons and holes can be separated before recombination can occur. These charges are swept out of the junction which creates a photocurrent in the circuit. This photocurrent then generates transients in the circuit. These transients are one of many single-event effects. Fig.~\ref{fig:cmos_inverter} depicts a radiation event taking place in a CMOS inverter.
     
@@ -121,8 +115,8 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
 
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=0.95\linewidth]{double_exp_param}
-        \caption{The above image depicts a family of double exponential curves. The area under the curve represents total charge delivered. Each curve in this plot has the same area underneath it (total charge). This demonstrates the ability of the double exponential radiation simulation block to be customized by adjusting various parameters such as \(t_r\), \(t_f\), \(\tau_r\), and \(\tau_f\).}
+        \includegraphics[width=0.95\linewidth]{EX_Double_Exponential}
+        \caption{Double exponential waveform}
         \label{fig:double_exp}
     \end{figure}
     
@@ -164,7 +158,7 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
 
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=0.95\linewidth]{dual_double_exp_param}
+        \includegraphics[width=0.95\linewidth]{EX_Dual_Double_Exponential}
         \caption{Dual double exponential waveform}
         \label{fig:dual_double_exp}
     \end{figure}
@@ -226,10 +220,103 @@ T \kern -.1667em \lower .7ex \hbox{E} \kern -.125emX}}
     Both of these configurations are demonstrated in Fig. \ref{fig:SEE_Usage}.
     The reason behind these configuration restraints is beyond the scope of this paper.
 
+%    \begin{figure}[htbp]
+%        \centering
+%        \includegraphics[width=0.9\linewidth]{PMOS_NMOS_Usage}
+%        \caption{Usage of SEE simulation modules on PMOS and NMOS transistors}
+%        \label{fig:SEE_Usage}
+%    \end{figure}
+
+%    \subsection{Other Radiation Effect Simulations}
+%    \label{subsec:other-radiation-effect-simulations}
+
+%    \subsubsection{Rail Span Collapse Voltage Source}
+%    A radiation induced phenomenon known as rail span collapse is often observed in complex circuits.
+%    Rail span collapse is characterized by the voltage between the positive and negative voltage rail collapsing due to excess current draw.
+%    This voltage collapse can result in severe problems, especially in circuitry with sequential logic.
+
+%    One example where rail span collapse can cause issues is in an SRAM circuit.
+%    When an SRAM is irradiated, each time a reverse biased MOSFET is struck a photo-current is generated in the junction.
+%    These photo-currents can be compounded together which can result in more current being drawn than the voltage rails can supply.
+%    This reduction in voltage difference between the positive and negative power rails can then cause the SRAM to become more susceptible to upsets, or lose its saved state all together.
+
+%    We've chosen to model the voltage drop due to excessive current draw as a logistic function.
+%    This logistic function outputs a voltage drop for a given current draw as input.
+%    Fig.~\ref{fig:rail_collapse_function} shows an example plot of this model.
+%    The function is tuned such that significant voltage drop begins to occur once a current of 3mA is exceeded.
+%    When more than about 5mA is drawn the voltage source can no longer sustain the load and the voltage drop is near 1.8 volts.
+%    Given that the voltage source in this example has a nominal voltage of 1.8 volts, this means that there is near zero voltage between the positive and negative rails after 5mA\@.
+
+%    \begin{figure}[htbp]
+%        \centering
+%        \includegraphics[width=0.95\linewidth]{rail_collapse_function}
+%        \caption{Rail span collapse function.}
+%        \label{fig:rail_collapse_function}
+%    \end{figure}
+
+%    The following equations define the behavior of the rail span collapse model:
+
+%    \begin{equation}
+%        V(I) = V_{nominal} - \frac{V_{nominal}}{1 + e^{-k(I - I_0)}}
+%        \label{eq:VI}
+%    \end{equation}
+
+%    Where \(I_0\), the inflection point of the logistic function, is defined as:
+
+%    \begin{equation}
+%        I_0 = I_{limit} - \frac{\ln\left(\frac{V_{limit}}{V_{initial} - V_{limit}}\right)}{k}
+%        \label{eq:I0}
+%    \end{equation}
+
+%    A detailed description of each parameter in the rail span collapse voltage source is as follows:
+
+%    \begin{itemize}
+
+%        \item[] \(V_{nominal}\) - The nominal voltage of the voltage source under normal conditions
+
+%        \item[] \(V_{limit}\) - The voltage drop when a current of exactly \(I_{limit}\) is being drawn.
+%        Must be greater than zero
+
+%        \item[] \(I_{limit}\) - The maximum current draw before voltage drop occurs
+
+%        \item[] \(k\) - A constant for adjusting the slope of the logistic function
+
+%    \end{itemize}
+
+%
+%    \section{Testing, Results, and Discussion}\label{sec:testing-results-and-discussion}
+%    This section presents the results of preliminary tests, highlighting the system's ability to simulate radiation effects with accuracy.
+
+%    Fig.~\ref{fig:inverter_response} depicts the voltage response of a CMOS inverter to a simulated radiation strike generated by the adaptive double exponential current source on the reverse biased NMOS transistor.
+%    The waveform generated closely resembles results found from TCAD simulations~\cite{Kauppila2009}.
+
+%    \begin{figure}[htbp]
+%        \centering
+%        \includegraphics[width=0.95\linewidth]{Inverter_Response}
+%        \caption{Voltage response of CMOS inverter due to simulated radiation strike on NMOS transistor}
+%        \label{fig:inverter_response}
+%    \end{figure}
+
+    % POSSIBLE TODO: Maybe find a TCAD waveform to compare to our plot.
+
+%    Fig.~\ref{fig:rail_collapse_response} depicts the voltage response of the rail span collapse voltage source to an arbitrary current draw.
+%    In this example, the threshold current before rail collapse begins is set at 8.7 mA~\cite{Massengill1984}.
+
+%    \begin{figure}[htbp]
+%        \centering
+%        \includegraphics[width=0.95\linewidth]{Rail_Collapse_Response}
+%        \caption{Voltage output in response to excess current draw.}
+%        \label{fig:rail_collapse_response}
+%    \end{figure}
+
+
+    %\subsection{Generalization and Application}\label{subsec:generalization-and-application}
+    %This subsection explores the potential for generalizing the simulation method to other types of circuits and its applicability in various fields requiring precise radiation effect simulation~\cite{Pepper1990}.
+
 	\section{Example Usage}\label{sec:example-usage}
 	\begin{figure}[htbp]
         \centering
-        \includegraphics[width=0.95\linewidth]{sram_circuit_detailed}
+        \includegraphics[width=0.95\linewidth]{sram_circuit}
         \caption{Motivating Example}
         \label{fig:motivating_example}
     \end{figure}    
