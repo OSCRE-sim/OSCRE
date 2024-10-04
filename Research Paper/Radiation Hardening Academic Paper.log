@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.9.4)  1 OCT 2024 14:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.9.4)  4 OCT 2024 11:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -433,11 +433,7 @@ pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count297
 \l__pdf_internal_box=\box57
-) (Radiation Hardening Academic Paper.aux
-
-LaTeX Warning: Label `fig:interaction_diagram' multiply defined.
-
-)
+) (Radiation Hardening Academic Paper.aux)
 \openout1 = `"Radiation Hardening Academic Paper.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
@@ -507,76 +503,73 @@ Overfull \hbox (1.99803pt too wide) in paragraph at lines 38--38
  [] 
  []
 
-<Block_Diagram_B_W_cropped.png, id=68, 638.385pt x 299.1978pt>
-File: Block_Diagram_B_W_cropped.png Graphic file (type png)
-<use Block_Diagram_B_W_cropped.png>
-Package pdftex.def Info: Block_Diagram_B_W_cropped.png  used on input line 74.
-(pdftex.def)             Requested size: 239.39923pt x 112.19888pt.
-<xschem_light.png, id=71, 1056.94875pt x 511.9125pt>
-File: xschem_light.png Graphic file (type png)
-<use xschem_light.png>
-Package pdftex.def Info: xschem_light.png  used on input line 84.
-(pdftex.def)             Requested size: 239.39923pt x 115.94864pt.
+<Inverter_Image_B_W_cropped.png, id=69, 534.3162pt x 311.7246pt>
+File: Inverter_Image_B_W_cropped.png Graphic file (type png)
+<use Inverter_Image_B_W_cropped.png>
+Package pdftex.def Info: Inverter_Image_B_W_cropped.png  used on input line 78.
+
+(pdftex.def)             Requested size: 252.0pt x 147.01952pt.
 [1{C:/Users/collinml/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users
 /collinml/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
 
 
- <./Block_Diagram_B_W_cropped.png> <./xschem_light.png>]
-<Inverter_Image_B_W_cropped.png, id=89, 534.3162pt x 311.7246pt>
-File: Inverter_Image_B_W_cropped.png Graphic file (type png)
-<use Inverter_Image_B_W_cropped.png>
-Package pdftex.def Info: Inverter_Image_B_W_cropped.png  used on input line 95.
+ <./Inverter_Image_B_W_cropped.png>]
+<Block_Diagram_B_W_cropped.png, id=85, 638.385pt x 299.1978pt>
+File: Block_Diagram_B_W_cropped.png Graphic file (type png)
+<use Block_Diagram_B_W_cropped.png>
+Package pdftex.def Info: Block_Diagram_B_W_cropped.png  used on input line 91.
+(pdftex.def)             Requested size: 239.39923pt x 112.19888pt.
+<xschem_env.png, id=87, 1445.4pt x 867.99281pt>
+File: xschem_env.png Graphic file (type png)
+<use xschem_env.png>
+Package pdftex.def Info: xschem_env.png  used on input line 100.
+(pdftex.def)             Requested size: 239.39923pt x 143.75565pt.
+<bespicewave.png, id=88, 1445.4pt x 866.48718pt>
+File: bespicewave.png Graphic file (type png)
+<use bespicewave.png>
+Package pdftex.def Info: bespicewave.png  used on input line 107.
+(pdftex.def)             Requested size: 239.39923pt x 143.50629pt.
+<double_exp_param_no_title.png, id=90, 758.835pt x 412.9026pt>
+File: double_exp_param_no_title.png Graphic file (type png)
+<use double_exp_param_no_title.png>
+Package pdftex.def Info: double_exp_param_no_title.png  used on input line 129.
 
-(pdftex.def)             Requested size: 252.0pt x 147.01952pt.
-<double_exp_param.png, id=91, 758.835pt x 433.62pt>
-File: double_exp_param.png Graphic file (type png)
-<use double_exp_param.png>
-Package pdftex.def Info: double_exp_param.png  used on input line 124.
-(pdftex.def)             Requested size: 239.39923pt x 136.79613pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 125
+(pdftex.def)             Requested size: 239.39923pt x 130.26031pt.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 130
 .
 
 (C:\Users\collinml\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 125
+LaTeX Font Info:    Trying to load font information for U+msb on input line 130
 .
 
 (C:\Users\collinml\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<dual_double_exp_param.png, id=96, 758.835pt x 433.62pt>
-File: dual_double_exp_param.png Graphic file (type png)
-<use dual_double_exp_param.png>
-Package pdftex.def Info: dual_double_exp_param.png  used on input line 167.
-(pdftex.def)             Requested size: 239.39923pt x 136.79613pt.
-
-[2 <./Inverter_Image_B_W_cropped.png> <./double_exp_param.png>]
-<Adaptive_Model_Cropped.png, id=119, 828.9369pt x 265.9536pt>
+[2 <./Block_Diagram_B_W_cropped.png> <./xschem_env.png> <./bespicewave.png> <./
+double_exp_param_no_title.png>]
+<dual_double_exp_param_no_title.png, id=119, 758.835pt x 402.303pt>
+File: dual_double_exp_param_no_title.png Graphic file (type png)
+<use dual_double_exp_param_no_title.png>
+Package pdftex.def Info: dual_double_exp_param_no_title.png  used on input line
+ 172.
+(pdftex.def)             Requested size: 239.39923pt x 126.9164pt.
+<Adaptive_Model_Cropped.png, id=122, 828.9369pt x 265.9536pt>
 File: Adaptive_Model_Cropped.png Graphic file (type png)
 <use Adaptive_Model_Cropped.png>
-Package pdftex.def Info: Adaptive_Model_Cropped.png  used on input line 183.
+Package pdftex.def Info: Adaptive_Model_Cropped.png  used on input line 188.
 (pdftex.def)             Requested size: 239.39923pt x 76.80803pt.
-
-
-LaTeX Warning: Reference `fig:SEE_Usage' on page 3 undefined on input line 223.
-
-
-
-LaTeX Warning: Reference `fig:SEE_Usage' on page 3 undefined on input line 226.
-
-
-<sram_circuit_detailed.png, id=124, 2327.69624pt x 1318.17468pt>
-File: sram_circuit_detailed.png Graphic file (type png)
-<use sram_circuit_detailed.png>
-Package pdftex.def Info: sram_circuit_detailed.png  used on input line 232.
-(pdftex.def)             Requested size: 239.39923pt x 135.56633pt.
-[3 <./dual_double_exp_param.png> <./Adaptive_Model_Cropped.png> <./sram_circuit
-_detailed.png>]
-<SRAM_Response_Multi.png, id=140, 578.16pt x 433.62pt>
+<small_sram.png, id=128, 1433.355pt x 752.8125pt>
+File: small_sram.png Graphic file (type png)
+<use small_sram.png>
+Package pdftex.def Info: small_sram.png  used on input line 237.
+(pdftex.def)             Requested size: 239.39923pt x 125.72498pt.
+ [3 <./dual_double_exp_param_no_title.png> <./Adaptive_Model_Cropped.png>]
+<SRAM_Response_Multi.png, id=147, 578.16pt x 433.62pt>
 File: SRAM_Response_Multi.png Graphic file (type png)
 <use SRAM_Response_Multi.png>
-Package pdftex.def Info: SRAM_Response_Multi.png  used on input line 244.
+Package pdftex.def Info: SRAM_Response_Multi.png  used on input line 249.
 (pdftex.def)             Requested size: 239.39923pt x 179.54533pt.
  (Radiation Hardening Academic Paper.bbl)
 
@@ -590,30 +583,24 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[4 <./SRAM_Response_Multi.png>] (Radiation Hardening Academic Paper.aux)
+[4 <./small_sram.png> <./SRAM_Response_Multi.png>]
+(Radiation Hardening Academic Paper.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package rerunfilecheck Info: File `"Radiation Hardening Academic Paper".out' ha
 s not changed.
-(rerunfilecheck)             Checksum: D6C6A445DBC6CC8D76E7A72B07AAB459;2526.
+(rerunfilecheck)             Checksum: 22CF0DEB8307B1101A1F07B98BFB28C9;2511.
  ) 
 Here is how much of TeX's memory you used:
- 11431 strings out of 474486
- 182073 string characters out of 5742340
- 1945542 words of memory out of 5000000
- 33528 multiletter control sequences out of 15000+600000
- 596692 words of font info for 108 fonts, out of 8000000 for 9000
+ 11443 strings out of 474486
+ 182363 string characters out of 5742340
+ 1946542 words of memory out of 5000000
+ 33540 multiletter control sequences out of 15000+600000
+ 595585 words of font info for 107 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,10n,79p,992b,443s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,10n,79p,1000b,524s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/collinml/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
 cm/cmex10.pfb><C:/Users/collinml/AppData/Local/Programs/MiKTeX/fonts/type1/publ
 ic/amsfonts/cm/cmmi10.pfb><C:/Users/collinml/AppData/Local/Programs/MiKTeX/font
@@ -624,17 +611,18 @@ ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users
 /collinml/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pf
 b><C:/Users/collinml/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
 cm/cmr5.pfb><C:/Users/collinml/AppData/Local/Programs/MiKTeX/fonts/type1/public
-/amsfonts/cm/cmsy10.pfb><C:/Users/collinml/AppData/Local/Programs/MiKTeX/fonts/
-type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/collinml/AppData/Local/Programs/Mi
-KTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/collinml/AppData/Local/
-Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/collinml/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/collinml/AppData
-/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/collinml/AppD
-ata/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "Radiation Hardening Academic Paper.pdf" (4 pages, 2776406 by
+/amsfonts/cm/cmr6.pfb><C:/Users/collinml/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/amsfonts/cm/cmsy10.pfb><C:/Users/collinml/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/collinml/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/collinml/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/collinml/A
+ppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/collin
+ml/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/col
+linml/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on "Radiation Hardening Academic Paper.pdf" (4 pages, 2803592 by
 tes).
 PDF statistics:
- 227 PDF objects out of 1000 (max. 8388607)
- 40 named destinations out of 1000 (max. 500000)
- 161 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 240 PDF objects out of 1000 (max. 8388607)
+ 41 named destinations out of 1000 (max. 500000)
+ 166 words of extra memory for PDF output out of 10000 (max. 10000000)
 
