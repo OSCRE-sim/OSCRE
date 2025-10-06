@@ -56,12 +56,12 @@ model=npn_cust
 area=1
 m=1}
 C {res.sym} 420 -120 0 0 {name=R3
-value=50
+value=1000
 footprint=1206
 device=resistor
 m=1}
 C {res.sym} 240 -360 0 0 {name=R4
-value=50
+value=1000
 footprint=1206
 device=resistor
 m=1}
@@ -71,5 +71,5 @@ C {iopin.sym} 330 -280 2 0 {name=p5 lab=RAD_SOURCE}
 C {iopin.sym} 330 -190 0 0 {name=p6 lab=RAD_SINK}
 C {code_shown.sym} 65 70 0 0 {name=s1 only_toplevel=false value="
 .model npn_cust npn (IS=\{IS_N\} BF=\{BF_N\} VAF=\{VAF_N\} IKF=\{IKF_N\} CJE=\{CJE_N\} CJC=\{CJC_N\} TF=\{TF_N\} TR=\{TR_N\})
-.model pnp_cust pnp (IS=1e-16 BF=100 VAF=100 IKF=0.1 CJE=2p CJC=2p TF=0.1n TR=10n)
+.model pnp_cust pnp (IS=\{IS_P\} BF=\{BF_P\} VAF=\{VAF_P\} IKF=\{IKF_P\} CJE=\{CJE_P\} CJC=\{CJC_N\} TF=\{TF_N\} TR=\{TR_P\})
 "}
