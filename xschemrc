@@ -575,3 +575,115 @@
 append XSCHEM_LIBRARY_PATH :/usr/local/share/rad_modeling_blocks
 append XSCHEM_LIBRARY_PATH :/home/collinml
 set XSCHEM_START_WINDOW {/usr/local/share/rad_modeling_blocks/top.sch}
+
+###########################################################################
+#### SKYWATER PDK SPECIFIC VARIABLES
+###########################################################################
+
+## check if env var PDK_ROOT exists, and use it for building open_pdks paths
+if { [info exists env(PDK_ROOT)] && $env(PDK_ROOT) ne {} } {
+  ## found variable, set tcl PDK_ROOT var
+  if {![file isdir $env(PDK_ROOT)]} {
+    puts stderr "Warning: PDK_ROOT environment variable is set but path not found on the system."
+  }
+  set PDK_ROOT $env(PDK_ROOT)
+} else {
+  ## not existing or empty. 
+  puts stderr "Warning: PDK_ROOT env. var. not found or empty, trying to find an open_pdks install"
+  if {[file isdir /usr/share/pdk]} {set PDK_ROOT /usr/share/pdk
+  } elseif {[file isdir /usr/local/share/pdk]} {set PDK_ROOT /usr/local/share/pdk
+  } elseif {[file isdir $env(HOME)/share/pdk]} {set PDK_ROOT $env(HOME)/share/pdk
+  } else {
+    puts stderr {No open_pdks installation found, set PDK_ROOT env. var. and restart xschem}
+  }
+}
+
+if {[info exists PDK_ROOT]} {
+  ## get process variant
+  if {[info exists env(PDK)]} {
+    set PDK $env(PDK)
+  } else {
+    set PDK sky130A
+  }
+  # set SKYWATER_MODELS ${PDK_ROOT}/${PDK}/libs.tech/ngspice
+  set SKYWATER_MODELS ${PDK_ROOT}/${PDK}/libs.tech/combined
+  set SKYWATER_STDCELLS ${PDK_ROOT}/${PDK}/libs.ref/sky130_fd_sc_hd/spice
+  puts stderr "open_pdks installation: using $PDK_ROOT"
+  puts stderr "SKYWATER_MODELS: $SKYWATER_MODELS"
+  puts stderr "SKYWATER_STDCELLS: $SKYWATER_STDCELLS"
+}
+
+# sky130 mosfets dimension checks
+proc fet_drc {instance symbol model w l {nf 1}} {
+  set res {}
+  # puts "$instance $model $symbol w=$w l=$l nf=$nf"
+  if { [string is double $w] && [string is double $l] && [string is integer $nf]} {
+    # not *_nf.sym devices: get single finger width
+    if {![regexp {fet.*_nf\.sym$} $symbol]} {
+      set w [expr { double($w) / double($nf)}]
+    }
+    switch -regexp $model {
+      {[np]fet_01v8$} {
+        if { $w < 0.42 } {
+          append res "${instance} ($model): finger width is too small, w / nf = $w" \n
+        }
+        if { $l < 0.15 } {
+          append res "${instance} ($model): length is too small, l = $l" \n
+        }
+      }
+      {pfet_01v8_lvt$} {
+        if { $w < 0.42 } {
+          append res "${instance} ($model): finger width is too small, w / nf = $w" \n
+        }
+        if { $l < 0.35 } {
+          append res "${instance} ($model): length is too small, l = $l" \n
+        }
+      }
+      {nfet_01v8_lvt$} {
+        if { $w < 0.42 } {
+          append res "${instance} ($model): finger width is too small, w / nf = $w" \n
+        }
+        if { $l < 0.15 } {
+          append res "${instance} ($model): length is too small, l = $l" \n
+        }
+      }
+      {[np]fet_g5v0d10v5$} {
+        if { $w < 0.42 } {
+          append res "${instance} ($model): finger width is too small, w / nf = $w" \n
+        }
+        if { $l < 0.5 } {
+          append res "${instance} ($model): length is too small, l = $l" \n
+        }
+      }
+      {pfet_g5v0d16v0$} {
+        if { $w < 5 } {
+          append res "${instance} ($model): finger width is too small, w / nf = $w" \n
+        }
+        if { $l < 0.66 } {
+          append res "${instance} ($model): length is too small, l = $l" \n
+        }
+      }
+      {nfet_g5v0d16v0$} {
+        if { $w < 5 } {
+          append res "${instance} ($model): finger width is too small, w / nf = $w" \n
+        }
+        if { $l < 0.7 } {
+          append res "${instance} ($model): length is too small, l = $l" \n
+        }
+      }
+    } ;# switch
+  }
+  return $res
+}
+
+# open_pdks specific:
+# Set variables after ${PDK_ROOT} is known
+# This overrides some of the variables set above.
+
+# set XSCHEM_START_WINDOW ${PDK_ROOT}/${PDK}/libs.tech/xschem/sky130_tests/top.sch
+append XSCHEM_LIBRARY_PATH :${PDK_ROOT}/${PDK}/libs.tech/xschem
+
+# allow a user-specific path add-on (https://github.com/iic-jku/iic-osic-tools/issues/7)
+if { [info exists ::env(XSCHEM_USER_LIBRARY_PATH) ] } {
+    append XSCHEM_LIBRARY_PATH :$env(XSCHEM_USER_LIBRARY_PATH)
+}

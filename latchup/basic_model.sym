@@ -2,49 +2,51 @@ v {xschem version=3.4.5 file_version=1.2
 }
 G {}
 K {type=subcircuit
-format="@name @pinlist @symname IS_N=@IS_N BF_N=@BF_N VAF_N=@VAF_N IKF_N=@IKF_N CJE_N=@CJE_N CJC_N=@CJC_N TF_N=@TF_N TR_N=@TR_N IS_P=@IS_P BF_P=@BF_P VAF_P=@VAF_P IKF_P=@IKF_P CJE_P=@CJE_P CJC_P=@CJC_P TF_P=@TF_P TR_P=@TR_P" 
-template="name=x1
-+ IS_N=1e-16
+format="@name @pinlist @symname"
+template="
++ IS_N=1e-18
 + BF_N=100
-+ VAF_N=100
-+ IKF_N=0.1
-+ CJE_N=2p
-+ CJC_N=2p
-+ TF_N=0.1n
-+ TR_N=10n
-+ IS_P=1e-16
++ VAF_N=50
++ IKF_N=0.01
++ CJE_N=0.2p
++ CJC_N=0.1p
++ TF_N=0.2n
++ TR_N=2n
++ IS_P=1e-18
 + BF_P=100
-+ VAF_P=100
-+ IKF_P=0.1
-+ CJE_P=2p
-+ CJC_P=2p
-+ TF_P=0.1n
-+ TR_P=10n"
++ VAF_P=50
++ IKF_P=0.01
++ CJE_P=0.3p
++ CJC_P=0.15p
++ TF_P=0.3n
++ TR_P=3n"
 }
 V {}
 S {}
 E {}
-L 4 -130 -70 130 -70 {}
-L 4 -130 40 130 40 {}
-L 4 -130 -40 -130 40 {}
-L 4 130 -40 130 40 {}
-L 4 100 -20 100 20 {}
-L 4 90 10 100 20 {}
-L 4 100 20 110 10 {}
-L 4 130 -70 130 -40 {}
-L 4 -130 -70 -130 -40 {}
-L 4 100 -50 100 -20 {}
-L 7 0 -90 0 -70 {}
-L 7 130 -60 150 -60 {}
-L 7 130 30 150 30 {}
-L 7 0 40 0 60 {}
-B 5 -2.5 -92.5 2.5 -87.5 {name=VDD dir=inout}
-B 5 147.5 -62.5 152.5 -57.5 {name=RAD_SOURCE dir=inout}
-B 5 147.5 27.5 152.5 32.5 {name=RAD_SINK dir=inout}
-B 5 -2.5 57.5 2.5 62.5 {name=VSS dir=inout}
-T {@symname} -47.5 -26 0 0 0.3 0.3 {}
-T {@name} 135 -82 0 0 0.2 0.2 {}
-T {VDD} 5 -64 0 1 0.2 0.2 {}
-T {RAD_SOURCE} 125 -64 0 1 0.2 0.2 {}
-T {RAD_SINK} 125 26 0 1 0.2 0.2 {}
-T {VSS} 5 26 0 1 0.2 0.2 {}
+L 4 -130 -60 130 -60 {}
+L 4 -130 70 130 70 {}
+L 4 -130 -60 -130 60 {}
+L 4 130 -60 130 60 {}
+L 4 130 60 130 70 {}
+L 4 -130 60 -130 70 {}
+L 7 0 -80 0 -60 {}
+L 7 -110 -80 -110 -60 {}
+L 7 130 -40 150 -40 {}
+L 7 130 50 150 50 {}
+L 7 0 70 0 90 {}
+L 7 -110 70 -110 90 {}
+B 5 -2.5 -82.5 2.5 -77.5 {name=PMOS_SOURCE dir=inout}
+B 5 -112.5 -82.5 -107.5 -77.5 {name=NWELL dir=inout}
+B 5 147.5 -42.5 152.5 -37.5 {name=RAD_SOURCE dir=inout}
+B 5 147.5 47.5 152.5 52.5 {name=RAD_SINK dir=inout}
+B 5 -2.5 87.5 2.5 92.5 {name=NMOS_SOURCE dir=inout}
+B 5 -112.5 87.5 -107.5 92.5 {name=SUBSTRATE dir=inout}
+T {@symname} -67.5 -6 0 0 0.3 0.3 {}
+T {@name} 135 -72 0 0 0.2 0.2 {}
+T {PMOS_SOURCE} 45 -54 0 1 0.2 0.2 {}
+T {NWELL} -85 -54 0 1 0.2 0.2 {}
+T {RAD_SOURCE} 125 -44 0 1 0.2 0.2 {}
+T {RAD_SINK} 125 46 0 1 0.2 0.2 {}
+T {NMOS_SOURCE} 45 56 0 1 0.2 0.2 {}
+T {SUBSTRATE} -65 56 0 1 0.2 0.2 {}

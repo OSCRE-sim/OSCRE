@@ -13,14 +13,18 @@ N -180 -170 -180 -140 {
 lab=VSS}
 N -180 -80 -180 -50 {
 lab=GND}
-N 200 -210 200 -190 {
+N 200 -220 200 -200 {
 lab=VDD}
-N 200 -40 200 -20 {
+N 200 -30 200 -10 {
 lab=VSS}
 N 350 -160 450 -160 {
 lab=#net1}
 N 350 -70 450 -70 {
 lab=#net2}
+N 90 -220 90 -200 {
+lab=VDD}
+N 90 -30 90 -10 {
+lab=VSS}
 C {vsource.sym} -70 -110 0 0 {name=V1 value=5 savecurrent=false}
 C {lab_pin.sym} -70 -170 0 0 {name=p7 sig_type=std_logic lab=VDD}
 C {gnd.sym} -70 -50 0 0 {name=l3 lab=GND}
@@ -36,10 +40,10 @@ C {code_shown.sym} 35 90 0 0 {name=s1 only_toplevel=false value="
 C {code.sym} -200 60 0 0 {name=include only_toplevel=false value="
 .include /usr/local/share/rad_modeling_blocks/rad_modeling_blocks.spice
 "}
-C {lab_pin.sym} 200 -20 0 0 {name=p2 sig_type=std_logic lab=VSS}
-C {double_exp.sym} 390 -220 1 0 {name=x3 t_r=50n t_f=55n tau_r=10p tau_f=10p q_tot=5p}
-C {OSCRE/latchup/basic_model.sym} 200 -100 0 0 {name=x1 
-+ IS_N=1e-16
+C {lab_pin.sym} 200 -10 0 0 {name=p2 sig_type=std_logic lab=VSS}
+C {double_exp.sym} 390 -220 1 0 {name=x3 t_r=5n t_f=10n tau_r=100p tau_f=100p q_tot=4p}
+C {OSCRE/latchup/basic_model.sym} 200 -120 0 0 {name=x1 
++ IS_N=1e-18
 + BF_N=100
 + VAF_N=50
 + IKF_N=0.01
@@ -47,7 +51,7 @@ C {OSCRE/latchup/basic_model.sym} 200 -100 0 0 {name=x1
 + CJC_N=0.1p
 + TF_N=0.2n
 + TR_N=2n
-+ IS_P=1e-16
++ IS_P=1e-18
 + BF_P=100
 + VAF_P=50
 + IKF_P=0.01
@@ -55,4 +59,6 @@ C {OSCRE/latchup/basic_model.sym} 200 -100 0 0 {name=x1
 + CJC_P=0.15p
 + TF_P=0.3n
 + TR_P=3n}
-C {lab_pin.sym} 200 -210 0 0 {name=p4 sig_type=std_logic lab=VDD}
+C {lab_pin.sym} 200 -220 0 0 {name=p4 sig_type=std_logic lab=VDD}
+C {lab_pin.sym} 90 -220 0 0 {name=p1 sig_type=std_logic lab=VDD}
+C {lab_pin.sym} 90 -10 0 0 {name=p5 sig_type=std_logic lab=VSS}
