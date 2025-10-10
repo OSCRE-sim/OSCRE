@@ -1,0 +1,73 @@
+** sch_path: /home/collinml/OSCRE/latchup/op_amp_test_intermed.sch
+**.subckt op_amp_test_intermed
+XM2 VS VB VSS VBN sky130_fd_pr__nfet_01v8 L=0.15 W=80 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+V1 VDD VSS 1.8
+V2 VSS GND 0
+XM1 VB VB VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=80 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+I0 VDD VB 100u
+XM3 net1 VINN VS VBN sky130_fd_pr__nfet_01v8 L=0.15 W=7 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM4 VOUT VINP VS VBN sky130_fd_pr__nfet_01v8 L=0.15 W=7 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM5 net1 net1 VDD VBP sky130_fd_pr__pfet_01v8 L=0.15 W=19 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM6 VOUT net1 VDD VBP sky130_fd_pr__pfet_01v8 L=0.15 W=19 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+V4 VINP VSS SIN(0.8 0.01 1e8)
+V3 VINN VSS SIN(0.8 0.01 1e8 0 0 180)
+C1 VB VSS 1n m=1
+V5 VIN VSS SIN(0.8 0.02 1e6)
+XM7 VS_OTHER VB_OTHER VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=80 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM8 VB_OTHER VB_OTHER VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=80 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+I1 VDD VB_OTHER 100u
+XM9 net2 VINN VS_OTHER VSS sky130_fd_pr__nfet_01v8 L=0.15 W=7 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM10 VOUT_OTHER VINP VS_OTHER VSS sky130_fd_pr__nfet_01v8 L=0.15 W=7 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM11 net2 net2 VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=19 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM12 VOUT_OTHER net2 VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=19 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+C2 VB_OTHER VSS 1n m=1
+Q1 PNP_C VBP PNP_E pnp_cust area=1 m=1
+Q2 NPN_C VBN NPN_E npn_cust area=1 m=1
+R3 VBN GND 1000 m=1
+R4 VDD PNP_E 5 m=1
+R1 VDD VBP 1000 m=1
+R2 NPN_E GND 5 m=1
+R5 VBP NPN_C 2 m=1
+R6 PNP_C VBN 2 m=1
+x2 VBP VBN double_exp t_r=6n tau_r=100p t_f=11n tau_f=100p q_tot=12.5p
+**** begin user architecture code
+
+
+.options savecurrents
+.ic V(VBP)=1.8 V(VBN)=0
+.tran 10p 17n 0n
+.save all
+
+
+
+** opencircuitdesign pdks install
+.lib /usr/local/share/pdk/sky130A/libs.tech/combined/sky130.lib.spice tt
+
+
+
+
+.include /usr/local/share/rad_modeling_blocks/rad_modeling_blocks.spice
+
+
+
+
+.model npn_cust npn (IS=1e-18 BF=100 VAF=50 IKF=0.01 CJE=0.2p CJC=0.1p TF=0.2n TR=2n)
+.model pnp_cust pnp (IS=1e-18 BF=100 VAF=50 IKF=0.01 CJE=0.3p CJC=0.15p TF=0.3n TR=3n)
+
+
+**** end user architecture code
+**.ends
+.GLOBAL GND
+.end

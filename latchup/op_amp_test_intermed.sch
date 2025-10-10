@@ -188,7 +188,7 @@ lab=VBN}
 C {code_shown.sym} -25 250 0 0 {name=s1 only_toplevel=false value="
 .options savecurrents
 .ic V(VBP)=1.8 V(VBN)=0
-.tran 500p 3u 0n
+.tran 1p 25n 0n
 .save all
 "}
 C {code.sym} -180 70 0 0 {name=sT_MODELS
@@ -305,10 +305,10 @@ C {lab_pin.sym} 970 160 2 1 {name=p10 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 1230 270 0 1 {name=p11 sig_type=std_logic lab=VOUT}
 C {lab_pin.sym} 1250 330 0 1 {name=p12 sig_type=std_logic lab=VINP}
 C {lab_pin.sym} 890 330 2 1 {name=p13 sig_type=std_logic lab=VINN}
-C {vsource.sym} 280 -110 0 0 {name=V4 value="SIN(0.8 0.01 1e6)" savecurrent=false}
+C {vsource.sym} 280 -110 0 0 {name=V4 value="SIN(0.8 0.01 1e8)" savecurrent=false}
 C {lab_pin.sym} 280 -30 0 0 {name=p16 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 280 -190 0 0 {name=p14 sig_type=std_logic lab=VINP}
-C {vsource.sym} 470 -110 0 0 {name=V3 value="SIN(0.8 0.01 1e6 0 0 180)" savecurrent=false}
+C {vsource.sym} 470 -110 0 0 {name=V3 value="SIN(0.8 0.01 1e8 0 0 180)" savecurrent=false}
 C {lab_pin.sym} 470 -30 0 0 {name=p15 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 470 -190 0 0 {name=p17 sig_type=std_logic lab=VINN}
 C {lab_pin.sym} 1070 370 0 1 {name=p18 sig_type=std_logic lab=VS}
@@ -487,4 +487,4 @@ C {code_shown.sym} 25 60 0 0 {name=s2 only_toplevel=false value="
 .model npn_cust npn (IS=1e-18 BF=100 VAF=50 IKF=0.01 CJE=0.2p CJC=0.1p TF=0.2n TR=2n)
 .model pnp_cust pnp (IS=1e-18 BF=100 VAF=50 IKF=0.01 CJE=0.3p CJC=0.15p TF=0.3n TR=3n)
 "}
-C {double_exp.sym} 1650 510 1 0 {name=x2 t_r=1500n t_f=1505n tau_r=100p tau_f=100p q_tot=10p}
+C {double_exp.sym} 1650 510 1 0 {name=x2 t_r=10n t_f=15n tau_r=100p tau_f=100p q_tot=10p}
