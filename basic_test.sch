@@ -34,7 +34,7 @@ C {gnd.sym} -180 -50 0 0 {name=l1 lab=GND}
 C {code_shown.sym} 35 90 0 0 {name=s1 only_toplevel=false value="
 .options savecurrents
 .ic V(net1)=5 V(net2)=0
-.tran 1p 100n 0n
+.tran 1p 15n 0n
 .save all
 "}
 C {code.sym} -200 60 0 0 {name=include only_toplevel=false value="

@@ -13,10 +13,6 @@ N 80 -80 80 -50 {
 lab=GND}
 N 190 -80 190 -30 {
 lab=VSS}
-N 1120 450 1120 500 {
-lab=VSS}
-N 820 450 820 500 {
-lab=VSS}
 N 820 360 820 390 {
 lab=VB}
 N 820 380 910 380 {
@@ -75,13 +71,13 @@ N 520 -80 520 -30 {
 lab=VSS}
 N 520 -190 520 -140 {
 lab=VINN}
-N 1560 300 1560 320 {
+N 1560 260 1560 280 {
 lab=VDD}
-N 1560 490 1560 510 {
+N 1560 450 1560 470 {
 lab=VSS}
-N 1450 300 1450 320 {
+N 1450 260 1450 280 {
 lab=VDD}
-N 1450 490 1450 510 {
+N 1450 450 1450 470 {
 lab=VSS}
 N 740 -80 740 -30 {
 lab=VSS}
@@ -189,12 +185,18 @@ N 1630 1360 1630 1370 {
 lab=NPN_E}
 N 1810 1370 1810 1380 {
 lab=NPN_B}
-N 1710 360 1730 360 {
+N 1710 320 1730 320 {
 lab=VBP}
-N 1710 450 1730 450 {
+N 1710 410 1730 410 {
 lab=VBN}
 N 860 420 920 420 {
 lab=VB}
+N 1120 450 1120 460 {
+lab=VSS}
+N 820 450 820 470 {
+lab=VSS}
+N 1120 460 1120 470 {
+lab=VSS}
 C {code_shown.sym} 25 250 0 0 {name=s1 only_toplevel=false value="
 .options savecurrents
 .ic V(VBP)=1.8 V(VBN)=0
@@ -233,7 +235,7 @@ C {vsource.sym} 80 -110 0 0 {name=V2 value=0 savecurrent=false}
 C {lab_pin.sym} 80 -170 0 0 {name=p3 sig_type=std_logic lab=VSS}
 C {gnd.sym} 80 -50 0 0 {name=l1 lab=GND}
 C {lab_pin.sym} 190 -30 0 0 {name=p30 sig_type=std_logic lab=VSS}
-C {lab_pin.sym} 1120 500 0 0 {name=p2 sig_type=std_logic lab=VSS}
+C {lab_pin.sym} 1120 470 0 0 {name=p2 sig_type=std_logic lab=VSS}
 C {sky130_fd_pr/nfet_01v8.sym} 840 420 0 1 {name=M1
 W=80
 L=0.15
@@ -248,7 +250,7 @@ sa=0 sb=0 sd=0
 model=nfet_01v8
 spiceprefix=X
 }
-C {lab_pin.sym} 820 500 0 0 {name=p4 sig_type=std_logic lab=VSS}
+C {lab_pin.sym} 820 470 0 0 {name=p4 sig_type=std_logic lab=VSS}
 C {isource.sym} 820 330 0 0 {name=I0 value=100u}
 C {lab_pin.sym} 820 260 0 0 {name=p5 sig_type=std_logic lab=VDD}
 C {sky130_fd_pr/nfet_01v8.sym} 1000 330 0 0 {name=M3
@@ -323,9 +325,9 @@ C {lab_pin.sym} 520 -30 0 0 {name=p15 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 520 -190 0 0 {name=p17 sig_type=std_logic lab=VINN}
 C {lab_pin.sym} 1120 370 0 1 {name=p18 sig_type=std_logic lab=VS}
 C {lab_pin.sym} 950 420 3 1 {name=p19 sig_type=std_logic lab=VB}
-C {lab_pin.sym} 1560 510 0 0 {name=p21 sig_type=std_logic lab=VSS}
-C {double_exp.sym} 1710 300 1 0 {name=x3 t_r=1500n t_f=1505n tau_r=100p tau_f=100p q_tot=9p}
-C {OSCRE/latchup/basic_model.sym} 1560 400 0 0 {name=x1 
+C {lab_pin.sym} 1560 470 0 0 {name=p21 sig_type=std_logic lab=VSS}
+C {double_exp.sym} 1710 260 1 0 {name=x3 t_r=1500n t_f=1505n tau_r=100p tau_f=100p q_tot=9p}
+C {OSCRE/latchup/basic_model.sym} 1560 360 0 0 {name=x1 
 + IS_N=1e-18
 + BF_N=100
 + VAF_N=50
@@ -342,12 +344,12 @@ C {OSCRE/latchup/basic_model.sym} 1560 400 0 0 {name=x1
 + CJC_P=0.15p
 + TF_P=0.3n
 + TR_P=3n}
-C {lab_pin.sym} 1560 300 0 0 {name=p22 sig_type=std_logic lab=VDD}
+C {lab_pin.sym} 1560 260 0 0 {name=p22 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 1140 420 2 0 {name=p23 sig_type=std_logic lab=VBN}
-C {lab_pin.sym} 1450 300 0 0 {name=p24 sig_type=std_logic lab=VDD}
-C {lab_pin.sym} 1450 510 0 0 {name=p25 sig_type=std_logic lab=VSS}
-C {lab_pin.sym} 1730 450 2 0 {name=p26 sig_type=std_logic lab=VBN}
-C {lab_pin.sym} 1730 360 0 1 {name=p27 sig_type=std_logic lab=VBP}
+C {lab_pin.sym} 1450 260 0 0 {name=p24 sig_type=std_logic lab=VDD}
+C {lab_pin.sym} 1450 470 0 0 {name=p25 sig_type=std_logic lab=VSS}
+C {lab_pin.sym} 1730 410 2 0 {name=p26 sig_type=std_logic lab=VBN}
+C {lab_pin.sym} 1730 320 0 1 {name=p27 sig_type=std_logic lab=VBP}
 C {vsource.sym} 740 -110 0 0 {name=V5 value="SIN(0.8 0.02 1e6)" savecurrent=false}
 C {lab_pin.sym} 740 -30 0 0 {name=p28 sig_type=std_logic lab=VSS
 value="SIN(0.8 0.02 1e6)"}

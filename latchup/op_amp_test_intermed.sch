@@ -34,7 +34,7 @@ lab=VSS}
 N 710 460 730 460 {
 lab=VSS}
 N 1070 420 1090 420 {
-lab=VBN}
+lab=#net1}
 N 870 420 1030 420 {
 lab=VB}
 N 1070 360 1070 390 {
@@ -46,19 +46,19 @@ lab=VS}
 N 970 330 1170 330 {
 lab=VBN}
 N 970 240 970 300 {
-lab=#net1}
+lab=VMIRR}
 N 1170 240 1170 300 {
 lab=VOUT}
 N 970 270 1070 270 {
-lab=#net1}
+lab=VMIRR}
 N 960 210 970 210 {
 lab=VBP}
 N 1170 210 1180 210 {
 lab=VBP}
 N 1010 210 1130 210 {
-lab=#net1}
+lab=VMIRR}
 N 1070 210 1070 270 {
-lab=#net1}
+lab=VMIRR}
 N 970 160 970 180 {
 lab=VDD}
 N 1170 160 1170 180 {
@@ -185,10 +185,14 @@ N 1560 720 1560 730 {
 lab=NPN_E}
 N 1740 730 1740 740 {
 lab=VBN}
+N 1090 420 1170 420 {
+lab=#net1}
+N 1230 420 1310 420 {
+lab=VBN}
 C {code_shown.sym} -25 250 0 0 {name=s1 only_toplevel=false value="
 .options savecurrents
 .ic V(VBP)=1.8 V(VBN)=0
-.tran 1p 25n 0n
+.tran 10p 25n 0n
 .save all
 "}
 C {code.sym} -180 70 0 0 {name=sT_MODELS
@@ -319,7 +323,7 @@ value=1n
 footprint=1206
 device="ceramic capacitor"}
 C {lab_pin.sym} 850 500 0 0 {name=p20 sig_type=std_logic lab=VSS}
-C {lab_pin.sym} 1090 420 2 0 {name=p23 sig_type=std_logic lab=VBN}
+C {lab_pin.sym} 1310 420 2 0 {name=p23 sig_type=std_logic lab=VBN}
 C {vsource.sym} 690 -110 0 0 {name=V5 value="SIN(0.8 0.02 1e6)" savecurrent=false}
 C {lab_pin.sym} 690 -30 0 0 {name=p28 sig_type=std_logic lab=VSS
 value="SIN(0.8 0.02 1e6)"}
@@ -488,3 +492,9 @@ C {code_shown.sym} 25 60 0 0 {name=s2 only_toplevel=false value="
 .model pnp_cust pnp (IS=1e-18 BF=100 VAF=50 IKF=0.01 CJE=0.3p CJC=0.15p TF=0.3n TR=3n)
 "}
 C {double_exp.sym} 1650 510 1 0 {name=x2 t_r=10n t_f=15n tau_r=100p tau_f=100p q_tot=10p}
+C {lab_pin.sym} 1080 210 3 1 {name=p21 sig_type=std_logic lab=VMIRR}
+C {res.sym} 1200 420 3 0 {name=R7
+value=0
+footprint=1206
+device=resistor
+m=1}

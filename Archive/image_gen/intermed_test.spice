@@ -1,0 +1,37 @@
+** sch_path: /home/collinml/OSCRE/latchup/intermed_test.sch
+**.subckt intermed_test
+V1 VDD GND 5
+V2 VSS GND 0
+x3 VBP VBN double_exp t_r=5n tau_r=100p t_f=10n tau_f=100p q_tot=5.25p
+Q1 PNP_C VBP PNP_E pnp_cust area=1 m=1
+Q2 NPN_C VBN NPN_E npn_cust area=1 m=1
+R3 VBN GND 1000 m=1
+R4 VDD PNP_E 5 m=1
+R1 VDD VBP 1000 m=1
+R2 NPN_E GND 5 m=1
+R5 VBP NPN_C 2 m=1
+R6 PNP_C VBN 2 m=1
+**** begin user architecture code
+
+
+.options savecurrents
+.ic V(VBP)=5 V(VBN)=0
+.tran 1p 15n 0n
+.save all
+
+
+
+
+.include /usr/local/share/rad_modeling_blocks/rad_modeling_blocks.spice
+
+
+
+
+.model npn_cust npn (IS=1e-18 BF=100 VAF=50 IKF=0.01 CJE=0.2p CJC=0.1p TF=0.2n TR=2n)
+.model pnp_cust pnp (IS=1e-18 BF=100 VAF=50 IKF=0.01 CJE=0.3p CJC=0.15p TF=0.3n TR=3n)
+
+
+**** end user architecture code
+**.ends
+.GLOBAL GND
+.end
